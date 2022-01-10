@@ -469,6 +469,14 @@ PrefabInstance:
       propertyPath: _descendingGravityScale
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 45943501467049747, guid: dbf0cb5d47ca4d04291280bd165f62a6, type: 3}
+      propertyPath: _changeToFallingStateWhenReleasingJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 45943501467049747, guid: dbf0cb5d47ca4d04291280bd165f62a6, type: 3}
+      propertyPath: _disableControlWhenDamageTaken._duration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 45943501467049751, guid: dbf0cb5d47ca4d04291280bd165f62a6, type: 3}
       propertyPath: m_Name
       value: Character.Tall
