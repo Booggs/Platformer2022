@@ -916,7 +916,7 @@ namespace GSGD2.Player
 				bool canWallGrabOppositeWall = wallNormal != _wallNormalDuringLastWallGrab;
 				if (IsWallGrabDisabled == false || canWallGrabOppositeWall == true)
 				{
-					bool isNotASlope = Mathf.Abs(wallNormal.z) == 1;
+					bool isNotASlope = Mathf.Approximately(Mathf.Abs(wallNormal.z), 1);
 					if (HasAWallInFrontOfCharacter == true && isNotASlope == true && _willPerformWallGrab == true)
 					{
 						_willPerformWallGrab = false;
@@ -981,7 +981,7 @@ namespace GSGD2.Player
 					if (HasAWallInFrontOfCharacter == false)
 					{
 
-						if (_hasBeganToFallFromGroundedState == true && _hasBeganToFallFromGroundedStateAndDidDash == false && _resetJumpCountWhenFalling == true)
+						if (_hasBeganToFallFromGroundedState == true && _hasBeganToFallFromGroundedStateAndDidDash == false && _resetDashCountWhenFalling == true)
 						{
 							ResetDashCount(_allowedDashCountWhenFalling);
 							_hasBeganToFallFromGroundedStateAndDidDash = true;
