@@ -84,8 +84,6 @@ namespace GSGD2.Gameplay
 
 		private void OnEnable()
 		{
-
-			print("launcher controller enabled");
 			_playerController.UseItemPerformed -= PlayerController_UseItemPerformed;
 			_playerController.UseItemPerformed += PlayerController_UseItemPerformed;
 

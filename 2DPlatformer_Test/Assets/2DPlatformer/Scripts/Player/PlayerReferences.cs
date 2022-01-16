@@ -26,6 +26,7 @@ namespace GSGD2.Player
 		[SerializeField] private PlayerDamageable _playerDamageable = null;
 		[SerializeField] private PlayerDamageFeedbackHandler _playerDamageFeedbackHandler = null;
 		[SerializeField] private CameraAimController _cameraAimController = null;
+		[SerializeField] private InteractionManager _interactionManager = null;
 
 		public bool TryGetRigidbody(out Rigidbody rigidbody)
 		{
