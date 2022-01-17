@@ -47,6 +47,7 @@ namespace GSGD2
 		public MouseToWorld2D MouseToWorld2D => _mouseToWorld2D;
 		public UIManager UIManager => _uiManager;
 		public LootManager LootManager => _lootManager;
+
 		protected override void OnDestroy()
 		{
 			base.OnDestroy();

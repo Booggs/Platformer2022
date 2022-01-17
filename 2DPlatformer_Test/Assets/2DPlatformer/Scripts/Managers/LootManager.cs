@@ -8,7 +8,17 @@ namespace GSGD2.Gameplay
     {
         private int _currentLoot = 0;
 
-        public int CurrentLoot => _currentLoot;
+        public int CurrentLoot
+        {
+            get
+            {
+                return _currentLoot;
+            }
+            set
+            {
+                _currentLoot = value;
+            }
+        }
 
         public delegate void LootManagerEvent(LootManager sender, int currentLoot);
         public event LootManagerEvent LootAdded = null;

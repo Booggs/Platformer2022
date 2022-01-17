@@ -9,8 +9,7 @@
 	/// </summary>
 	public abstract class PickupCommand : ACommand
 	{
-		[SerializeField]
-		private bool _destroyPickupOnApply = false;
+		public bool _destroyPickupOnApply = false;
 
 		// We prevent Pickup child class to override Apply in order to ensure it can't remove the destroy effect
 		public sealed override void Apply(ICommandSender from)

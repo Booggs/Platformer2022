@@ -129,5 +129,11 @@ namespace GSGD2.Player
 			cameraAimController = _cameraAimController;
 			return cameraAimController != null;
 		}
+
+		public bool TryGetInteractionManager(out InteractionManager interactionManager)
+        {
+			interactionManager = _interactionManager;
+			return interactionManager != null;
+        }
 	}
 }

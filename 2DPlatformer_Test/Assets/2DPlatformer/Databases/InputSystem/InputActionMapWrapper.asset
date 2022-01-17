@@ -105,6 +105,38 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: UseInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 22b16da0-bc52-4e0b-9f35-fde48f835577
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: LeaveInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 332c949d-f380-4189-95cf-6889e6d6f3b8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: NavigateLeftInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 6af5c1c4-987e-4caf-aa7b-337d18ed33b2
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: NavigateRightInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: b48a5a56-3ee9-4e02-9e75-9dcfb18eaae5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
     - m_Name: 
       m_Id: b82491d4-813d-4be0-bea8-2217def02fb7
@@ -329,4 +361,36 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: GroundSmash
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 7da90234-c486-46cc-9884-d159355e4718
+      m_Path: <Gamepad>/dpad/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: UseInteractable
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 3d6a8677-6f69-45e1-979e-aebf41f72138
+      m_Path: <Gamepad>/dpad/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: LeaveInteractable
+      m_Flags: 0
+    - m_Name: 
+      m_Id: e0d59abe-2881-4558-a862-82f37f8bebac
+      m_Path: <Gamepad>/dpad/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: NavigateLeftInteractable
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 1259e4aa-df76-4373-a12b-bc883f50574b
+      m_Path: <Gamepad>/dpad/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: NavigateRightInteractable
       m_Flags: 0

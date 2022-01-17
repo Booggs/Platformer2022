@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73493b7c0f3ecb743af8a26a1bae3fe7, type: 3}
+  m_Name: InputActionMapWrapper.Interactables
+  m_EditorClassIdentifier: 
+  _actionMap:
+    m_Name: Action Map
+    m_Id: 879ef829-0b8c-4f75-b221-2ebbacac4a0d
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: UseInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 3994b925-346c-422a-a1ba-77c710c5f660
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: LeaveInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 53af15eb-eef3-4b8c-9bf2-b997b1b144b9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: LeftInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 83e5d03c-ef7c-46f6-8414-32d754cc6e4c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: RightInteractable
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: bf2212b9-63f1-472c-a86a-72d01de82051
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: 0b00d006-43b8-49e8-874d-5e1874069e9c
+      m_Path: <Gamepad>/dpad/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: UseInteractable
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 8852e69c-bc2d-4edf-bb04-d4c0112da1d2
+      m_Path: <Gamepad>/dpad/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: LeaveInteractable
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 75cf4493-f25c-42db-b256-146efcc0450d
+      m_Path: <Gamepad>/dpad/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: LeftInteractable
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 60a8fdb9-c4bf-4dd0-a966-2b2fddeac453
+      m_Path: <Gamepad>/dpad/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: RightInteractable
+      m_Flags: 0

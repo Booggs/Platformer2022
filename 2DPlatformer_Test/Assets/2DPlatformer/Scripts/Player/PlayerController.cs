@@ -21,6 +21,10 @@ namespace GSGD2.Player
 		private const string RELEASE_ITEM_ACTION_NAME = "ReleaseItem";
 		private const string USE_ITEM_ACTION_NAME = "UseItem";
 		private const string GROUND_SMASH_ACTION_NAME = "GroundSmash";
+		private const string USE_INTERACTABLE_ACTION_NAME = "UseInteractable";
+		private const string LEAVE_INTERACTABLE_ACTION_NAME = "LeaveInteractable"; 
+		private const string NAVIGATE_LEFT_INTERACTABLE_ACTION_NAME = "NavigateLeftInteractable";
+		private const string NAVIGATE_RIGHT_INTERACTABLE_ACTION_NAME = "NavigateRightInteractable";
 
 		[SerializeField]
 		private InputActionMapWrapper _inputActionMapWrapper;
@@ -39,6 +43,11 @@ namespace GSGD2.Player
 		private InputAction _releaseItemInputAction = null;
 		private InputAction _useItemInputAction = null;
 		private InputAction _groundSmashInputAction = null;
+		private InputAction _useInteractableInputAction = null;
+		private InputAction _leaveInteractableInputAction = null;
+		private InputAction _navigateLeftInteractableInputAction = null;
+		private InputAction _navigateRightInteractableInputAction = null;
+
 
 		public bool UseMouseForLookDirection => _useMouseForLookDirection;
 		public float HorizontalMove => _horizontalMoveInputAction.ReadValue<float>();
@@ -56,6 +65,10 @@ namespace GSGD2.Player
 		public event InputEvent ReleaseItemPerformed = null;
 		public event InputEvent UseItemPerformed = null;
 		public event InputEvent GroundSmashPerformed = null;
+		public event InputEvent UseInteractablePerformed = null;
+		public event InputEvent LeaveInteractablePerformed = null;
+		public event InputEvent NavigateLeftInteractablePerformed = null;
+		public event InputEvent NavigateRightInteractablePerformed = null;
 
 		private void OnEnable()
 		{
@@ -111,6 +124,30 @@ namespace GSGD2.Player
 				_groundSmashInputAction.performed -= GroundSmashInputAction_performed;
 				_groundSmashInputAction.performed += GroundSmashInputAction_performed;
 			}
+
+			if (_inputActionMapWrapper.TryFindAction(USE_INTERACTABLE_ACTION_NAME, out _useInteractableInputAction, true) == true)
+			{
+				_useInteractableInputAction.performed -= UseInteractableInputAction_performed;
+				_useInteractableInputAction.performed += UseInteractableInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(LEAVE_INTERACTABLE_ACTION_NAME, out _leaveInteractableInputAction, true) == true)
+			{
+				_leaveInteractableInputAction.performed -= LeaveInteractableInputAction_performed;
+				_leaveInteractableInputAction.performed += LeaveInteractableInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(NAVIGATE_LEFT_INTERACTABLE_ACTION_NAME, out _navigateLeftInteractableInputAction, true) == true)
+			{
+				_navigateLeftInteractableInputAction.performed -= NavigateLeftInteractableInputAction_performed;
+				_navigateLeftInteractableInputAction.performed += NavigateLeftInteractableInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(NAVIGATE_RIGHT_INTERACTABLE_ACTION_NAME, out _navigateRightInteractableInputAction, true) == true)
+			{
+				_navigateRightInteractableInputAction.performed -= NavigateRightInteractableInputAction_performed;
+				_navigateRightInteractableInputAction.performed += NavigateRightInteractableInputAction_performed;
+			}
 		}
 
 		private void OnDisable()
@@ -127,6 +164,10 @@ namespace GSGD2.Player
 			_verticalLookInputAction.Disable();
 			_useItemInputAction.Disable();
 			_groundSmashInputAction.Disable();
+			_useInteractableInputAction.Disable();
+			_leaveInteractableInputAction.Disable();
+			_navigateLeftInteractableInputAction.Disable();
+			_navigateRightInteractableInputAction.Disable();
 
 			_jumpInputAction.performed -= JumpInputAction_performed;
 			_dashInputAction.performed -= DashInputAction_performed;
@@ -136,6 +177,10 @@ namespace GSGD2.Player
 			_releaseItemInputAction.performed -= ReleaseItemInputAction_performed;
 			_useItemInputAction.performed -= UseItemInputAction_performed;
 			_groundSmashInputAction.performed -= GroundSmashInputAction_performed;
+			_useInteractableInputAction.performed -= UseInteractableInputAction_performed;
+			_leaveInteractableInputAction.performed -= LeaveInteractableInputAction_performed;
+			_navigateLeftInteractableInputAction.performed -= NavigateLeftInteractableInputAction_performed;
+			_navigateRightInteractableInputAction.performed -= NavigateRightInteractableInputAction_performed;
 		}
 
 		private void JumpInputAction_performed(InputAction.CallbackContext obj)
@@ -175,6 +220,25 @@ namespace GSGD2.Player
 		private void GroundSmashInputAction_performed(InputAction.CallbackContext obj)
 		{
 			GroundSmashPerformed?.Invoke(this, obj);
+		}
+
+		private void UseInteractableInputAction_performed(InputAction.CallbackContext obj)
+		{
+			UseInteractablePerformed?.Invoke(this, obj);
+		}
+
+		private void LeaveInteractableInputAction_performed(InputAction.CallbackContext obj)
+        {
+			LeaveInteractablePerformed?.Invoke(this, obj);
+        }
+
+		private void NavigateLeftInteractableInputAction_performed(InputAction.CallbackContext obj)
+        {
+			NavigateLeftInteractablePerformed?.Invoke(this, obj);
+        }
+		private void NavigateRightInteractableInputAction_performed(InputAction.CallbackContext obj)
+		{
+			NavigateRightInteractablePerformed?.Invoke(this, obj);
 		}
 	}
 }

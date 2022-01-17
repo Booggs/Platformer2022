@@ -14,7 +14,7 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private Teleporter targetTeleporter;
         
-        public override void Interact(PlayerReferences playerRefs)
+        public override void UseInteractable(PlayerReferences playerRefs)
         {
             Teleport(playerRefs.gameObject);
         }
