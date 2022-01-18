@@ -5,6 +5,7 @@ namespace GSGD2.Gameplay
     using UnityEngine;
     using UnityEngine.InputSystem;
     using GSGD2.Player;
+    using UnityEditor;
 
     public class Shop : EnvironmentInteractable
     {
@@ -29,6 +30,7 @@ namespace GSGD2.Gameplay
                 }
             }
         }
+
 
         #region InteractionInputMethods
         public override void UseInteractable(PlayerReferences playerRefs)
@@ -67,17 +69,42 @@ namespace GSGD2.Gameplay
 
         private void OpenShop()
         {
-            _shopOpened = true;
-            _canvasParent.SetActive(true);
-            CheckItemAvailability();
+            if (_interactableActive == true)
+            {
+                _shopOpened = true;
+                _canvasParent.SetActive(true);
+                CheckItemAvailability();
+            }
         }
 
         private void UseShop(PlayerReferences playerRefs)
         {
-            if (_shopItems[_currentItemIndex].ItemCost <= _lootManager.CurrentLoot)
+            ShopItem shopItem = _shopItems[_currentItemIndex];
+            if (shopItem.ItemCost <= _lootManager.CurrentLoot)
             {
-                _shopItems[_currentItemIndex].BuyItem();
-                _lootManager.CurrentLoot = _lootManager.CurrentLoot - _shopItems[_currentItemIndex].ItemCost;
+                shopItem.BuyItem();
+                _lootManager.AddLoot(-shopItem.ItemCost);
+
+                if (shopItem.BuyLimit > 0 && shopItem.BoughtAmount >= shopItem.BuyLimit)
+                {
+                    if (_shopItems.Length > 1)
+                    {
+                        shopItem.gameObject.SetActive(false);
+                        ArrayUtility.RemoveAt<ShopItem>(ref _shopItems, _currentItemIndex);
+                        if (_currentItemIndex > 0)
+                        {
+                            _currentItemIndex--;
+                        }
+                        else _currentItemIndex = _shopItems.Length - 1;
+
+                        CheckItemAvailability();
+                    }
+                    else
+                    {
+                        ActivateInteractable(false);
+                        CloseShop();
+                    }
+                }
                 CheckItemAvailability();
             }
         }

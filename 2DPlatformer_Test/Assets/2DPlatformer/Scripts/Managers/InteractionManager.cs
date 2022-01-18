@@ -14,12 +14,10 @@ namespace GSGD2.Gameplay
         private PlayerReferences _playerRefs = null;
 
         private PlayerController _playerController;
-        private LootManager _lootManager;
 
         private void Awake()
         {
             LevelReferences levelReference = LevelReferences.Instance;
-            _lootManager = levelReference.LootManager;
             levelReference.PlayerReferences.TryGetPlayerController(out _playerController);
 
             _playerController.UseInteractablePerformed -= PlayerController_UseInteractablePerformed;
@@ -40,11 +38,19 @@ namespace GSGD2.Gameplay
             Collider[] overlappingColliders = Physics.OverlapSphere(this.gameObject.transform.position, 0.5f);
             foreach (var overlappingCollider in overlappingColliders)
 			{
-                if (overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>())
+                EnvironmentInteractable interactable = null;
+                if ((interactable = overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>()) == true)
                 {
-                    overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>().UseInteractable(_playerRefs);
+                    interactable.UseInteractable(_playerRefs);
                 }
 			}
+            for (int i = 0; i < overlappingColliders.Length; i++)
+            {
+                if (overlappingColliders[i].gameObject.GetComponentInParent<EnvironmentInteractable>())
+                {
+
+                }
+            }
         }
         private void PlayerController_LeaveInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {

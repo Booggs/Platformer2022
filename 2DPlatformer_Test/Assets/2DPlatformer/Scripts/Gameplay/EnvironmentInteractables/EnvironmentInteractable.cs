@@ -8,6 +8,10 @@
 
     public class EnvironmentInteractable : MonoBehaviour
     {
+        protected bool _interactableActive = true;
+
+        public bool InteractableActive => _interactableActive;
+
         public virtual void UseInteractable(PlayerReferences playerRefs)
         {
             print("interactable activated");
@@ -26,6 +30,11 @@
         public virtual void NavigateRightInteractable()
         {
             print("navigating right");
+        }
+
+        public void ActivateInteractable(bool status)
+        {
+            _interactableActive = status;
         }
     }
 }

@@ -118,8 +118,8 @@ namespace GSGD2.Player
 		[SerializeField]
 		private float _durationToDisableGroundRaycastWhenDashing = 0.5f;
 
-		[SerializeField]
-		private bool _resetDashCountWhenFalling = true;
+		/*[SerializeField]
+		private bool _resetDashCountWhenFalling = true;*/
 
 		[SerializeField]
 		private int _allowedDashCountWhenFalling = 1;
@@ -140,6 +140,9 @@ namespace GSGD2.Player
 		private int _allowedDashCountWhenBumping = 1;
 
 		[Header("Wall Grab / Jump")]
+		[SerializeField]
+		private bool _enableWallGrab = true;
+
 		/// <summary>
 		/// Height applied to the jump force when releasing the wall jump button
 		/// </summary>
@@ -304,6 +307,11 @@ namespace GSGD2.Player
 		{
 			_dash.enabled = isEnabled;
 		}
+
+		public void EnableGrab(bool isEnabled)
+        {
+			_enableWallGrab = isEnabled;
+        }
 
 		public void AddMaximumAllowedForceToJump(int toAdd)
 		{
@@ -912,11 +920,16 @@ namespace GSGD2.Player
 
 			void TryWallGrab()
 			{
+				if (_enableWallGrab == false)
+                {
+					return;
+                }
+
 				var wallNormal = _characterCollision.WallNormal;
 				bool canWallGrabOppositeWall = wallNormal != _wallNormalDuringLastWallGrab;
 				if (IsWallGrabDisabled == false || canWallGrabOppositeWall == true)
 				{
-					bool isNotASlope = Mathf.Approximately(Mathf.Abs(wallNormal.z), 1);
+					bool isNotASlope = Mathf.Abs(wallNormal.z) == 1;
 					if (HasAWallInFrontOfCharacter == true && isNotASlope == true && _willPerformWallGrab == true)
 					{
 						_willPerformWallGrab = false;
@@ -981,7 +994,7 @@ namespace GSGD2.Player
 					if (HasAWallInFrontOfCharacter == false)
 					{
 
-						if (_hasBeganToFallFromGroundedState == true && _hasBeganToFallFromGroundedStateAndDidDash == false && _resetDashCountWhenFalling == true)
+						if (_hasBeganToFallFromGroundedState == true && _hasBeganToFallFromGroundedStateAndDidDash == false && _resetJumpCountWhenFalling == true)
 						{
 							ResetDashCount(_allowedDashCountWhenFalling);
 							_hasBeganToFallFromGroundedStateAndDidDash = true;

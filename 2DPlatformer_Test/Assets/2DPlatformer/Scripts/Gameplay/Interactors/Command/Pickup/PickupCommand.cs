@@ -9,7 +9,20 @@
 	/// </summary>
 	public abstract class PickupCommand : ACommand
 	{
-		public bool _destroyPickupOnApply = false;
+		private bool _destroyPickupOnApply = false;
+
+		public bool DestroyPickupOnApply
+        {
+            get
+            {
+				return _destroyPickupOnApply;
+            }
+            set
+            {
+				_destroyPickupOnApply = value;
+            }
+        }
+
 
 		// We prevent Pickup child class to override Apply in order to ensure it can't remove the destroy effect
 		public sealed override void Apply(ICommandSender from)

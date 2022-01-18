@@ -14,7 +14,8 @@
 		private enum Ability
 		{
 			Jump,
-			Dash
+			Dash,
+			Grab
 		}
 
 		// TODO AL : add modifiers : SetAllowedForce, 
@@ -61,6 +62,14 @@
 					}
 				}
 					break;
+				case Ability.Grab:
+                    {
+						if (_modifier == Modifier.Enable || _modifier == Modifier.Disable)
+                        {
+							player.EnableGrab(_modifier == Modifier.Enable ? true : false);
+                        }
+						break;
+                    }
 				default:
 					break;
 			}
