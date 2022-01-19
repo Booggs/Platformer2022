@@ -59,6 +59,25 @@ namespace GSGD2.Player
                 case CubeController.State.StartJump:
                     break;
                 case CubeController.State.Jumping:
+                    {
+                        print(_displacementEstimationUpdater.MovementDirection.ToString());
+                        if (_displacementEstimationUpdater.Velocity.y != 0)
+                        {
+                            _animator.SetTrigger("AirJump");
+                        }
+                        else
+                        {
+                            float dotProduct = Vector3.Dot(_rigidbody.velocity, Vector3.forward);
+                            if (dotProduct >= 0)
+                            {
+                                _animator.SetTrigger("JumpRight");
+                            }
+                            else
+                            {
+                                _animator.SetTrigger("JumpLeft");
+                            }
+                        }
+                    }
                     break;
                 case CubeController.State.EndJump:
                     break;
@@ -67,6 +86,10 @@ namespace GSGD2.Player
                 case CubeController.State.WallJump:
                     break;
                 case CubeController.State.Dashing:
+                    {
+                        _animator.SetTrigger("Dash");
+                        print("dashing");
+                    }
                     break;
                 case CubeController.State.DamageTaken:
                     break;
