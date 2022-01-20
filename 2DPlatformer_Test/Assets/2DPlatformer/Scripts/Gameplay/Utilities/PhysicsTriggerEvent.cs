@@ -17,6 +17,7 @@ namespace GSGD2.Gameplay
 		public Trigger_UnityEvent _onTriggerStay = null;
 		public Trigger_UnityEvent _onTriggerExit = null;
 
+
 		private void OnTriggerEnter(Collider other)
 		{
 			_onTriggerEnter.Invoke(this, other);

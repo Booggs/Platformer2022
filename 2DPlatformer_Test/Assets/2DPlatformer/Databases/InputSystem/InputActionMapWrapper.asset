@@ -137,6 +137,22 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: Glider
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: d88d28ed-6497-4ed2-998c-a577f95a40c7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: ReleaseGlider
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: b52d177f-a544-48e6-adc3-8bd43e500585
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
     - m_Name: 
       m_Id: b82491d4-813d-4be0-bea8-2217def02fb7
@@ -205,7 +221,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: c12c7b0a-6041-49b8-9066-8f62102d9f0a
       m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Jump
@@ -393,4 +409,20 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: NavigateRightInteractable
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 80d38474-7e47-455f-818c-f0f129df0452
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: Hold(duration=0.4)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Glider
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 2bf846b4-839f-4e50-817a-0126df51f1ff
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: Press(pressPoint=1.401298E-45,behavior=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: ReleaseGlider
       m_Flags: 0

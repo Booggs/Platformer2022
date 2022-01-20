@@ -25,6 +25,8 @@ namespace GSGD2.Player
 		private const string LEAVE_INTERACTABLE_ACTION_NAME = "LeaveInteractable"; 
 		private const string NAVIGATE_LEFT_INTERACTABLE_ACTION_NAME = "NavigateLeftInteractable";
 		private const string NAVIGATE_RIGHT_INTERACTABLE_ACTION_NAME = "NavigateRightInteractable";
+		private const string GLIDER_ACTION_NAME = "Glider";
+		private const string RELEASE_GLIDER_ACTION_NAME = "ReleaseGlider";
 
 		[SerializeField]
 		private InputActionMapWrapper _inputActionMapWrapper;
@@ -47,6 +49,8 @@ namespace GSGD2.Player
 		private InputAction _leaveInteractableInputAction = null;
 		private InputAction _navigateLeftInteractableInputAction = null;
 		private InputAction _navigateRightInteractableInputAction = null;
+		private InputAction _gliderInputAction = null;
+		private InputAction _releaseGliderInputAction = null;
 
 
 		public bool UseMouseForLookDirection => _useMouseForLookDirection;
@@ -69,6 +73,8 @@ namespace GSGD2.Player
 		public event InputEvent LeaveInteractablePerformed = null;
 		public event InputEvent NavigateLeftInteractablePerformed = null;
 		public event InputEvent NavigateRightInteractablePerformed = null;
+		public event InputEvent GliderPerformed = null;
+		public event InputEvent ReleaseGliderPerformed = null;
 
 		private void OnEnable()
 		{
@@ -148,6 +154,18 @@ namespace GSGD2.Player
 				_navigateRightInteractableInputAction.performed -= NavigateRightInteractableInputAction_performed;
 				_navigateRightInteractableInputAction.performed += NavigateRightInteractableInputAction_performed;
 			}
+
+			if (_inputActionMapWrapper.TryFindAction(GLIDER_ACTION_NAME, out _gliderInputAction, true) == true)
+			{
+				_gliderInputAction.performed -= GliderInputAction_performed;
+				_gliderInputAction.performed += GliderInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(RELEASE_GLIDER_ACTION_NAME, out _releaseGliderInputAction, true) == true)
+			{
+				_releaseGliderInputAction.performed -= ReleaseGliderInputAction_performed;
+				_releaseGliderInputAction.performed += ReleaseGliderInputAction_performed;
+			}
 		}
 
 		private void OnDisable()
@@ -168,6 +186,8 @@ namespace GSGD2.Player
 			_leaveInteractableInputAction.Disable();
 			_navigateLeftInteractableInputAction.Disable();
 			_navigateRightInteractableInputAction.Disable();
+			_gliderInputAction.Disable();
+			_releaseGliderInputAction.Disable();
 
 			_jumpInputAction.performed -= JumpInputAction_performed;
 			_dashInputAction.performed -= DashInputAction_performed;
@@ -181,6 +201,8 @@ namespace GSGD2.Player
 			_leaveInteractableInputAction.performed -= LeaveInteractableInputAction_performed;
 			_navigateLeftInteractableInputAction.performed -= NavigateLeftInteractableInputAction_performed;
 			_navigateRightInteractableInputAction.performed -= NavigateRightInteractableInputAction_performed;
+			_gliderInputAction.performed -= GliderInputAction_performed;
+			_releaseGliderInputAction.performed -= ReleaseGliderInputAction_performed;
 		}
 
 		private void JumpInputAction_performed(InputAction.CallbackContext obj)
@@ -236,9 +258,20 @@ namespace GSGD2.Player
         {
 			NavigateLeftInteractablePerformed?.Invoke(this, obj);
         }
+
 		private void NavigateRightInteractableInputAction_performed(InputAction.CallbackContext obj)
 		{
 			NavigateRightInteractablePerformed?.Invoke(this, obj);
+		}
+
+		private void GliderInputAction_performed(InputAction.CallbackContext obj)
+        {
+			GliderPerformed?.Invoke(this, obj);
+        }
+
+		private void ReleaseGliderInputAction_performed(InputAction.CallbackContext obj)
+		{
+			ReleaseGliderPerformed?.Invoke(this, obj);
 		}
 	}
 }

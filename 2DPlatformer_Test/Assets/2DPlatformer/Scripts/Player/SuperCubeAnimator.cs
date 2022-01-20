@@ -60,7 +60,6 @@ namespace GSGD2.Player
                     break;
                 case CubeController.State.Jumping:
                     {
-                        print(_displacementEstimationUpdater.MovementDirection.ToString());
                         if (_displacementEstimationUpdater.Velocity.y != 0)
                         {
                             _animator.SetTrigger("AirJump");

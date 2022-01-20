@@ -256,6 +256,30 @@ namespace GSGD2.Player
 		public bool HasAWallBehindCharacter => _characterCollision.HasAWallInFrontOfCharacter;
 		public bool HasASlopeInFrontOfOrBehindCharacter => _characterCollision.HasASlopeInFrontOfOrBehindCharacter;
 
+		public float AirMoveSpeed
+        {
+			get
+            {
+				return _airMoveSpeed;
+            }
+			set
+            {
+				_airMoveSpeed = value;
+            }
+        }
+
+		public float DescendingGravityScale
+		{
+			get
+			{
+				return _descendingGravityScale;
+			}
+			set
+			{
+				_descendingGravityScale = value;
+			}
+		}
+
 		#endregion Properties
 
 		#region Events

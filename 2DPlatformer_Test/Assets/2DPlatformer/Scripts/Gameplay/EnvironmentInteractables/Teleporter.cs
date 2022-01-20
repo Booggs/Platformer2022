@@ -6,7 +6,7 @@ namespace GSGD2.Gameplay
     using UnityEngine.InputSystem;
     using GSGD2.Player;
 
-    public class Teleporter : EnvironmentInteractable
+    public class Teleporter : AEnvironmentInteractable
     {
         [SerializeField]
         private Transform teleportLocation;

@@ -14,5 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2DPlatformer/Scenes/GameplayZoo.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/2DPlatformer/Scenes/GameplayTest_LD01.unity
+    guid: 8e8df4e59f6933d4088be32a7706ed6d
+  - enabled: 1
+    path: Assets/2DPlatformer/Scenes/GameplayTest_LD02.unity
+    guid: 63adc0165b8770f49b6632bdd36706bd
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 079574cea476da149abcb28640cb83c8, type: 2}
