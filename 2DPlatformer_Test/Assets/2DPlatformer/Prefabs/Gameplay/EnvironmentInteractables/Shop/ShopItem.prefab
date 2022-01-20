@@ -262,11 +262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a390d6c7ebde4e42991ce3c459b0652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pickupCommand: {fileID: 11400000, guid: 8fe089d274658c84cb566114b8bcc668, type: 2}
   _itemNameDisplay: {fileID: 5610230402180225200}
   _itemCostDisplay: {fileID: 3247477779083740629}
   _itemName: Free Loot
   _itemCost: 0
+  _pickupCommand: {fileID: 11400000, guid: 8fe089d274658c84cb566114b8bcc668, type: 2}
+  _buyLimit: 0
+  _canvasGroup: {fileID: 4048543550289980186}
 --- !u!1 &4048543550905381483
 GameObject:
   m_ObjectHideFlags: 0

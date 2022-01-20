@@ -72,5 +72,4 @@ namespace GSGD2.Player
 			_force = Mathf.Clamp(_force, 10f, float.MaxValue);
 		}
 	}
-
 }

@@ -13,6 +13,8 @@ namespace GSGD2.Gameplay
         private TextMeshProUGUI _itemNameDisplay = null;
         [SerializeField]
         private TextMeshProUGUI _itemCostDisplay = null;
+        [SerializeField]
+        private CanvasGroup _canvasGroup = null;
 
         [Header("Item Data")]
         [SerializeField]
@@ -26,7 +28,6 @@ namespace GSGD2.Gameplay
 
         private int _boughtAmount = 0;
 
-        private CanvasGroup _canvasGroup = null;
 
 
         public CanvasGroup canvasGroup => _canvasGroup;
@@ -38,7 +39,6 @@ namespace GSGD2.Gameplay
         private void Awake()
         {
             _pickupCommand.DestroyPickupOnApply = false;
-            _canvasGroup = GetComponent<CanvasGroup>();
             _itemNameDisplay.text = _itemName;
             _itemCostDisplay.text = "Cost : " + _itemCost;
         }

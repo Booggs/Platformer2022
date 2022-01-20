@@ -7,7 +7,7 @@ namespace GSGD2.Gameplay
     using GSGD2.Player;
     using UnityEditor;
 
-    public class Shop : EnvironmentInteractable
+    public class Shop : AEnvironmentInteractable
     {
         [SerializeField]
         private GameObject _canvasParent = null;
@@ -21,7 +21,6 @@ namespace GSGD2.Gameplay
         {
             _lootManager = LevelReferences.FindObjectOfType<LootManager>();
             _shopItems = GetComponentsInChildren<ShopItem>(); //Be sure to get shop item list BEFORE the shop items are disabled by the CloseShop() function
-            CloseShop();
             if (_shopItems.Length > 1)
             {
                 for (int i = 1; i < _shopItems.Length; i++)
@@ -29,6 +28,7 @@ namespace GSGD2.Gameplay
                     _shopItems[i].canvasGroup.alpha = 0f;
                 }
             }
+            CloseShop();
         }
 
 

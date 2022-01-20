@@ -14,12 +14,29 @@ namespace GSGD2.Gameplay
         private PlayerReferences _playerRefs = null;
 
         private PlayerController _playerController;
+        private AEnvironmentInteractable _currentEnvironmentInteractable;
+
+        public AEnvironmentInteractable CurrentEnvironmentInteractable
+        {
+            get
+            {
+                return _currentEnvironmentInteractable;
+            }
+            set
+            {
+                _currentEnvironmentInteractable = value;
+            }
+        }
 
         private void Awake()
         {
             LevelReferences levelReference = LevelReferences.Instance;
             levelReference.PlayerReferences.TryGetPlayerController(out _playerController);
+        }
 
+        #region EventsListener
+        private void OnEnable()
+        {
             _playerController.UseInteractablePerformed -= PlayerController_UseInteractablePerformed;
             _playerController.UseInteractablePerformed += PlayerController_UseInteractablePerformed;
 
@@ -33,56 +50,56 @@ namespace GSGD2.Gameplay
             _playerController.NavigateRightInteractablePerformed += PlayerController_NavigateRightInteractablePerformed;
         }
 
+        private void OnDisable()
+        {
+            _playerController.UseInteractablePerformed -= PlayerController_UseInteractablePerformed;
+            _playerController.LeaveInteractablePerformed -= PlayerController_LeaveInteractablePerformed;
+            _playerController.NavigateLeftInteractablePerformed -= PlayerController_NavigateLeftInteractablePerformed;
+            _playerController.NavigateRightInteractablePerformed -= PlayerController_NavigateRightInteractablePerformed;
+        }
+        #endregion
+
         private void PlayerController_UseInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            Collider[] overlappingColliders = Physics.OverlapSphere(this.gameObject.transform.position, 0.5f);
+            if (_currentEnvironmentInteractable != null)
+            {
+                _currentEnvironmentInteractable.UseInteractable(_playerRefs);
+            }
+
+            // DEPRECATED
+            // Used in order to interact with Interactables without using UnityEvents
+            /*Collider[] overlappingColliders = Physics.OverlapSphere(this.gameObject.transform.position, 0.5f);
             foreach (var overlappingCollider in overlappingColliders)
-			{
+            {
                 EnvironmentInteractable interactable = null;
                 if ((interactable = overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>()) == true)
                 {
                     interactable.UseInteractable(_playerRefs);
                 }
-			}
-            for (int i = 0; i < overlappingColliders.Length; i++)
-            {
-                if (overlappingColliders[i].gameObject.GetComponentInParent<EnvironmentInteractable>())
-                {
-
-                }
-            }
+            }*/
         }
+
         private void PlayerController_LeaveInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            Collider[] overlappingColliders = Physics.OverlapSphere(this.gameObject.transform.position, 0.5f);
-            foreach (var overlappingCollider in overlappingColliders)
+            if (_currentEnvironmentInteractable != null)
             {
-                if (overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>())
-                {
-                    overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>().LeaveInteractable();
-                }
+                _currentEnvironmentInteractable.LeaveInteractable();
             }
         }
+
         private void PlayerController_NavigateLeftInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            Collider[] overlappingColliders = Physics.OverlapSphere(this.gameObject.transform.position, 0.5f);
-            foreach (var overlappingCollider in overlappingColliders)
+            if (_currentEnvironmentInteractable != null)
             {
-                if (overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>())
-                {
-                    overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>().NavigateLeftInteractable();
-                }
+                _currentEnvironmentInteractable.NavigateLeftInteractable();
             }
         }
+
         private void PlayerController_NavigateRightInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            Collider[] overlappingColliders = Physics.OverlapSphere(this.gameObject.transform.position, 0.5f);
-            foreach (var overlappingCollider in overlappingColliders)
+            if (_currentEnvironmentInteractable != null)
             {
-                if (overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>())
-                {
-                    overlappingCollider.gameObject.GetComponentInParent<EnvironmentInteractable>().NavigateRightInteractable( );
-                }
+                _currentEnvironmentInteractable.NavigateRightInteractable();
             }
         }
     }
