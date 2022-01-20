@@ -8,12 +8,11 @@ namespace GSGD2.Gameplay
     public class InteractableSwitch : AEnvironmentInteractable
     {
         [SerializeField]
-        private ASwitchTarget _switchTarget = null;
+        private SwitchTarget _switchTarget = null;
 
-        public override void UseInteractable(Player.PlayerReferences playerRefs)
+        public override void UseInteractable()
         {
-            _switchTarget.ToggleObject();
+            _switchTarget.ToggleSwitch();
         }
     }
-
 }

@@ -11,7 +11,7 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private string _sceneName;
         
-        public override void UseInteractable(PlayerReferences playerRefs)
+        public override void UseInteractable()
         {
             LoadScene();
         }

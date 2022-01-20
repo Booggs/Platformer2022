@@ -8,9 +8,12 @@
 
     public abstract class AEnvironmentInteractable : MonoBehaviour
     {
-        protected bool _interactableActive = true;
+        [SerializeField]
+        protected bool _unlockedAtStart = true;
 
-        public bool InteractableActive => _interactableActive;
+        protected PlayerReferences _playerRefs = null;
+
+        public bool InteractableActive => _unlockedAtStart;
 
         public void SetPlayerInteractable(PhysicsTriggerEvent physicsTriggerEvent, Collider other)
         {
@@ -18,6 +21,7 @@
             if(interactionManager != null)
             {
                 interactionManager.CurrentEnvironmentInteractable = this;
+                _playerRefs = interactionManager.PlayerRefs;
             }
         }
 
@@ -28,10 +32,11 @@
             {
                 interactionManager.CurrentEnvironmentInteractable = null;
                 LeaveInteractable();
+                _playerRefs = null;
             }
         }
 
-        public virtual void UseInteractable(PlayerReferences playerRefs)
+        public virtual void UseInteractable()
         {
             return;
         }
@@ -53,7 +58,7 @@
 
         public void ActivateInteractable(bool status)
         {
-            _interactableActive = status;
+            _unlockedAtStart = status;
         }
 
         protected void OnTriggerEnter(Collider other)

@@ -28,6 +28,8 @@ namespace GSGD2.Gameplay
             }
         }
 
+        public PlayerReferences PlayerRefs => _playerRefs;
+
         private void Awake()
         {
             LevelReferences levelReference = LevelReferences.Instance;
@@ -63,7 +65,7 @@ namespace GSGD2.Gameplay
         {
             if (_currentEnvironmentInteractable != null)
             {
-                _currentEnvironmentInteractable.UseInteractable(_playerRefs);
+                _currentEnvironmentInteractable.UseInteractable();
             }
 
             // DEPRECATED

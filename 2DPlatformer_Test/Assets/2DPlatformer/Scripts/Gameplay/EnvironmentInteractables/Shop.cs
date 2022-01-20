@@ -33,13 +33,13 @@ namespace GSGD2.Gameplay
 
 
         #region InteractionInputMethods
-        public override void UseInteractable(PlayerReferences playerRefs)
+        public override void UseInteractable()
         {
             if (_shopOpened == false)
             {
                 OpenShop();
             }
-            else UseShop(playerRefs);
+            else UseShop(_playerRefs);
         }
 
         public override void LeaveInteractable()
@@ -69,7 +69,7 @@ namespace GSGD2.Gameplay
 
         private void OpenShop()
         {
-            if (_interactableActive == true)
+            if (_unlockedAtStart == true)
             {
                 _shopOpened = true;
                 _canvasParent.SetActive(true);
