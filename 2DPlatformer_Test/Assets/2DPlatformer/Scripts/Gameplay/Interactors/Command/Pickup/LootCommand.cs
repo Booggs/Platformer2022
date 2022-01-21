@@ -16,7 +16,6 @@
 		protected override bool ApplyPickup(ICommandSender from)
 		{
 			LevelReferences.Instance.LootManager.AddLoot(_lootValue);
-			Debug.Log("picked up loot");
 			return true;
 		}
 	}

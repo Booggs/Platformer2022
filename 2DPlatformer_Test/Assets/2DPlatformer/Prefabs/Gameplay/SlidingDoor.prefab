@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6895842237080662291}
   - component: {fileID: 6895842237080662290}
   - component: {fileID: 6895842237080662293}
+  - component: {fileID: 502798590}
+  - component: {fileID: 502798591}
   m_Layer: 0
   m_Name: SlidingDoor
   m_TagString: Untagged
@@ -89,12 +91,38 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _pingPong: 0
+  _stopWhenAtEndOfPath: 1
   _timerBetweenPingPong:
     _duration: 0
   _applyTimerAtDefaultPlay: 1
   _applyTimerAtReversePlay: 1
   _beginWithTimerAtFinishedState: 1
+--- !u!114 &502798590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895842237080662288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82979f01fa02e7948a26f0f5f341b354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unlockerSwitch: 1
+--- !u!114 &502798591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895842237080662288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ed3c051d452f143ae88ddf27e19415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unlockedAtStart: 0
 --- !u!1 &6895842238815435144
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +136,8 @@ GameObject:
   - component: {fileID: 6895842238815435148}
   - component: {fileID: 6895842238815435149}
   - component: {fileID: 6895842238815435146}
+  - component: {fileID: 2501876504673696884}
+  - component: {fileID: 1839120160}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -402,8 +432,66 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6895842238815435144}
   m_Material: {fileID: 13400000, guid: 5d69c0f3f91c7b845a6ad2500246955e, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 6}
+  m_Center: {x: 0, y: 0.5, z: 3}
+--- !u!65 &2501876504673696884
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895842238815435144}
+  m_Material: {fileID: 13400000, guid: 5d69c0f3f91c7b845a6ad2500246955e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 2, z: 6}
+  m_Size: {x: 3, y: 1, z: 6}
   m_Center: {x: 0, y: 0.5, z: 3}
+--- !u!114 &1839120160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895842238815435144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c8f768198901b45aae3577542c65cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 502798591}
+        m_TargetAssemblyTypeName: GSGD2.Gameplay.AEnvironmentInteractable, Assembly-CSharp
+        m_MethodName: SetPlayerInteractable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  _onTriggerExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 502798591}
+        m_TargetAssemblyTypeName: GSGD2.Gameplay.AEnvironmentInteractable, Assembly-CSharp
+        m_MethodName: ResetPlayerInteractable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

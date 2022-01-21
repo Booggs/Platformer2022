@@ -93,7 +93,6 @@ namespace GSGD2.Player
 
 		private void StopGliding()
         {
-			print("glider reset");
 			_cubeController.enabled = true;
 			_isGliding = false;
 			_cubeController.AirMoveSpeed = _defaultAirSpeed;

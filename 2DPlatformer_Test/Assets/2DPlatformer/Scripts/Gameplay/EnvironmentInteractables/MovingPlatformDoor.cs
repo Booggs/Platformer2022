@@ -7,7 +7,11 @@ namespace GSGD2.Gameplay
 
     public class MovingPlatformDoor : AEnvironmentInteractable
     {
+        [SerializeField]
+        private bool _staysOpen = false;
+
         private MovingPlatform _movingPlatform;
+        private bool _doorOpen = false;
 
         private void Awake()
         {
@@ -18,7 +22,16 @@ namespace GSGD2.Gameplay
         {
             if (_movingPlatform != null)
             {
-                _movingPlatform.Play(false, true);
+                if (_doorOpen == false)
+                {
+                    _doorOpen = true;
+                    _movingPlatform.Play(false, true);
+                }
+                else if (_doorOpen == true && _staysOpen == false)
+                {
+                    _doorOpen = false;
+                    _movingPlatform.PlayReverse(false, true);
+                }
             }
         }
     }

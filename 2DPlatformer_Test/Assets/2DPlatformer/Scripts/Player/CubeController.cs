@@ -207,6 +207,8 @@ namespace GSGD2.Player
 		private Vector3 _wallNormalDuringLastWallGrab;
 		private bool _shouldChangeToFallingStateWhenReleasingJump = false;
 		private bool _hasBeganToFallFromGroundedState = false;
+		private float _currentAirSpeed = 0f;
+		private float _currentDescendingGravityScale = 0f;
 
 		private bool _hasBeganToFallFromGroundedStateAndDidJump = false;
 		private bool _hasBeganToFallFromGroundedStateAndDidDash = false;
@@ -256,15 +258,17 @@ namespace GSGD2.Player
 		public bool HasAWallBehindCharacter => _characterCollision.HasAWallInFrontOfCharacter;
 		public bool HasASlopeInFrontOfOrBehindCharacter => _characterCollision.HasASlopeInFrontOfOrBehindCharacter;
 
+		public int MaxJumpCount => _jump.MaximumAllowedForcesWhileInAir;
+
 		public float AirMoveSpeed
         {
 			get
             {
-				return _airMoveSpeed;
+				return _currentAirSpeed;
             }
 			set
             {
-				_airMoveSpeed = value;
+				_currentAirSpeed = value;
             }
         }
 
@@ -272,11 +276,11 @@ namespace GSGD2.Player
 		{
 			get
 			{
-				return _descendingGravityScale;
+				return _currentDescendingGravityScale;
 			}
 			set
 			{
-				_descendingGravityScale = value;
+				_currentDescendingGravityScale = value;
 			}
 		}
 
@@ -388,6 +392,9 @@ namespace GSGD2.Player
 			_dash.cubeController = this;
 			_jump.displacementEstimationUpdater = _displacementEstimationUpdater;
 			_dash.displacementEstimationUpdater = _displacementEstimationUpdater;
+
+			_currentAirSpeed = _airMoveSpeed;
+			_currentDescendingGravityScale = _descendingGravityScale;
 
 			ResetCurrentValues();
 		}
@@ -729,7 +736,7 @@ namespace GSGD2.Player
 			return true;
 		}
 
-		private void ResetJumpCount(int allowedForceCount)
+		public void ResetJumpCount(int allowedForceCount)
 		{
 			_jump.ResetCurrentForceCount(_jump.MaximumAllowedForcesWhileInAir - allowedForceCount);
 		}
@@ -1205,7 +1212,7 @@ namespace GSGD2.Player
 					// do not enter if we're in WallJump with a wall in front of us to avoid wall clipping / stucking
 					if (_currentState != State.WallJump || HasAWallInFrontOfCharacter == false)
 					{
-						velocity.z = _inputMovement * (isGrounded == true ? _groundMoveSpeed : _airMoveSpeed);
+						velocity.z = _inputMovement * (isGrounded == true ? _groundMoveSpeed : _currentAirSpeed);
 					}
 				}
 				else if (isGrounded == true)
@@ -1241,7 +1248,7 @@ namespace GSGD2.Player
 
 		private void ApplyGravity(ref Vector3 velocity)
 		{
-			float gravityScale = (velocity.y > 0 ? _ascendingGravityScale : _descendingGravityScale);
+			float gravityScale = (velocity.y > 0 ? _ascendingGravityScale : _currentDescendingGravityScale);
 			velocity.y += Physics.gravity.y * gravityScale * Time.deltaTime;
 		}
 
@@ -1305,13 +1312,13 @@ namespace GSGD2.Player
 		{
 			_groundMoveSpeed = Mathf.Clamp(_groundMoveSpeed, 0, float.MaxValue);
 			_groundFriction = Mathf.Clamp(_groundFriction, 0, float.MaxValue);
-			_airMoveSpeed = Mathf.Clamp(_airMoveSpeed, 0, float.MaxValue);
+			_currentAirSpeed = Mathf.Clamp(_currentAirSpeed, 0, float.MaxValue);
 			_wallJumpHeight = Mathf.Clamp(_wallJumpHeight, 0, float.MaxValue);
 
 			_jump?.Validate();
 			_dash?.Validate();
 			_ascendingGravityScale = Mathf.Clamp(_ascendingGravityScale, 0, float.MaxValue);
-			_descendingGravityScale = Mathf.Clamp(_descendingGravityScale, 0, float.MaxValue);
+			_currentDescendingGravityScale = Mathf.Clamp(_currentDescendingGravityScale, 0, float.MaxValue);
 			_turnSpeed = Mathf.Clamp(_turnSpeed, 0, float.MaxValue);
 		}
 
@@ -1322,7 +1329,7 @@ namespace GSGD2.Player
 				Log(message, args);
 			}
 		}
-
+		
 		private void Log(string message, params object[] args)
 		{
 			Debug.LogFormat(string.Format(LOG_TOKEN, GetType().Name, message), args);

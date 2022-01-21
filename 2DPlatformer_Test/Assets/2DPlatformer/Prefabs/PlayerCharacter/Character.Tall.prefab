@@ -552,6 +552,13 @@ GameObject:
   - component: {fileID: 349363936}
   - component: {fileID: 273068455644414413}
   - component: {fileID: 2386281391824443594}
+  - component: {fileID: 419176763}
+  - component: {fileID: 419176764}
+  - component: {fileID: 419176765}
+  - component: {fileID: 419176766}
+  - component: {fileID: 419176767}
+  - component: {fileID: 419176768}
+  - component: {fileID: 419176769}
   m_Layer: 0
   m_Name: Character.Tall
   m_TagString: Untagged
@@ -618,6 +625,7 @@ MonoBehaviour:
   _playerDamageable: {fileID: 4548461259680535859}
   _playerDamageFeedbackHandler: {fileID: 1772138187070269183}
   _cameraAimController: {fileID: 2386281391824443594}
+  _interactionManager: {fileID: 419176764}
 --- !u!54 &45943501467049745
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -647,7 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputActionMapWrapper: {fileID: 11400000, guid: e8daf777ebdc62246864a6127518cef6, type: 2}
-  _useMouseForRightDirection: 0
+  _useMouseForLookDirection: 0
 --- !u!114 &8794679050676698220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,32 +755,32 @@ MonoBehaviour:
   _playerReferences: {fileID: 658029998098805078}
   _collider: {fileID: 1241346952}
   _maxVelocity: 50
-  _groundMoveSpeed: 9
-  _groundFriction: 11.62
+  _groundMoveSpeed: 10
+  _groundFriction: 8
   _airMoveSpeed: 11
-  _ascendingGravityScale: 9
-  _descendingGravityScale: 12
+  _ascendingGravityScale: 2.5
+  _descendingGravityScale: 3.5
   _jump:
     enabled: 1
-    _maximumAllowedForcesWhileInAir: 1
-    resetVelocityWhenApplyingForceWhileInAir: 1
+    _maximumAllowedForces: 2
     cubeController: {fileID: 0}
     displacementEstimationUpdater: {fileID: 0}
     _gravityScale: 9
-    _jumpHeight: 3
+    _jumpHeight: 1
     _jumpHeightBonusWhenFalling: 1
     _jumpHeightBonusSpeedThreshold: 10
-  _changeToFallingStateWhenReleasingJump: 1
+  _changeToFallingStateWhenReleasingJump: 0
   _canJumpDuringDash: 1
   _durationToDisableGroundRaycastWhenJumping: 0.5
+  _resetJumpCountWhenFalling: 1
+  _allowedJumpCountWhenFalling: 1
   _resetJumpCountWhenWallJumping: 1
   _allowedJumpCountWhenWallJumping: 1
   _resetJumpCountWhenBumping: 1
   _allowedJumpCountWhenBumping: 1
   _dash:
     enabled: 1
-    _maximumAllowedForcesWhileInAir: 1
-    resetVelocityWhenApplyingForceWhileInAir: 1
+    _maximumAllowedForces: 1
     cubeController: {fileID: 0}
     displacementEstimationUpdater: {fileID: 0}
     _dashForce: 40
@@ -781,11 +789,13 @@ MonoBehaviour:
     _positionOffsetWhenEnteringDash: 0.1
     _debugMode: 0
   _durationToDisableGroundRaycastWhenDashing: 0.5
+  _allowedDashCountWhenFalling: 1
   _wallRaycastDistanceWhenDashing: 3
   _resetDashCountWhenWallJumping: 1
   _allowedDashCountWhenWallJumping: 1
   _resetDashJumpCountWhenBumping: 1
   _allowedDashCountWhenBumping: 1
+  _enableWallGrab: 1
   _wallJumpHeight: 3
   _wallJumpWallNormalForce: 8
   _wallGrabDisableDuration: 0.25
@@ -817,7 +827,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _disableControlWhenDamageTaken:
-    _duration: 0.4
+    _duration: 0
   _debugMode: 0
 --- !u!114 &45943501467049744
 MonoBehaviour:
@@ -826,7 +836,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45943501467049751}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 481caa45599dca243a03072e843bfc6e, type: 3}
   m_Name: 
@@ -844,7 +854,7 @@ Animator:
   m_GameObject: {fileID: 45943501467049751}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 894abbaf133cb1a4f99c52b350ec702e, type: 2}
+  m_Controller: {fileID: 9100000, guid: ec69fd2594bbc48438ef0c06cbd7bf66, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1026,7 +1036,7 @@ MonoBehaviour:
   healthAtStart: 10
   maxHealth: 10
   destroyIfHealthBelowZero: 0
-  recoveryDuration: 1
+  recoveryDuration: 0.5
   showDebug: 0
   _damageOnTime:
     _receiveDOT: 1
@@ -1144,6 +1154,115 @@ MonoBehaviour:
   _axis: 0
   _distance: 5
   _speed: 30
+--- !u!114 &419176763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45943501467049751}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adaeb4d6b7e34f044ad3912b4c0dbc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _size: 0.25
+  _lifeTime: 10
+  _frequency: 2
+--- !u!114 &419176764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45943501467049751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909ee107f3c865d4eb8d5c77df1c4969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRefs: {fileID: 658029998098805078}
+--- !u!114 &419176765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45943501467049751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6098de913a00f24d9a9429a41a9fab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &419176766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45943501467049751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2689c209443991649b9f1a609b554218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerReferences: {fileID: 658029998098805078}
+  _endJumpDownwardSpeedThresholdWhenGrounded: 5
+--- !u!114 &419176767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45943501467049751}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5795231808f4f0e4eafc4339e37b7559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerReferences: {fileID: 658029998098805078}
+  _moveSpeed: 2
+  _force: 100
+  _ascendingGravityScale: 5
+  _descendingGravityScale: 5
+  _enableControlsAfterTimer:
+    _duration: 0.2
+  _usableInState: 151
+--- !u!114 &419176768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45943501467049751}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e794723c072ae489fc9ba28c0b35af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 45943501467049745}
+  _cubeController: {fileID: 45943501467049747}
+  _playerController: {fileID: 4954958364502005736}
+  _force: 50
+  _enableControlsAfterTimer:
+    _duration: 0
+  _usableInState: 150
+--- !u!114 &419176769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45943501467049751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a745f1589b85747ab099a918538919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerReferences: {fileID: 658029998098805078}
+  _glidingSpeedMultiplier: 0.8
+  _glidingGravityDivider: 15
+  _usableInState: 146
 --- !u!1 &45943501639459713
 GameObject:
   m_ObjectHideFlags: 0

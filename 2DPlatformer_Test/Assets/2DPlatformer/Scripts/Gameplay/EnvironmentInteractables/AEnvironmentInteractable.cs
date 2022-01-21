@@ -61,11 +61,6 @@
             _unlockedAtStart = status;
         }
 
-        protected void OnTriggerEnter(Collider other)
-        {
-            print(other.gameObject.name);
-        }
-
         private InteractionManager CheckForPlayer(Collider other)
         {
             if (other.GetComponentInParent<InteractionManager>() != null)

@@ -63,7 +63,7 @@ namespace GSGD2.Gameplay
 
         private void PlayerController_UseInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_currentEnvironmentInteractable != null)
+            if (_currentEnvironmentInteractable != null && _currentEnvironmentInteractable.InteractableActive == true)
             {
                 _currentEnvironmentInteractable.UseInteractable();
             }
@@ -83,7 +83,7 @@ namespace GSGD2.Gameplay
 
         private void PlayerController_LeaveInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_currentEnvironmentInteractable != null)
+            if (_currentEnvironmentInteractable != null && _currentEnvironmentInteractable.InteractableActive == true)
             {
                 _currentEnvironmentInteractable.LeaveInteractable();
             }
@@ -91,7 +91,7 @@ namespace GSGD2.Gameplay
 
         private void PlayerController_NavigateLeftInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_currentEnvironmentInteractable != null)
+            if (_currentEnvironmentInteractable != null && _currentEnvironmentInteractable.InteractableActive == true)
             {
                 _currentEnvironmentInteractable.NavigateLeftInteractable();
             }
@@ -99,7 +99,7 @@ namespace GSGD2.Gameplay
 
         private void PlayerController_NavigateRightInteractablePerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_currentEnvironmentInteractable != null)
+            if (_currentEnvironmentInteractable != null && _currentEnvironmentInteractable.InteractableActive == true)
             {
                 _currentEnvironmentInteractable.NavigateRightInteractable();
             }

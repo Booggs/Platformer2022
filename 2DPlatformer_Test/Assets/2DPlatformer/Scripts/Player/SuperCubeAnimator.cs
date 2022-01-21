@@ -87,7 +87,6 @@ namespace GSGD2.Player
                 case CubeController.State.Dashing:
                     {
                         _animator.SetTrigger("Dash");
-                        print("dashing");
                     }
                     break;
                 case CubeController.State.DamageTaken:
