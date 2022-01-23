@@ -14,6 +14,9 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private float _startingZiplineSpeed = 5f;
 
+        /*[SerializeField]
+        private float _maxAccelerationTime = 3f;*/
+
         private Zipline _currentZipline = null;
         private bool _ziplining = false;
         private bool _zipliningLeft = false;
@@ -22,6 +25,8 @@ namespace GSGD2.Gameplay
         private CubeController _cubeController = null;
         private Rigidbody _rigidbody = null;
         private float _currentZiplineSpeed = 5f;
+        private float _maxZiplineSpeed = 0f;
+        private float _accelerationFactor = 0f;
 
         private void Awake()
         {
@@ -43,9 +48,11 @@ namespace GSGD2.Gameplay
 
         public void SetZipline(Zipline zipline)
         {
+            _currentZiplineSpeed = _startingZiplineSpeed;
             _currentZipline = zipline;
             _ziplining = true;
             this._rigidbody.velocity = new Vector3(0, 0, 0);
+            SetNewZiplineStats();
             if ((transform.rotation.eulerAngles.y <= 90 && transform.rotation.eulerAngles.y >= -90) == true)
             {
                 _zipliningLeft = false;
@@ -78,13 +85,42 @@ namespace GSGD2.Gameplay
             {
                 if (Vector3.Distance(transform.position, _zipliningDestination) > 0.5f)
                 {
-                    transform.position += (_zipliningDestination - transform.position).normalized * _startingZiplineSpeed * Time.deltaTime;
-                    print(Vector3.Distance(transform.position, _zipliningDestination).ToString());
+                    if (transform.position.y > _zipliningDestination.y)
+                    {
+
+                        if (_currentZiplineSpeed > _maxZiplineSpeed)
+                        {
+                            _currentZiplineSpeed = _maxZiplineSpeed;
+                        }
+                        else _currentZiplineSpeed = _currentZiplineSpeed + (_accelerationFactor * Time.deltaTime);
+                    }
+
+                    transform.position += (_zipliningDestination - transform.position).normalized * _currentZiplineSpeed * Time.deltaTime;
                 }
-                else 
+                else
                 {
                     LeaveZipline(_currentZipline);
                 }
+            }
+        }
+
+        private void SetNewZiplineStats()
+        {
+            float ziplineAngle;
+            if (_currentZipline.ZiplineAngle < 5f)
+            {
+                ziplineAngle = 10f;
+            }
+            else if (_currentZipline.ZiplineAngle > 75f)
+            {
+                ziplineAngle = 150f;
+            }
+            else ziplineAngle = _currentZipline.ZiplineAngle * 2;
+            _accelerationFactor = (ziplineAngle - 10f) / (150f - 10f) * 15f * 2;
+            _maxZiplineSpeed = (ziplineAngle - 10f) / (150f - 10f) * 25f;
+            if (_maxZiplineSpeed < 10f)
+            {
+                _maxZiplineSpeed = 10f;
             }
         }
 

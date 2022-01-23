@@ -728,7 +728,7 @@ namespace GSGD2.Player
 				break;
 				default:
 				{
-					LogError("{0}.ChangeState({0}) to an unhandled state.", GetType().Name);
+					//LogError("{0}.ChangeState({0}) to an unhandled state.", GetType().Name);
 				}
 				break;
 			}
