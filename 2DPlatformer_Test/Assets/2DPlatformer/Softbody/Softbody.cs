@@ -91,6 +91,7 @@ namespace GSGD2.Player
             sp.connectedBody = go2.GetComponent<Rigidbody>();
             sp.spring = spring;
             sp.damper = damper;
+            sp.connectedBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             return sp;
         }
         public static LineRenderer AddLine(ref GameObject go1, ref GameObject go2, ref LineRenderer prefab)

@@ -9,7 +9,6 @@ namespace GSGD2.Player
 	/// </summary>
 	public class PlayerReferences : MonoBehaviour
 	{
-		[SerializeField] private Rigidbody _rigidbody = null;
 		[SerializeField] private PlayerController _playerController = null;
 		[SerializeField] private CharacterCollision _characterCollision = null;
 		[SerializeField] private CubeController _cubeController = null;
@@ -27,8 +26,14 @@ namespace GSGD2.Player
 		[SerializeField] private PlayerDamageFeedbackHandler _playerDamageFeedbackHandler = null;
 		[SerializeField] private CameraAimController _cameraAimController = null;
 		[SerializeField] private InteractionManager _interactionManager = null;
+		private Rigidbody _rigidbody = null;
 
-		public bool TryGetRigidbody(out Rigidbody rigidbody)
+        private void Awake()
+        {
+			_rigidbody = GetComponent<Rigidbody>();
+		}
+
+        public bool TryGetRigidbody(out Rigidbody rigidbody)
 		{
 			rigidbody = _rigidbody;
 			return rigidbody != null;

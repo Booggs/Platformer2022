@@ -8,13 +8,12 @@ namespace GSGD2.Gameplay
 	/// <summary>
 	/// Receive a force from any <see cref="Bumper"/> calling OnTriggerEnter().
 	/// </summary>
-	[RequireComponent(typeof(Rigidbody))]
 	public class BumperReceiver : MonoBehaviour
 	{
 		[SerializeField]
 		private Timer _durationThresholdBeforeReceiveAnotherBump = null;
 
-		private Rigidbody _rigidbody = null;
+		private Rigidbody[] _rigidbodies = null;
 		private IBumperReceiverListener[] _bumperReceiverListeners = null;
 
 		private Bumper _currentBumperInRange = null;
@@ -44,7 +43,10 @@ namespace GSGD2.Gameplay
 			_durationThresholdBeforeReceiveAnotherBump.Start();
 			CallEventOnListeners();
 			transform.position = fromBumper.Origin.position;
-			_rigidbody.AddForce(fromBumper.Origin.up * fromBumper.BumpForce, ForceMode.Impulse);
+			foreach(var rigidbody in _rigidbodies)
+            {
+				rigidbody.AddForce(fromBumper.Origin.up * fromBumper.BumpForce, ForceMode.Impulse);
+            }
 		}
 
 		private void Update()
@@ -54,7 +56,7 @@ namespace GSGD2.Gameplay
 
 		private void Awake()
 		{
-			_rigidbody = GetComponent<Rigidbody>();
+			_rigidbodies = GetComponentsInChildren<Rigidbody>();
 			_bumperReceiverListeners = GetComponents<IBumperReceiverListener>();
 			// Ensure we start with the timer at true
 			_durationThresholdBeforeReceiveAnotherBump.ForceFinishState();

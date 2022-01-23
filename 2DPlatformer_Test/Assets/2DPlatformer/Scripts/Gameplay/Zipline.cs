@@ -40,7 +40,6 @@ namespace GSGD2.Gameplay
             _ziplineTrigger.transform.position = new Vector3(0f, (_startPosition.y + _targetPosition.y) / 2, (_startPosition.z + _targetPosition.z) / 2);
             _ziplineTrigger.transform.rotation = Quaternion.LookRotation(_targetPosition - _ziplineTrigger.transform.position);
             _ziplineTrigger.size = new Vector3(_ziplineTrigger.size.x, _ziplineTrigger.size.y, Vector3.Distance(_startPosition, _targetPosition));
-            print(ZiplineAngle);
         }
 
         public void PlayerOnZipline(PhysicsTriggerEvent sender, Collider other)

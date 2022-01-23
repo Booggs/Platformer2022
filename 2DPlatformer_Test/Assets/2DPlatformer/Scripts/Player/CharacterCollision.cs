@@ -92,169 +92,169 @@ namespace GSGD2.Player
 
 		public void HandleWallCollisionAndApplyBonusYReplacement(int lastMovementDirection, bool debug = false)
 		{
-			RaycastHit chosenWallRaycastHitResult = new RaycastHit();
-			RaycastHit chosenSlopeRaycastHitResult = new RaycastHit();
+            RaycastHit chosenWallRaycastHitResult = new RaycastHit();
+            RaycastHit chosenSlopeRaycastHitResult = new RaycastHit();
 
-			//Debug.LogFormat("HandleWallCollisionAndApplyBonusYReplacement {0}", _currentState);
+            //Debug.LogFormat("HandleWallCollisionAndApplyBonusYReplacement {0}", _currentState);
 
-			// Right
-			bool topRightResult = _topRightWallRaycaster.RaycastAll(out RaycastHit[] topRightHits, debug: debug);
-			bool downRightResult = _downRightWallRaycaster.RaycastAll(out RaycastHit[] downRightHits, debug: debug);
-			bool midRightResult = _midRightWallRaycaster.RaycastAll(out RaycastHit[] midRightHits, debug: debug);
-			bool yRightReplacerBonusResult = _yRightReplacerBonusRaycaster.RaycastAll(out RaycastHit[] yRightReplacerBonusHits, debug: debug);
-			bool topRightSlopeResult = false, downRightSlopeResult = false, midRightSlopeResult = false;
-			Vector3 rightWallNormal = Vector3.zero;
-			if (topRightResult == true)
-			{
-				topRightResult = IsNormalIndicateAnyOfThisAsAWall(ref topRightHits, out rightWallNormal);
-				if (topRightResult == true)
-				{
-					chosenWallRaycastHitResult = topRightHits[0];
-				}
-				else
-				{
-					topRightSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref topRightHits, out rightWallNormal);
-					if (topRightSlopeResult == true)
-					{
-						chosenSlopeRaycastHitResult = topRightHits[0];
-					}
-				}
-			}
+            // Right
+            bool topRightResult = _topRightWallRaycaster.RaycastAll(out RaycastHit[] topRightHits, debug: debug);
+            bool downRightResult = _downRightWallRaycaster.RaycastAll(out RaycastHit[] downRightHits, debug: debug);
+            bool midRightResult = _midRightWallRaycaster.RaycastAll(out RaycastHit[] midRightHits, debug: debug);
+            bool yRightReplacerBonusResult = _yRightReplacerBonusRaycaster.RaycastAll(out RaycastHit[] yRightReplacerBonusHits, debug: debug);
+            bool topRightSlopeResult = false, downRightSlopeResult = false, midRightSlopeResult = false;
+            Vector3 rightWallNormal = Vector3.zero;
+            if (topRightResult == true)
+            {
+                topRightResult = IsNormalIndicateAnyOfThisAsAWall(ref topRightHits, out rightWallNormal);
+                if (topRightResult == true)
+                {
+                    chosenWallRaycastHitResult = topRightHits[0];
+                }
+                else
+                {
+                    topRightSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref topRightHits, out rightWallNormal);
+                    if (topRightSlopeResult == true)
+                    {
+                        chosenSlopeRaycastHitResult = topRightHits[0];
+                    }
+                }
+            }
 
-			if (downRightResult == true)
-			{
-				downRightResult = IsNormalIndicateAnyOfThisAsAWall(ref downRightHits, out rightWallNormal);
-				if (downRightResult == true)
-				{
-					chosenWallRaycastHitResult = downRightHits[0];
-				}
-				else
-				{
-					downRightSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref downRightHits, out rightWallNormal);
-					if (downRightSlopeResult == true)
-					{
-						chosenSlopeRaycastHitResult = downRightHits[0];
-					}
-				}
-			}
+            if (downRightResult == true)
+            {
+                downRightResult = IsNormalIndicateAnyOfThisAsAWall(ref downRightHits, out rightWallNormal);
+                if (downRightResult == true)
+                {
+                    chosenWallRaycastHitResult = downRightHits[0];
+                }
+                else
+                {
+                    downRightSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref downRightHits, out rightWallNormal);
+                    if (downRightSlopeResult == true)
+                    {
+                        chosenSlopeRaycastHitResult = downRightHits[0];
+                    }
+                }
+            }
 
-			if (midRightResult == true)
-			{
-				midRightResult = IsNormalIndicateAnyOfThisAsAWall(ref midRightHits, out rightWallNormal);
-				if (midRightResult == true)
-				{
-					chosenWallRaycastHitResult = midRightHits[0];
-				}
-				else
-				{
-					midRightSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref midRightHits, out rightWallNormal);
-					if (midRightSlopeResult == true)
-					{
-						chosenSlopeRaycastHitResult = midRightHits[0];
-					}
-				}
-			}
+            if (midRightResult == true)
+            {
+                midRightResult = IsNormalIndicateAnyOfThisAsAWall(ref midRightHits, out rightWallNormal);
+                if (midRightResult == true)
+                {
+                    chosenWallRaycastHitResult = midRightHits[0];
+                }
+                else
+                {
+                    midRightSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref midRightHits, out rightWallNormal);
+                    if (midRightSlopeResult == true)
+                    {
+                        chosenSlopeRaycastHitResult = midRightHits[0];
+                    }
+                }
+            }
 
-			if (yRightReplacerBonusResult == true)
-			{
-				yRightReplacerBonusResult = IsNormalIndicateAnyOfThisAsAWall(ref yRightReplacerBonusHits, out _);
-			}
+            if (yRightReplacerBonusResult == true)
+            {
+                yRightReplacerBonusResult = IsNormalIndicateAnyOfThisAsAWall(ref yRightReplacerBonusHits, out _);
+            }
 
-			// Left
-			bool topLeftResult = _topLeftWallRaycaster.RaycastAll(out RaycastHit[] topLeftHits, debug: debug);
-			bool downLeftResult = _downLeftWallRaycaster.RaycastAll(out RaycastHit[] downLeftHits, debug: debug);
-			bool midLeftResult = _midLeftWallRaycaster.RaycastAll(out RaycastHit[] midLeftHits, debug: debug);
-			bool yLeftReplacerBonusResult = _yLeftReplacerBonusRaycaster.RaycastAll(out RaycastHit[] yLeftReplacerBonusHits, debug: debug);
-			bool topLeftSlopeResult = false, downLeftSlopeResult = false, midLeftSlopeResult = false;
+            // Left
+            bool topLeftResult = _topLeftWallRaycaster.RaycastAll(out RaycastHit[] topLeftHits, debug: debug);
+            bool downLeftResult = _downLeftWallRaycaster.RaycastAll(out RaycastHit[] downLeftHits, debug: debug);
+            bool midLeftResult = _midLeftWallRaycaster.RaycastAll(out RaycastHit[] midLeftHits, debug: debug);
+            bool yLeftReplacerBonusResult = _yLeftReplacerBonusRaycaster.RaycastAll(out RaycastHit[] yLeftReplacerBonusHits, debug: debug);
+            bool topLeftSlopeResult = false, downLeftSlopeResult = false, midLeftSlopeResult = false;
 
-			Vector3 leftWallNormal = Vector3.zero;
-			if (topLeftResult == true)
-			{
-				topLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref topLeftHits, out leftWallNormal);
-				if (topLeftResult == true)
-				{
-					chosenWallRaycastHitResult = topLeftHits[0];
-				}
-				else
-				{
-					topLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref topLeftHits, out leftWallNormal);
-					if (topLeftSlopeResult == true)
-					{
-						chosenSlopeRaycastHitResult = midRightHits[0];
-					}
-				}
-			}
-			if (downLeftResult == true)
-			{
-				downLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref downLeftHits, out leftWallNormal);
-				if (downLeftResult == true)
-				{
-					chosenWallRaycastHitResult = downLeftHits[0];
-				}
-				else
-				{
-					downLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref downLeftHits, out leftWallNormal);
-					if (downLeftSlopeResult == true)
-					{
-						chosenSlopeRaycastHitResult = downLeftHits[0];
-					}
-				}
-			}
+            Vector3 leftWallNormal = Vector3.zero;
+            if (topLeftResult == true)
+            {
+                topLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref topLeftHits, out leftWallNormal);
+                if (topLeftResult == true)
+                {
+                    chosenWallRaycastHitResult = topLeftHits[0];
+                }
+                else
+                {
+                    topLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref topLeftHits, out leftWallNormal);
+                    if (topLeftSlopeResult == true)
+                    {
+                        chosenSlopeRaycastHitResult = midRightHits[0];
+                    }
+                }
+            }
+            if (downLeftResult == true)
+            {
+                downLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref downLeftHits, out leftWallNormal);
+                if (downLeftResult == true)
+                {
+                    chosenWallRaycastHitResult = downLeftHits[0];
+                }
+                else
+                {
+                    downLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref downLeftHits, out leftWallNormal);
+                    if (downLeftSlopeResult == true)
+                    {
+                        chosenSlopeRaycastHitResult = downLeftHits[0];
+                    }
+                }
+            }
 
-			if (midLeftResult == true)
-			{
-				midLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref midLeftHits, out leftWallNormal);
-				if (midLeftResult == true)
-				{
-					chosenWallRaycastHitResult = midLeftHits[0];
-				}
-				else
-				{
-					midLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref midLeftHits, out leftWallNormal);
-					if (midLeftSlopeResult == true)
-					{
-						chosenSlopeRaycastHitResult = midLeftHits[0];
-					}
-				}
-			}
+            if (midLeftResult == true)
+            {
+                midLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref midLeftHits, out leftWallNormal);
+                if (midLeftResult == true)
+                {
+                    chosenWallRaycastHitResult = midLeftHits[0];
+                }
+                else
+                {
+                    midLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref midLeftHits, out leftWallNormal);
+                    if (midLeftSlopeResult == true)
+                    {
+                        chosenSlopeRaycastHitResult = midLeftHits[0];
+                    }
+                }
+            }
 
-			if (yLeftReplacerBonusResult == true)
-			{
-				yLeftReplacerBonusResult = IsNormalIndicateAnyOfThisAsAWall(ref yLeftReplacerBonusHits, out _);
-			}
+            if (yLeftReplacerBonusResult == true)
+            {
+                yLeftReplacerBonusResult = IsNormalIndicateAnyOfThisAsAWall(ref yLeftReplacerBonusHits, out _);
+            }
 
-			bool hasABonusYReplacement =
-				lastMovementDirection > 0
-				? downRightResult == true && yRightReplacerBonusResult == false
-				: downLeftResult == true && yLeftReplacerBonusResult == false;
+            bool hasABonusYReplacement =
+                lastMovementDirection > 0
+                ? downRightResult == true && yRightReplacerBonusResult == false
+                : downLeftResult == true && yLeftReplacerBonusResult == false;
 
-			if (hasABonusYReplacement == true)
-			{
-				Vector3 position = transform.position;
-				position.y = _yRightReplacerBonusRaycaster.WorldPosition.y;
-				//TODO AL  here apply a little of z position
-				transform.position = position;
-			}
-			else
-			{
-				_lastWallRaycastHitResult = chosenWallRaycastHitResult;
-				_lastSlopeRaycastHitResult = chosenSlopeRaycastHitResult;
-				if (lastMovementDirection > 0)
-				{
-					_hasAWallInFrontOfCharacter = topRightResult || midRightResult || downRightResult;
-					_hasAWallBehindCharacter = topLeftResult || midLeftResult || downLeftResult;
-					_wallNormal = rightWallNormal;
-					_hasASlopeInFrontOfOrBehindCharacter = topRightSlopeResult || downRightSlopeResult || midRightSlopeResult;
-				}
-				else
-				{
-					_hasAWallInFrontOfCharacter = topLeftResult || midLeftResult || downLeftResult;
-					_hasAWallBehindCharacter = topRightResult || midRightResult || downRightResult;
-					_wallNormal = leftWallNormal;
-					_hasASlopeInFrontOfOrBehindCharacter = topLeftSlopeResult || downLeftSlopeResult || midLeftSlopeResult;
-				}
-			}
-		}
+            if (hasABonusYReplacement == true)
+            {
+                Vector3 position = transform.position;
+                position.y = _yRightReplacerBonusRaycaster.WorldPosition.y;
+                //TODO AL  here apply a little of z position
+                transform.position = position;
+            }
+            else
+            {
+                _lastWallRaycastHitResult = chosenWallRaycastHitResult;
+                _lastSlopeRaycastHitResult = chosenSlopeRaycastHitResult;
+                if (lastMovementDirection > 0)
+                {
+                    _hasAWallInFrontOfCharacter = topRightResult || midRightResult || downRightResult;
+                    _hasAWallBehindCharacter = topLeftResult || midLeftResult || downLeftResult;
+                    _wallNormal = rightWallNormal;
+                    _hasASlopeInFrontOfOrBehindCharacter = topRightSlopeResult || downRightSlopeResult || midRightSlopeResult;
+                }
+                else
+                {
+                    _hasAWallInFrontOfCharacter = topLeftResult || midLeftResult || downLeftResult;
+                    _hasAWallBehindCharacter = topRightResult || midRightResult || downRightResult;
+                    _wallNormal = leftWallNormal;
+                    _hasASlopeInFrontOfOrBehindCharacter = topLeftSlopeResult || downLeftSlopeResult || midLeftSlopeResult;
+                }
+            }
+        }
 
 		public float GetReplacementZPosition(float lastMovementDirection)
 		{

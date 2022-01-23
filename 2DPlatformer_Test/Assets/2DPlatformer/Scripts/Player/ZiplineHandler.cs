@@ -51,7 +51,7 @@ namespace GSGD2.Gameplay
             _currentZiplineSpeed = _startingZiplineSpeed;
             _currentZipline = zipline;
             _ziplining = true;
-            this._rigidbody.velocity = new Vector3(0, 0, 0);
+            _cubeController.ResetRigidbodiesVelocity();
             SetNewZiplineStats();
             if ((transform.rotation.eulerAngles.y <= 90 && transform.rotation.eulerAngles.y >= -90) == true)
             {
