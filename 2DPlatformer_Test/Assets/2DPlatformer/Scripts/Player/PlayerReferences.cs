@@ -26,6 +26,7 @@ namespace GSGD2.Player
 		[SerializeField] private PlayerDamageFeedbackHandler _playerDamageFeedbackHandler = null;
 		[SerializeField] private CameraAimController _cameraAimController = null;
 		[SerializeField] private InteractionManager _interactionManager = null;
+		[SerializeField] private BoneSphere _boneSphere = null;
 		private Rigidbody _rigidbody = null;
 
         private void Awake()
@@ -139,6 +140,12 @@ namespace GSGD2.Player
         {
 			interactionManager = _interactionManager;
 			return interactionManager != null;
+        }
+
+		public bool TryGetBoneSphere(out BoneSphere boneSphere)
+        {
+			boneSphere = _boneSphere;
+			return boneSphere != null;
         }
 	}
 }

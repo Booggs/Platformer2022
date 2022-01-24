@@ -606,7 +606,6 @@ namespace GSGD2.Player
                     return false;
                 }
             }
-            print(newState);
 
             DebugLog($"changin to {newState} from {_currentState}");
 

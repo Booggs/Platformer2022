@@ -28,6 +28,8 @@ namespace GSGD2.Gameplay
         private float _maxZiplineSpeed = 0f;
         private float _accelerationFactor = 0f;
 
+        public bool ZipliningLeft => _zipliningLeft;
+
         private void Awake()
         {
             _playerRefs.TryGetPlayerController(out _playerController);
@@ -65,6 +67,10 @@ namespace GSGD2.Gameplay
             }
             _cubeController.ChangeState(CubeController.State.None);
             //_cubeController.enabled = false;
+            foreach (Rigidbody rigidbody in _cubeController.Rigidbodies)
+            {
+                rigidbody.useGravity = false;
+            }
         }
 
         public void LeaveZipline(Zipline zipline)
@@ -76,10 +82,14 @@ namespace GSGD2.Gameplay
                 //_cubeController.enabled = true;
                 _cubeController.ResetJumpCount(_cubeController.MaxJumpCount);
                 _cubeController.ChangeState(CubeController.State.StartJump);
+                foreach(Rigidbody rigidbody in _cubeController.Rigidbodies)
+                {
+                    rigidbody.useGravity = true;
+                }
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_ziplining == true && _currentZipline != null)
             {

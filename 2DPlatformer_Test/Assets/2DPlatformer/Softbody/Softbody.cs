@@ -83,6 +83,7 @@ namespace GSGD2.Player
             rb.drag = 0f;
             rb.angularDrag = 10f;
             rb.constraints = Constraints;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             return rb;
         }
         public static SpringJoint AddSpring(ref GameObject go1, ref GameObject go2, float spring, float damper)

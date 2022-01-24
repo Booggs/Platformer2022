@@ -3,6 +3,8 @@ namespace GSGD2.Player
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using GSGD2.Utilities;
+    using UnityEngine.InputSystem;
 
     public class BoneSphere : MonoBehaviour
     {
@@ -14,6 +16,14 @@ namespace GSGD2.Player
         public GameObject y2 = null;
         public GameObject z = null;
         public GameObject z2 = null;
+        [SerializeField]
+        private GameObject _bonesCenter = null;
+        [SerializeField]
+        private float _snapFactor = 1.5f;
+        [SerializeField]
+        private Timer _snapTimer;
+        [SerializeField]
+        private PlayerController _playerController = null;
         /*public GameObject newBone = null;
         public GameObject newBone2 = null;
         public GameObject newBone3 = null;
@@ -34,11 +44,15 @@ namespace GSGD2.Player
         public LineRenderer PrefabLine = null;
         public bool ViewLines = true;
 
+        private GameObject[] _bones = new GameObject[6];
+        private Vector3[] _bonesPositions = new Vector3[6];
+        private float[] _bonesDistance = new float[6];
+
         private void Awake()
         {
             Softbody.Init(Shape, ColliderSize, RigidbodyMass, Spring, Damper, RigidbodyConstraints.FreezeRotation, PrefabLine, ViewLines);
 
-            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, 0.005f, 1f);
+            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, 0.45f, 1f);
             Softbody.AddCollider(ref x);
             Softbody.AddCollider(ref x2);
             Softbody.AddCollider(ref y);
@@ -68,6 +82,69 @@ namespace GSGD2.Player
             Softbody.AddSpring(ref newBone6, ref root);
             Softbody.AddSpring(ref newBone7, ref root);
             Softbody.AddSpring(ref newBone8, ref root);*/
+            _bones.SetValue(x, 0);
+            _bones.SetValue(x2, 1);
+            _bones.SetValue(y, 2);
+            _bones.SetValue(y2, 3);
+            _bones.SetValue(z, 4);
+            _bones.SetValue(z2, 5);
+            for (int i = 0; i < _bones.Length; i++)
+            {
+                _bonesPositions.SetValue(_bones[i].transform.localPosition, i);
+                _bonesDistance.SetValue(Vector3.Distance(_bonesPositions[i], _bonesCenter.transform.localPosition), i);
+            }
+        }
+
+        private void OnEnable()
+        {
+            _snapTimer.StateChanged -= SnapBones;
+            _snapTimer.StateChanged += SnapBones;
+            _playerController.ResetPlayerPerformed -= ResetPlayer;
+            _playerController.ResetPlayerPerformed += ResetPlayer;
+        }
+
+        private void OnDisable()
+        {
+            _snapTimer.StateChanged -= SnapBones;
+            _playerController.ResetPlayerPerformed -= ResetPlayer;
+        }
+
+        private void FixedUpdate()
+        {
+            root.transform.position = new Vector3(0, root.transform.position.y, root.transform.position.z);
+        }
+
+        private void Update()
+        {
+            for (int i = 0; i < _bones.Length; i++)
+            {
+                //Debug.Log("Current bone = " + _bones[i].name + " // " + "Default distance to root = " + _bonesDistance[i] + " // " + "Current distance to root = " + Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition));
+                if (Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor && _snapTimer.IsRunning == false)
+                {
+                    _snapTimer.Start();
+                }
+            }
+            if (_snapTimer.IsRunning == true)
+            {
+
+                _snapTimer.Update();
+            }
+        }
+
+        private void SnapBones(Timer timer, Timer.State state)
+        {
+            for (int i = 0; i < _bones.Length; i++)
+            {
+                if (Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor)
+                {
+                    _bones[i].transform.localPosition = _bonesPositions[i];
+                }
+            }
+        }
+
+        private void ResetPlayer(PlayerController sender, InputAction.CallbackContext obj)
+        {
+            LevelReferences.Instance.PlayerStart.ResetPlayerPosition();
         }
     }
 }

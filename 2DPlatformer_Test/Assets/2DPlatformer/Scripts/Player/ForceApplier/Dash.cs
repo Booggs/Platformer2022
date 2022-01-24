@@ -2,6 +2,7 @@
 {
 	using UnityEngine;
 	using GSGD2.Utilities;
+	using System;
 
 	/// <summary>
 	/// Add a force in the direction of <see cref="CubeController.LastMovementDirection"/>.
@@ -69,8 +70,7 @@
 			{
 				cubeController.transform.position += Vector3.up * _positionOffsetWhenEnteringDash;
 			}
-
-			Vector3 forward = Vector3.forward * cubeController.LastMovementDirection;
+			Vector3 forward = Vector3.forward * (1 * Math.Sign(cubeController.Rigidbody.velocity.normalized.z));
 			_lastMovementDirection = forward.z >= 0 ? 1 : -1;
 			cubeController.SetColliderTrigger(true);
 

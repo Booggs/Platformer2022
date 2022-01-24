@@ -56,7 +56,7 @@ namespace GSGD2.Player
 		private float _slopeNormalThreshold = 0.7f;
 
 		// Runtime fields
-		private Vector3 _groundNormale;
+		private Vector3 _groundNormal;
 		private Vector3 _wallNormal;
 		private Vector3 _slopeNormal;
 		private RaycastHit _lastWallRaycastHitResult;
@@ -67,7 +67,7 @@ namespace GSGD2.Player
 		#endregion Fields
 
 		#region Properties
-		public Vector3 GroundNormal => _groundNormale;
+		public Vector3 GroundNormal => _groundNormal;
 		public Vector3 WallNormal => _wallNormal;
 		public Vector3 SlopeNormal => _slopeNormal;
 		public RaycastHit LastWallRaycastHitResult => _lastWallRaycastHitResult;
@@ -264,7 +264,7 @@ namespace GSGD2.Player
 
 		public void ResetCurrentValues()
 		{
-			_groundNormale = Vector3.zero;
+			_groundNormal = Vector3.zero;
 			_wallNormal = Vector3.zero;
 			_slopeNormal = Vector3.zero;
 		}
@@ -310,12 +310,12 @@ namespace GSGD2.Player
 			// if touching ground
 			if (frontResult == true || backResult == true)
 			{
-				_groundNormale = floorNormal;
+				_groundNormal = floorNormal;
 				return true;
 			}
 			else
 			{
-				_groundNormale = Vector3.zero;
+				_groundNormal = Vector3.zero;
 				return false;
 			}
 		}
@@ -414,7 +414,7 @@ namespace GSGD2.Player
 			_yRightReplacerBonusRaycaster.DrawGizmos();
 			_yLeftReplacerBonusRaycaster.DrawGizmos();
 
-			Gizmos.DrawWireCube(transform.position + Vector3.up * 1f, new Vector3(1f, 2f, _characterZExtent * 2));
+			Gizmos.DrawWireCube(transform.position - Vector3.up * 1f, new Vector3(1f, 2f, _characterZExtent * 2));
 		}
 		#endregion Methods
 	}

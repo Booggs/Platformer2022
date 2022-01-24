@@ -153,6 +153,14 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: ResetPlayer
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 7668acaf-faf2-4869-bab4-a9bbf4d572f8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
     - m_Name: 
       m_Id: b82491d4-813d-4be0-bea8-2217def02fb7
@@ -425,4 +433,12 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: ReleaseGlider
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 79788342-9747-44b0-bc9d-13136159a477
+      m_Path: <Gamepad>/select
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: ResetPlayer
       m_Flags: 0

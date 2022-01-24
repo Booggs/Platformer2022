@@ -12,9 +12,6 @@ namespace GSGD2.Player
 	public class ExampleGroundSmash : MonoBehaviour
 	{
 		[SerializeField]
-		private Rigidbody _rigidbody = null;
-
-		[SerializeField]
 		private CubeController _cubeController = null;
 
 		[SerializeField]
@@ -30,8 +27,14 @@ namespace GSGD2.Player
 		private CubeController.State _usableInState = CubeController.State.None;
 
 		private bool _isOnGroundSmash = false;
+		private PlayerReferences playerRefs = null;
 
-		private void OnEnable()
+        private void Awake()
+        {
+			playerRefs = GetComponent<PlayerReferences>();
+        }
+
+        private void OnEnable()
 		{
 			_playerController.GroundSmashPerformed -= PlayerControllerOnGroundSmashPerformed;
 			_playerController.GroundSmashPerformed += PlayerControllerOnGroundSmashPerformed;
@@ -48,7 +51,13 @@ namespace GSGD2.Player
 			{
 				_isOnGroundSmash = true;
 				// TODO AL : maybe reset vel to 0 before applying the bump
-				_rigidbody.AddForce(new Vector3(0f, _force * -1, 0f), ForceMode.Impulse);
+				if (playerRefs.TryGetCubeController(out CubeController cubeController) == true)
+                {
+					foreach(var rigidbody in cubeController.Rigidbodies)
+                    {
+						rigidbody.AddForce(new Vector3(0f, _force * -1, 0f), ForceMode.Impulse);
+					}
+                }
 				_cubeController.enabled = false;
 				_enableControlsAfterTimer.Start();
 			}

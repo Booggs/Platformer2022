@@ -27,6 +27,7 @@ namespace GSGD2.Player
 		private const string NAVIGATE_RIGHT_INTERACTABLE_ACTION_NAME = "NavigateRightInteractable";
 		private const string GLIDER_ACTION_NAME = "Glider";
 		private const string RELEASE_GLIDER_ACTION_NAME = "ReleaseGlider";
+		private const string RESET_PLAYER_ACTION_NAME = "ResetPlayer";
 
 		[SerializeField]
 		private InputActionMapWrapper _inputActionMapWrapper;
@@ -51,6 +52,7 @@ namespace GSGD2.Player
 		private InputAction _navigateRightInteractableInputAction = null;
 		private InputAction _gliderInputAction = null;
 		private InputAction _releaseGliderInputAction = null;
+		private InputAction _resetPlayerInputAction = null;
 
 
 		public bool UseMouseForLookDirection => _useMouseForLookDirection;
@@ -75,6 +77,7 @@ namespace GSGD2.Player
 		public event InputEvent NavigateRightInteractablePerformed = null;
 		public event InputEvent GliderPerformed = null;
 		public event InputEvent ReleaseGliderPerformed = null;
+		public event InputEvent ResetPlayerPerformed = null;
 
 		private void OnEnable()
 		{
@@ -166,6 +169,12 @@ namespace GSGD2.Player
 				_releaseGliderInputAction.performed -= ReleaseGliderInputAction_performed;
 				_releaseGliderInputAction.performed += ReleaseGliderInputAction_performed;
 			}
+
+			if (_inputActionMapWrapper.TryFindAction(RESET_PLAYER_ACTION_NAME, out _resetPlayerInputAction, true) == true)
+			{
+				_resetPlayerInputAction.performed -= ResetPlayerInputAction_performed;
+				_resetPlayerInputAction.performed += ResetPlayerInputAction_performed;
+			}
 		}
 
 		private void OnDisable()
@@ -188,6 +197,7 @@ namespace GSGD2.Player
 			_navigateRightInteractableInputAction.Disable();
 			_gliderInputAction.Disable();
 			_releaseGliderInputAction.Disable();
+			_resetPlayerInputAction.Disable();
 
 			_jumpInputAction.performed -= JumpInputAction_performed;
 			_dashInputAction.performed -= DashInputAction_performed;
@@ -203,6 +213,7 @@ namespace GSGD2.Player
 			_navigateRightInteractableInputAction.performed -= NavigateRightInteractableInputAction_performed;
 			_gliderInputAction.performed -= GliderInputAction_performed;
 			_releaseGliderInputAction.performed -= ReleaseGliderInputAction_performed;
+			_resetPlayerInputAction.performed -= ResetPlayerInputAction_performed;
 		}
 
 		private void JumpInputAction_performed(InputAction.CallbackContext obj)
@@ -273,5 +284,10 @@ namespace GSGD2.Player
 		{
 			ReleaseGliderPerformed?.Invoke(this, obj);
 		}
+
+		private void ResetPlayerInputAction_performed(InputAction.CallbackContext obj)
+        {
+			ResetPlayerPerformed?.Invoke(this, obj);
+        }
 	}
 }
