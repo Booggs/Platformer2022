@@ -1408,7 +1408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6149921870029657666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6272848757514519501}
@@ -1477,6 +1477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb24f4fd12f9254b84e1b30742a8725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unlockedAtStart: 1
   teleportLocation: {fileID: 3703057956481663748}
   targetTeleporter: {fileID: 0}
 --- !u!1 &6272848758427585894

@@ -59,6 +59,17 @@ namespace GSGD2.Player
 
             return sp;
         }
+
+        public static SpringJoint AddUndersideSpring(ref GameObject go1, ref GameObject go2)
+        {
+            SpringJoint sp = AddSpring(ref go1, ref go2, Spring / 10, Damper);
+
+            if (ViewLines == true)
+                AddLine(ref go1, ref go2);
+
+            return sp;
+        }
+
         public static LineRenderer AddLine(ref GameObject go1, ref GameObject go2)
         {
             return AddLine(ref go1, ref go2, ref PrefabLine);
@@ -95,6 +106,7 @@ namespace GSGD2.Player
             sp.connectedBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             return sp;
         }
+
         public static LineRenderer AddLine(ref GameObject go1, ref GameObject go2, ref LineRenderer prefab)
         {
             LineRenderer line = Object.Instantiate(prefab);
@@ -104,5 +116,4 @@ namespace GSGD2.Player
             return line;
         }
     }
-
 }

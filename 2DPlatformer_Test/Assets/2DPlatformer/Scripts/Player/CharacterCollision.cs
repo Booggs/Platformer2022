@@ -414,7 +414,7 @@ namespace GSGD2.Player
 			_yRightReplacerBonusRaycaster.DrawGizmos();
 			_yLeftReplacerBonusRaycaster.DrawGizmos();
 
-			Gizmos.DrawWireCube(transform.position - Vector3.up * 1f, new Vector3(1f, 2f, _characterZExtent * 2));
+			Gizmos.DrawWireCube(transform.position, new Vector3(2f, 2f, _characterZExtent * 2));
 		}
 		#endregion Methods
 	}

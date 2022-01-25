@@ -161,6 +161,14 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: StartTestTimer
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 05346041-ddac-4c92-9c0b-b8ef56956643
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
     - m_Name: 
       m_Id: b82491d4-813d-4be0-bea8-2217def02fb7
@@ -441,4 +449,12 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: ResetPlayer
+      m_Flags: 0
+    - m_Name: 
+      m_Id: b5dca778-afdc-40c2-ba44-2354f8b51c11
+      m_Path: <Gamepad>/leftStickPress
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: StartTestTimer
       m_Flags: 0

@@ -255,7 +255,7 @@ namespace GSGD2.Player
         public bool IsWallGrabDisabled => _currentWallGrabDisableDuration < _wallGrabDisableDuration;
         public bool IsBumpingDisableControls => _currentDurationToDisableControlDuringBump < _durationToDisableControlDuringBump;
         public bool HasAWallInFrontOfCharacter => _characterCollision.HasAWallInFrontOfCharacter;
-        public bool HasAWallBehindCharacter => _characterCollision.HasAWallInFrontOfCharacter;
+        public bool HasAWallBehindCharacter => _characterCollision.HasAWallBehindCharacter;
         public bool HasASlopeInFrontOfOrBehindCharacter => _characterCollision.HasASlopeInFrontOfOrBehindCharacter;
 
         public int MaxJumpCount => _jump.MaximumAllowedForcesWhileInAir;
@@ -1099,8 +1099,10 @@ namespace GSGD2.Player
                     {
                         ApplyMovementOrDecelerationForce(isGrounded);
                         NullifyMovementAgainstAWallInFrontOf();
+                        NullifyMovementAgainstAWallBehind();
                         // If grounded, project velocity by the floor normal to handle slopes
-                        velocity = Vector3.ProjectOnPlane(velocity, _characterCollision.GroundNormal);
+                        //velocity = Vector3.ProjectOnPlane(velocity, _characterCollision.GroundNormal);
+                        ApplyGravity(ref velocity);
                     }
                     break;
                 case State.Falling:
@@ -1111,8 +1113,8 @@ namespace GSGD2.Player
                         }
                         ApplyMovementOrDecelerationForce(isGrounded);
                         NullifyMovementAgainstAWallInFrontOf();
+                        NullifyMovementAgainstAWallBehind();
                         ApplyGravity(ref velocity);
-
                     }
                     break;
                 case State.Bumping:
@@ -1123,6 +1125,7 @@ namespace GSGD2.Player
                         }
                         ApplyMovementOrDecelerationForce(isGrounded);
                         NullifyMovementAgainstAWallInFrontOf();
+                        NullifyMovementAgainstAWallBehind();
                         ApplyGravity(ref velocity);
 
                     }
@@ -1141,6 +1144,7 @@ namespace GSGD2.Player
                         }
                         ApplyMovementOrDecelerationForce(isGrounded);
                         NullifyMovementAgainstAWallInFrontOf();
+                        NullifyMovementAgainstAWallBehind();
                         ApplyGravity(ref velocity);
                     }
                     break;
@@ -1170,10 +1174,11 @@ namespace GSGD2.Player
                         DebugLog("while Dashing : WallLeft:{0} | WallRight:{1} | Slope:{2}", HasAWallBehindCharacter, HasAWallInFrontOfCharacter, HasASlopeInFrontOfOrBehindCharacter);
 
                         NullifyMovementAgainstAWallInFrontOf();
-                        if (_rawInputMovement != 0 && _rawInputMovement != _dash.LastMovementDirection)
+                        /*if (_rawInputMovement != 0 && _rawInputMovement != _dash.LastMovementDirection)
                         {
                             NullifyMovementAgainstAWallBehind();
-                        }
+                        }*/
+                        NullifyMovementAgainstAWallBehind();
 
                         if (HasAWallInFrontOfCharacter == true)
                         {

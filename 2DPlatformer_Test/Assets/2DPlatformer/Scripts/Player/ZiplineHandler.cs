@@ -53,9 +53,7 @@ namespace GSGD2.Gameplay
             _currentZiplineSpeed = _startingZiplineSpeed;
             _currentZipline = zipline;
             _ziplining = true;
-            _cubeController.ResetRigidbodiesVelocity();
-            SetNewZiplineStats();
-            if ((transform.rotation.eulerAngles.y <= 90 && transform.rotation.eulerAngles.y >= -90) == true)
+            if (_cubeController.Rigidbody.velocity.z >= 0)
             {
                 _zipliningLeft = false;
                 _zipliningDestination = _currentZipline.ZiplineTarget.position;
@@ -65,6 +63,8 @@ namespace GSGD2.Gameplay
                 _zipliningLeft = true;
                 _zipliningDestination = _currentZipline.ZiplineStart.position;
             }
+            _cubeController.ResetRigidbodiesVelocity();
+            SetNewZiplineStats();
             _cubeController.ChangeState(CubeController.State.None);
             //_cubeController.enabled = false;
             foreach (Rigidbody rigidbody in _cubeController.Rigidbodies)

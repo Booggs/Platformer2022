@@ -11,16 +11,11 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private TextMeshProUGUI _debugText = null;
         [SerializeField]
-        private InteractionManager _interactionManager = null;
+        private CubeController _cubeController = null;
 
         void Update()
         {
-            string debugText = null;
-            if (_interactionManager.CurrentEnvironmentInteractable != null)
-                debugText = _interactionManager.CurrentEnvironmentInteractable.name;
-            else debugText = null;
-
-            _debugText.text = debugText;
+            _debugText.text = _cubeController.CurrentState.ToString();
         }
     }
 }

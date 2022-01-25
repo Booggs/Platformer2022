@@ -28,6 +28,7 @@ namespace GSGD2.Player
 		private const string GLIDER_ACTION_NAME = "Glider";
 		private const string RELEASE_GLIDER_ACTION_NAME = "ReleaseGlider";
 		private const string RESET_PLAYER_ACTION_NAME = "ResetPlayer";
+		private const string START_TIMER_ACTION_NAME = "StartTestTimer";
 
 		[SerializeField]
 		private InputActionMapWrapper _inputActionMapWrapper;
@@ -53,7 +54,7 @@ namespace GSGD2.Player
 		private InputAction _gliderInputAction = null;
 		private InputAction _releaseGliderInputAction = null;
 		private InputAction _resetPlayerInputAction = null;
-
+		private InputAction _startTimerInputAction = null;
 
 		public bool UseMouseForLookDirection => _useMouseForLookDirection;
 		public float HorizontalMove => _horizontalMoveInputAction.ReadValue<float>();
@@ -78,6 +79,7 @@ namespace GSGD2.Player
 		public event InputEvent GliderPerformed = null;
 		public event InputEvent ReleaseGliderPerformed = null;
 		public event InputEvent ResetPlayerPerformed = null;
+		public event InputEvent StartTimerPerformed = null;
 
 		private void OnEnable()
 		{
@@ -175,6 +177,12 @@ namespace GSGD2.Player
 				_resetPlayerInputAction.performed -= ResetPlayerInputAction_performed;
 				_resetPlayerInputAction.performed += ResetPlayerInputAction_performed;
 			}
+
+			if (_inputActionMapWrapper.TryFindAction(START_TIMER_ACTION_NAME, out _startTimerInputAction, true) == true)
+			{
+				_startTimerInputAction.performed -= StartTimerInputAction_performed;
+				_startTimerInputAction.performed += StartTimerInputAction_performed;
+			}
 		}
 
 		private void OnDisable()
@@ -198,6 +206,7 @@ namespace GSGD2.Player
 			_gliderInputAction.Disable();
 			_releaseGliderInputAction.Disable();
 			_resetPlayerInputAction.Disable();
+			_startTimerInputAction.Disable();
 
 			_jumpInputAction.performed -= JumpInputAction_performed;
 			_dashInputAction.performed -= DashInputAction_performed;
@@ -214,6 +223,7 @@ namespace GSGD2.Player
 			_gliderInputAction.performed -= GliderInputAction_performed;
 			_releaseGliderInputAction.performed -= ReleaseGliderInputAction_performed;
 			_resetPlayerInputAction.performed -= ResetPlayerInputAction_performed;
+			_startTimerInputAction.performed -= StartTimerInputAction_performed;
 		}
 
 		private void JumpInputAction_performed(InputAction.CallbackContext obj)
@@ -289,5 +299,10 @@ namespace GSGD2.Player
         {
 			ResetPlayerPerformed?.Invoke(this, obj);
         }
+
+		private void StartTimerInputAction_performed(InputAction.CallbackContext obj)
+		{
+			StartTimerPerformed?.Invoke(this, obj);
+		}
 	}
 }

@@ -72,7 +72,7 @@ namespace GSGD2.Player
             Softbody.AddSpring(ref x2, ref root);
             Softbody.AddSpring(ref y, ref root);
             Softbody.AddSpring(ref y2, ref root);
-            Softbody.AddSpring(ref z, ref root);
+            Softbody.AddUndersideSpring(ref z, ref root);
             Softbody.AddSpring(ref z2, ref root);
             /*Softbody.AddSpring(ref newBone, ref root);
             Softbody.AddSpring(ref newBone2, ref root);
