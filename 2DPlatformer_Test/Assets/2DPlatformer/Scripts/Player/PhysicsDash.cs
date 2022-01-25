@@ -18,10 +18,10 @@ namespace GSGD2.Player
         private PlayerController _playerController = null;
 
         [SerializeField]
-        private float _force = 50f;
+        private float _force = 30f;
 
         [SerializeField]
-        private float _groundDashMultiplier = 3f;
+        private float _groundDashMultiplier = 1.2f;
 
         [SerializeField]
         private Timer _dashTimeLimit = null;
@@ -50,9 +50,9 @@ namespace GSGD2.Player
 
         private void PlayerControllerOnDashPerformed(PlayerController sender, UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
-            if (_usableInState.HasFlag(_cubeController.CurrentState) && _isDashing == false && (_cubeController.Rigidbody.velocity.z >= 0.5f || _cubeController.Rigidbody.velocity.z <= -0.5f))
+            if (_usableInState.HasFlag(_cubeController.CurrentState) && _isDashing == false && (_cubeController.Rigidbody.velocity.z >= 3f || _cubeController.Rigidbody.velocity.z <= -3f))
             {
-                float dashDirection = Mathf.Sign(_cubeController.Rigidbody.velocity.z);
+                float dashDirection = Mathf.Sign(_playerController.HorizontalMove);
                 _isDashing = true;
                 _cubeController.ResetRigidbodiesVelocity();
 

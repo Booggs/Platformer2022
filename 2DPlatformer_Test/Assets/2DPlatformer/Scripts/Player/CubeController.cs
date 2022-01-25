@@ -139,6 +139,9 @@ namespace GSGD2.Player
         [SerializeField]
         private bool _enableWallGrab = true;
 
+        [SerializeField]
+        private Timer _wallGrabDuration;
+
         /// <summary>
         /// Height applied to the jump force when releasing the wall jump button
         /// </summary>
@@ -635,9 +638,13 @@ namespace GSGD2.Player
                 case State.EndJump:
                     break;
                 case State.WallGrab:
+                    {
+                    }
                     break;
                 case State.WallJump:
                     {
+                        _wallGrabDuration.ForceFinishState();
+                        _characterCollision.SlopeNormalThreshold = _characterCollision.DefaultSlopeNormalThreshold;
                     }
                     break;
                 case State.Dashing:
@@ -711,7 +718,9 @@ namespace GSGD2.Player
                     break;
                 case State.WallGrab:
                     {
-                        _wallNormalDuringLastWallGrab = _characterCollision.WallNormal;
+                        //_wallNormalDuringLastWallGrab = _characterCollision.WallNormal;
+                        _wallGrabDuration.Start();
+                        _characterCollision.SlopeNormalThreshold = 0;
                     }
                     break;
                 case State.WallJump:
@@ -772,7 +781,7 @@ namespace GSGD2.Player
         {
             _inputMovement = _playerController.HorizontalMove;
             _rawInputMovement = _inputMovement == 0 ? 0 : (_inputMovement > 0 ? 1 : -1);
-            LookToDirection();
+            //LookToDirection();
 
             switch (_currentState)
             {
@@ -794,6 +803,10 @@ namespace GSGD2.Player
                     break;
                 case State.Falling:
                     {
+                        if (Rigidbody.velocity.magnitude < 0.1f)
+                        {
+                            ChangeState(State.Grounded);
+                        }
                         if (DisableControlAfterBump() == false)
                         {
                             return;
@@ -836,6 +849,10 @@ namespace GSGD2.Player
                     break;
                 case State.Jumping:
                     {
+                        if (Rigidbody.velocity.magnitude < 0.1f)
+                        {
+                            ChangeState(State.Grounded);
+                        }
                         CheckGround();
 
                         if (_currentState == State.Jumping) // CheckGround can change state
@@ -867,6 +884,11 @@ namespace GSGD2.Player
                     break;
                 case State.WallGrab:
                     {
+                        if (_wallGrabDuration.IsRunning == true)
+                        {
+                            _wallGrabDuration.Update();
+                        }
+                        else _characterCollision.SlopeNormalThreshold = _characterCollision.DefaultSlopeNormalThreshold;
                         TryWallJump();
                         DisableGroundRaycastWhenJumping(); // check this
                     }
@@ -972,8 +994,13 @@ namespace GSGD2.Player
                 {
                     return;
                 }
-
-                var wallNormal = _characterCollision.WallNormal;
+                bool canChangeState = CanChangeState(State.WallGrab);
+                if (canChangeState == true && _wallGrabDuration.IsRunning == false && _willPerformWallGrab == true && (HasAWallInFrontOfCharacter == true || HasAWallBehindCharacter == true))
+                {
+                    ChangeState(State.WallGrab);
+                }
+                else return;
+                /*var wallNormal = _characterCollision.WallNormal;
                 bool canWallGrabOppositeWall = wallNormal != _wallNormalDuringLastWallGrab;
                 if (IsWallGrabDisabled == false || canWallGrabOppositeWall == true)
                 {
@@ -987,7 +1014,7 @@ namespace GSGD2.Player
                             ChangeState(State.WallGrab);
                         }
                     }
-                }
+                }*/
             }
 
             void TryWallJump()
@@ -1040,7 +1067,7 @@ namespace GSGD2.Player
 
             bool TryDash()
             {
-                /*if (_willPerformDash == true && (Rigidbody.velocity.z >= 0.5f || Rigidbody.velocity.z <= -0.5f))
+                if (_willPerformDash == true && (Rigidbody.velocity.z >= 0.5f || Rigidbody.velocity.z <= -0.5f))
                 {
                     _willPerformDash = false;
                     bool result = false;
@@ -1065,7 +1092,7 @@ namespace GSGD2.Player
                         }
                     }
                     return result;
-                }*/
+                }
                 return false;
             }
 
@@ -1311,7 +1338,10 @@ namespace GSGD2.Player
             {
                 if (_currentState == State.Grounded)
                 {
-                    ChangeState(State.Falling);
+                    if (Rigidbody.velocity.magnitude > 0.1f)
+                    {
+                        ChangeState(State.Falling);
+                    }
                 }
             }
         }

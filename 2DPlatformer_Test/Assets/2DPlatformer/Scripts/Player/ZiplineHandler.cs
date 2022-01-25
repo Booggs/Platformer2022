@@ -53,7 +53,7 @@ namespace GSGD2.Gameplay
             _currentZiplineSpeed = _startingZiplineSpeed;
             _currentZipline = zipline;
             _ziplining = true;
-            if (_cubeController.Rigidbody.velocity.z >= 0)
+            if (_playerController.HorizontalMove >= 0)
             {
                 _zipliningLeft = false;
                 _zipliningDestination = _currentZipline.ZiplineTarget.position;

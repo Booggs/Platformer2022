@@ -64,6 +64,7 @@ namespace GSGD2.Player
 		private bool _hasAWallInFrontOfCharacter = false;
 		private bool _hasAWallBehindCharacter = false;
 		private bool _hasASlopeInFrontOfOrBehindCharacter = false;
+		private float slopeNormalThreshold;
 		#endregion Fields
 
 		#region Properties
@@ -76,6 +77,19 @@ namespace GSGD2.Player
 		public bool HasAWallBehindCharacter => _hasAWallBehindCharacter;
 		public bool HasASlopeInFrontOfOrBehindCharacter => _hasASlopeInFrontOfOrBehindCharacter;
 		public bool HasAWallNearCharacter => HasAWallBehindCharacter && HasAWallInFrontOfCharacter;
+
+		public float SlopeNormalThreshold
+        {
+			get
+            {
+				return slopeNormalThreshold;
+            }
+			set
+            {
+				slopeNormalThreshold = value;
+            }
+        }
+		public float DefaultSlopeNormalThreshold => _slopeNormalThreshold;
 
 		/// <summary>
 		/// Local position of character right bound, see <see cref="HandleWallCollisionAndApplyBonusYReplacement(bool)"/>
@@ -302,7 +316,7 @@ namespace GSGD2.Player
 			{
 				frontResult = IsNormalIndicateAnyOfThisAsAFloor(ref frontHits, out floorNormal);
 			}
-			if (frontResult == false && backResult == true)
+			if (/*frontResult == false && */backResult == true)
 			{
 				backResult = IsNormalIndicateAnyOfThisAsAFloor(ref backHits, out floorNormal);
 			}
@@ -332,6 +346,7 @@ namespace GSGD2.Player
 			_downLeftWallRaycaster.Initialize();
 			_yRightReplacerBonusRaycaster.Initialize();
 			_yLeftReplacerBonusRaycaster.Initialize();
+			slopeNormalThreshold = _slopeNormalThreshold;
 		}
 
 		// TODO AL : improve perfs by checking walls and slopes in the same loop
@@ -349,7 +364,7 @@ namespace GSGD2.Player
 			{
 				var hit = hits[i];
 				//Debug.LogFormat("hit.normal.y {0} < {1} _slopeNormalThreshold", hit.normal.y,  _slopeNormalThreshold);
-				if (hit.normal.y < _slopeNormalThreshold)
+				if (hit.normal.y < slopeNormalThreshold)
 				{
 					wallNormal = hit.normal;
 
@@ -369,7 +384,7 @@ namespace GSGD2.Player
 				var hit = hits[i];
 
 				//Debug.LogFormat("hit.normal.y {0} < {1} _slopeNormalThreshold", hit.normal.y,  _slopeNormalThreshold);
-				if (hit.normal.y > _slopeNormalThreshold)
+				if (hit.normal.y > slopeNormalThreshold)
 				{
 					Debug.DrawLine(hit.point, hit.point + hit.normal, Color.red);
 					floorNormal = hit.normal;
