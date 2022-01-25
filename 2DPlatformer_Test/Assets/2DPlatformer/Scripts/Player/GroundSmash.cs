@@ -9,7 +9,7 @@ namespace GSGD2.Player
 	/// This class is an example of how you can add movement behavior to the player without digging into <see cref="CubeController"/>.
 	/// It can enable a mario like "ground smash" 
 	/// </summary>
-	public class ExampleGroundSmash : MonoBehaviour
+	public class GroundSmash : MonoBehaviour
 	{
 		[SerializeField]
 		private CubeController _cubeController = null;
@@ -50,6 +50,7 @@ namespace GSGD2.Player
 			if (_usableInState.HasFlag(_cubeController.CurrentState) && _isOnGroundSmash == false)
 			{
 				_isOnGroundSmash = true;
+				_cubeController.ResetRigidbodiesVelocity();
 				// TODO AL : maybe reset vel to 0 before applying the bump
 				if (playerRefs.TryGetCubeController(out CubeController cubeController) == true)
                 {

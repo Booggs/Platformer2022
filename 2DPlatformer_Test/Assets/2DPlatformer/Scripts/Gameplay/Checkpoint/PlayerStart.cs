@@ -25,7 +25,7 @@ namespace GSGD2.Gameplay
 		private Vector3 _cachedStartPlayerPosition = Vector3.zero;
 
 		private CubeController _player = null;
-		private Rigidbody _playerRigidbody = null;
+		private Rigidbody[] _playerRigidbodies = null;
 
 		private List<Checkpoint> _checkpoints = new List<Checkpoint>();
 
@@ -50,7 +50,7 @@ namespace GSGD2.Gameplay
 		{
 			_player = LevelReferences.Instance.Player;
 			_cachedStartPlayerPosition = _player.transform.position;
-			_playerRigidbody = _player.Rigidbody;
+			_playerRigidbodies = _player.Rigidbodies;
 		}
 
 		/// <summary>
@@ -130,7 +130,7 @@ namespace GSGD2.Gameplay
 				{
 					if (_lastCheckpointPassed != null)
 					{
-						resetPosition = _lastCheckpointPassed.transform.position;
+						resetPosition = _lastCheckpointPassed.transform.position + new Vector3(0, 1, 0);
 					}
 					else
 					{
@@ -147,7 +147,10 @@ namespace GSGD2.Gameplay
 		{
 			PlayerStartEventArgs args = new PlayerStartEventArgs(_player.transform.position, atPosition);
 			BeforePlayerPositionReset?.Invoke(this, args);
-			_playerRigidbody.velocity = Vector3.zero;
+			foreach(var rigidbody in _playerRigidbodies)
+            {
+				rigidbody.velocity = Vector3.zero;
+            }
 			_player.transform.position = atPosition;
 			var instance = Instantiate(_playerResetParticle, atPosition, _playerResetParticle.transform.rotation);
 			AfterPlayerPositionReset?.Invoke(this, args);

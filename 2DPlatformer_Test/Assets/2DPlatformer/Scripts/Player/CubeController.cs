@@ -1040,7 +1040,7 @@ namespace GSGD2.Player
 
             bool TryDash()
             {
-                if (_willPerformDash == true)
+                /*if (_willPerformDash == true && (Rigidbody.velocity.z >= 0.5f || Rigidbody.velocity.z <= -0.5f))
                 {
                     _willPerformDash = false;
                     bool result = false;
@@ -1065,7 +1065,7 @@ namespace GSGD2.Player
                         }
                     }
                     return result;
-                }
+                }*/
                 return false;
             }
 

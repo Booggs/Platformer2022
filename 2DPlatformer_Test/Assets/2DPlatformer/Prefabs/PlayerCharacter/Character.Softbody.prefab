@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8021904361280626387}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: x2
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5315170325376085418}
   - component: {fileID: 6425506463223592923}
   - component: {fileID: 6894845365987490030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh.Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5875422563519077503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemHeldParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1378240121804312390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -398,7 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7219929566868684911}
   - component: {fileID: 7038285111042879796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character.CameraAim
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -440,7 +440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5835507120861775067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: y2
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -471,12 +471,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8282128020492993647}
   m_Layer: 0
-  m_Name: NewBone.04
+  m_Name: NewBone.05
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8282128020492993647
 Transform:
   m_ObjectHideFlags: 0
@@ -500,7 +500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4821928086829040523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: z2
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -531,7 +531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2112215263736636862}
   - component: {fileID: 8524021207686786735}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle.TakeDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667847142420856745}
   m_LocalRotation: {x: -0, y: 0.70710707, z: -0, w: 0.7071066}
-  m_LocalPosition: {x: 0.513, y: 1.32, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -574,7 +574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960906516490775978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: y
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -605,12 +605,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8749163650240748250}
   m_Layer: 0
-  m_Name: NewBone.03
+  m_Name: NewBone.04
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8749163650240748250
 Transform:
   m_ObjectHideFlags: 0
@@ -635,7 +635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3340643341608468229}
   - component: {fileID: 7283388834953695016}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.ItemHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951238532099854693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -0.5}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -665,8 +665,8 @@ PositionConstraint:
   m_GameObject: {fileID: 1951238532099854693}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1, z: -0.5}
-  m_TranslationOffset: {x: 0, y: 1, z: -0.5}
+  m_TranslationAtRest: {x: 0, y: 1.25, z: 0}
+  m_TranslationOffset: {x: 0, y: 1.25, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -685,7 +685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7659724842038268440}
   - component: {fileID: 6089898245757500841}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Wall.Left.Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979883796742175144}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.9, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.899999, z: 0.50000024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -715,15 +715,15 @@ PositionConstraint:
   m_GameObject: {fileID: 1979883796742175144}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1.9, z: 0.5}
-  m_TranslationOffset: {x: 0, y: 1.9, z: 0.5}
+  m_TranslationAtRest: {x: 0, y: 0.9, z: 0.5}
+  m_TranslationOffset: {x: 0.0005372744, y: 0.019423842, z: 0.50000024}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 4821928086829040523}
     weight: 1
 --- !u!1 &2177101262253061136
 GameObject:
@@ -739,6 +739,10 @@ GameObject:
   - component: {fileID: 8963912016909959918}
   - component: {fileID: 5332166841865761384}
   - component: {fileID: 4608137964132476650}
+  - component: {fileID: 1029967524585618606}
+  - component: {fileID: 5524500298167027900}
+  - component: {fileID: 3510370588588690044}
+  - component: {fileID: 8330099605319962634}
   - component: {fileID: 1766770694844520402}
   - component: {fileID: 1413790177752788334}
   - component: {fileID: 222757353873992973}
@@ -750,15 +754,11 @@ GameObject:
   - component: {fileID: 2332251551028677084}
   - component: {fileID: 3603357115734113580}
   - component: {fileID: 8239428974043230489}
-  - component: {fileID: 5524500298167027900}
   - component: {fileID: 6299231398197848385}
   - component: {fileID: 4824230165174943828}
   - component: {fileID: 6817740376375966763}
   - component: {fileID: 7791287364633039995}
-  - component: {fileID: 7233402762824016166}
-  - component: {fileID: 3510370588588690044}
-  - component: {fileID: 8330099605319962634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character.Softbody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +772,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2177101262253061136}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.077, z: 3.3681602}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -816,11 +816,16 @@ MonoBehaviour:
   y2: {fileID: 1381009359423592687}
   z: {fileID: 5056790090854604934}
   z2: {fileID: 1619455909875995448}
-  Spring: 150
-  Damper: 10
+  _bonesCenter: {fileID: 1163597484721821439}
+  _snapFactor: 2
+  _snapTimer:
+    _duration: 0.2
+  _playerController: {fileID: 8963912016909959918}
+  Spring: 1000
+  Damper: 0.01
   Shape: 1
   ColliderSize: 0.002
-  RigidbodyMass: 2
+  RigidbodyMass: 1
   PrefabLine: {fileID: 0}
   ViewLines: 0
 --- !u!114 &6559671171331571633
@@ -852,6 +857,7 @@ MonoBehaviour:
   _playerDamageFeedbackHandler: {fileID: 3603357115734113580}
   _cameraAimController: {fileID: 6299231398197848385}
   _interactionManager: {fileID: 6817740376375966763}
+  _boneSphere: {fileID: 8021408352904000306}
 --- !u!114 &8963912016909959918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,14 +889,14 @@ MonoBehaviour:
     _maxDistance: 0.45
     _layerMask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 959
     _drawGizmos: 1
   _backGroundRaycaster:
     fromTransform: {fileID: 1465845327748852557}
     _maxDistance: 0.45
     _layerMask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 959
     _drawGizmos: 1
   _topRightWallRaycaster:
     fromTransform: {fileID: 8162265896534072478}
@@ -948,7 +954,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1
     _drawGizmos: 1
-  _characterZExtent: 0.5
+  _characterZExtent: 1
   _slopeNormalThreshold: 0.7
 --- !u!114 &4608137964132476650
 MonoBehaviour:
@@ -965,18 +971,18 @@ MonoBehaviour:
   _playerReferences: {fileID: 6559671171331571633}
   _maxVelocity: 50
   _groundMoveSpeed: 10
-  _groundFriction: 8
+  _groundFriction: 9
   _airMoveSpeed: 11
-  _ascendingGravityScale: 2.5
-  _descendingGravityScale: 3.5
+  _ascendingGravityScale: 2
+  _descendingGravityScale: 2
   _jump:
     enabled: 1
-    _maximumAllowedForces: 2
+    _maximumAllowedForces: 1
     cubeController: {fileID: 0}
     displacementEstimationUpdater: {fileID: 0}
     _gravityScale: 9
-    _jumpHeight: 1
-    _jumpHeightBonusWhenFalling: 1
+    _jumpHeight: 50
+    _jumpHeightBonusWhenFalling: 50
     _jumpHeightBonusSpeedThreshold: 10
   _changeToFallingStateWhenReleasingJump: 0
   _canJumpDuringDash: 1
@@ -992,14 +998,14 @@ MonoBehaviour:
     _maximumAllowedForces: 1
     cubeController: {fileID: 0}
     displacementEstimationUpdater: {fileID: 0}
-    _dashForce: 40
+    _dashForce: 100
     _timerUntilDashEnd:
-      _duration: 0.15
+      _duration: 0.25
     _positionOffsetWhenEnteringDash: 0.1
-    _debugMode: 0
+    _debugMode: 1
   _durationToDisableGroundRaycastWhenDashing: 0.5
   _allowedDashCountWhenFalling: 1
-  _wallRaycastDistanceWhenDashing: 3
+  _wallRaycastDistanceWhenDashing: 1.1
   _resetDashCountWhenWallJumping: 1
   _allowedDashCountWhenWallJumping: 1
   _resetDashJumpCountWhenBumping: 1
@@ -1038,6 +1044,72 @@ MonoBehaviour:
   _disableControlWhenDamageTaken:
     _duration: 0
   _debugMode: 0
+--- !u!114 &1029967524585618606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177101262253061136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932762b6ae828dd44a7afa664a233dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeController: {fileID: 0}
+  _playerController: {fileID: 0}
+  _force: 50
+  _enableControlsAfterTimer:
+    _duration: 0
+  _usableInState: 0
+--- !u!114 &5524500298167027900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177101262253061136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e794723c072ae489fc9ba28c0b35af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeController: {fileID: 4608137964132476650}
+  _playerController: {fileID: 8963912016909959918}
+  _force: 60
+  _enableControlsAfterTimer:
+    _duration: 0.2
+  _usableInState: 18
+--- !u!114 &3510370588588690044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177101262253061136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a745f1589b85747ab099a918538919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerReferences: {fileID: 6559671171331571633}
+  _glidingSpeedMultiplier: 0.8
+  _glidingGravityDivider: 50
+  _usableInState: 146
+--- !u!114 &8330099605319962634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177101262253061136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b86544790536042aaecd68c7c60c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRefs: {fileID: 6559671171331571633}
+  _startingZiplineSpeed: 5
 --- !u!114 &1766770694844520402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,25 +1364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be32dc41fb511447bcfdbc588ec183a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5524500298167027900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2177101262253061136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e794723c072ae489fc9ba28c0b35af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
-  _cubeController: {fileID: 4608137964132476650}
-  _playerController: {fileID: 8963912016909959918}
-  _force: 60
-  _enableControlsAfterTimer:
-    _duration: 0.2
-  _usableInState: 18
 --- !u!114 &6299231398197848385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,7 +1379,7 @@ MonoBehaviour:
   _enabledAtStart: 1
   _cameraAimTransformParent: {fileID: 8101763736310891629}
   _cameraAim: {fileID: 7038285111042879796}
-  _axis: 0
+  _axis: 2
   _distance: 5
   _speed: 30
 --- !u!114 &4824230165174943828
@@ -1369,50 +1422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6098de913a00f24d9a9429a41a9fab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7233402762824016166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2177101262253061136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2689c209443991649b9f1a609b554218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerReferences: {fileID: 6559671171331571633}
-  _endJumpDownwardSpeedThresholdWhenGrounded: 5
---- !u!114 &3510370588588690044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2177101262253061136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0a745f1589b85747ab099a918538919, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerReferences: {fileID: 6559671171331571633}
-  _glidingSpeedMultiplier: 0.8
-  _glidingGravityDivider: 15
-  _usableInState: 146
---- !u!114 &8330099605319962634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2177101262253061136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b86544790536042aaecd68c7c60c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerRefs: {fileID: 6559671171331571633}
-  _startingZiplineSpeed: 5
 --- !u!1 &2671628357469391244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,7 +1431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4657082351141777159}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.FrontGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1437,7 +1446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2671628357469391244}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.49}
+  m_LocalPosition: {x: 0, y: -0.40799993, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1452,7 +1461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 202674359106308440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnimationCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1488,12 +1497,12 @@ GameObject:
   m_Component:
   - component: {fileID: 584243115392363608}
   m_Layer: 0
-  m_Name: NewBone.02
+  m_Name: NewBone.03
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &584243115392363608
 Transform:
   m_ObjectHideFlags: 0
@@ -1518,7 +1527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3105910168043448705}
   - component: {fileID: 1759924269503613688}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Wall.Left.Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1533,7 +1542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3657291303670173881}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0.5}
+  m_LocalPosition: {x: 0.0005738998, y: -0.9140002, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1548,15 +1557,15 @@ PositionConstraint:
   m_GameObject: {fileID: 3657291303670173881}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.2, z: 0.5}
-  m_TranslationOffset: {x: 0, y: 0.2, z: 0.5}
+  m_TranslationAtRest: {x: 0.0005738998, y: -0.914, z: 0.50000024}
+  m_TranslationOffset: {x: 0, y: -0.0008704066, z: 0.5}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 7423650729752058277}
     weight: 1
 --- !u!1 &3915092975588668041
 GameObject:
@@ -1567,7 +1576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6666614901799809697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnimationCenterParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,12 +1608,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2954431314718463325}
   m_Layer: 0
-  m_Name: NewBone.01
+  m_Name: NewBone.02
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2954431314718463325
 Transform:
   m_ObjectHideFlags: 0
@@ -1628,7 +1637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2856957866302981648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1674,12 +1683,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4209494627422835690}
   m_Layer: 0
-  m_Name: NewBone.06
+  m_Name: NewBone.07
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4209494627422835690
 Transform:
   m_ObjectHideFlags: 0
@@ -1703,7 +1712,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7423650729752058277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: z
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -1740,7 +1749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &918067762784632558
 Transform:
   m_ObjectHideFlags: 0
@@ -1778,7 +1787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1465845327748852557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1793,7 +1802,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5400643977553422582}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: 0.4, z: -0.49}
+  m_LocalPosition: {x: 0, y: -0.408, z: -0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1810,7 +1819,7 @@ GameObject:
   - component: {fileID: 8633056579388270240}
   - component: {fileID: 6145182565762605997}
   - component: {fileID: 553900796195415165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1890,12 +1899,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1215434935047470352}
   m_Layer: 0
-  m_Name: NewBone.07
+  m_Name: NewBone.08
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1215434935047470352
 Transform:
   m_ObjectHideFlags: 0
@@ -1920,7 +1929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8617019179592474605}
   - component: {fileID: 5034125913269527770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Right.YReplacerBonusLimit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1935,7 +1944,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6586728069268151644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.511, z: -0.5}
+  m_LocalPosition: {x: 0.003211415, y: -0.0058243275, z: -1.008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1950,15 +1959,15 @@ PositionConstraint:
   m_GameObject: {fileID: 6586728069268151644}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.511, z: -0.5}
-  m_TranslationOffset: {x: 0, y: 0.511, z: -0.5}
+  m_TranslationAtRest: {x: 0.003211415, y: -0.0058243275, z: -1.008}
+  m_TranslationOffset: {x: 0, y: 0, z: -0.1112448}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
-  m_IsLocked: 1
+  m_IsLocked: 0
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 5835507120861775067}
     weight: 1
 --- !u!1 &6687324761743450181
 GameObject:
@@ -1972,7 +1981,7 @@ GameObject:
   - component: {fileID: 3447951268662860039}
   - component: {fileID: 6120530861025204312}
   - component: {fileID: 3262194551773560447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh.head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2269,7 +2278,7 @@ GameObject:
   - component: {fileID: 4467182254475610497}
   - component: {fileID: 3442562349513209008}
   - component: {fileID: 4643285676769284910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2349,7 +2358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8162265896534072478}
   - component: {fileID: 6331161987776243314}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Wall.Right.Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2364,7 +2373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6732645064505343830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0.899999, z: -0.49999976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2379,15 +2388,15 @@ PositionConstraint:
   m_GameObject: {fileID: 6732645064505343830}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1.9, z: -0.5}
-  m_TranslationOffset: {x: 0, y: 1.9, z: -0.5}
+  m_TranslationAtRest: {x: 0, y: 0.9, z: -0.5}
+  m_TranslationOffset: {x: 0.0005372744, y: 0.019423842, z: -0.49999976}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 4821928086829040523}
     weight: 1
 --- !u!1 &6826529305701720769
 GameObject:
@@ -2399,7 +2408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3771492152473085751}
   - component: {fileID: 8079367261450329543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Wall.Right.Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2414,7 +2423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6826529305701720769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -0.5}
+  m_LocalPosition: {x: 0.003211415, y: -0.0058250427, z: -1.0199997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2429,15 +2438,15 @@ PositionConstraint:
   m_GameObject: {fileID: 6826529305701720769}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1, z: -0.5}
-  m_TranslationOffset: {x: 0, y: 1, z: -0.5}
+  m_TranslationAtRest: {x: 0.003211415, y: -0.0058243275, z: -1.02}
+  m_TranslationOffset: {x: 0, y: 0, z: -0.123244524}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 5835507120861775067}
     weight: 1
 --- !u!1 &7162480539692425786
 GameObject:
@@ -2448,7 +2457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1748199105421788706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: x
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -2479,7 +2488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1011265884313809812}
   - component: {fileID: 7098687182309579306}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Icosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2569,12 +2578,12 @@ GameObject:
   m_Component:
   - component: {fileID: 12582483631721674}
   m_Layer: 0
-  m_Name: NewBone
+  m_Name: NewBone.01
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &12582483631721674
 Transform:
   m_ObjectHideFlags: 0
@@ -2599,7 +2608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2252590564834590129}
   - component: {fileID: 2593872512912434520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Left.YReplacerBonusLimit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2614,7 +2623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7552398810042230511}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.511, z: 0.5}
+  m_LocalPosition: {x: 0.003211415, y: -0.0031867027, z: 1.023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2629,15 +2638,15 @@ PositionConstraint:
   m_GameObject: {fileID: 7552398810042230511}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.511, z: 0.5}
-  m_TranslationOffset: {x: 0, y: 0.511, z: 0.5}
+  m_TranslationAtRest: {x: 0.003211415, y: -0.0031867027, z: 1.023}
+  m_TranslationOffset: {x: 0, y: 0, z: 0.10778165}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
-  m_IsLocked: 1
+  m_IsLocked: 0
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 1960906516490775978}
     weight: 1
 --- !u!1 &7952755719839057162
 GameObject:
@@ -2649,7 +2658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3559233093539606322}
   - component: {fileID: 4316633942021843080}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Wall.Right.Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2664,7 +2673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7952755719839057162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: -0.5}
+  m_LocalPosition: {x: 0, y: -0.9000002, z: -0.50000024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2679,15 +2688,15 @@ PositionConstraint:
   m_GameObject: {fileID: 7952755719839057162}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.2, z: -0.5}
-  m_TranslationOffset: {x: 0, y: 0.2, z: -0.5}
+  m_TranslationAtRest: {x: 0, y: -0.9, z: -0.5}
+  m_TranslationOffset: {x: -0.0005738998, y: 0.013129592, z: -0.50000024}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 7423650729752058277}
     weight: 1
 --- !u!1 &8509798112700554833
 GameObject:
@@ -2699,12 +2708,12 @@ GameObject:
   m_Component:
   - component: {fileID: 283976960728053671}
   m_Layer: 0
-  m_Name: NewBone.05
+  m_Name: NewBone.06
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &283976960728053671
 Transform:
   m_ObjectHideFlags: 0
@@ -2730,7 +2739,7 @@ GameObject:
   - component: {fileID: 9088719436880831037}
   - component: {fileID: 7509636409677922980}
   - component: {fileID: 287800271762549890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2810,7 +2819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7294682736069967599}
   - component: {fileID: 8229920042229677643}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raycaster.Wall.Left.Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2825,7 +2834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8823338168772009037}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0.003211415, y: -0.0031871796, z: 1.0230002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2840,15 +2849,15 @@ PositionConstraint:
   m_GameObject: {fileID: 8823338168772009037}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1, z: 0.5}
-  m_TranslationOffset: {x: 0, y: 1, z: 0.5}
+  m_TranslationAtRest: {x: 0.003211415, y: -0.0031867027, z: 1.023}
+  m_TranslationOffset: {x: 0, y: 0, z: 0.10778189}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 1960906516490775978}
     weight: 1
 --- !u!1 &9120025045931260153
 GameObject:
@@ -2860,7 +2869,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5458421216406235571}
   - component: {fileID: 8101763736310891629}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character.CameraAim.ParentFollower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
