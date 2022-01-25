@@ -3480,7 +3480,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2060
+  m_Name: pb_Mesh-2166
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9461,7 +9461,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2070
+  m_Name: pb_Mesh-2176
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9974,7 +9974,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2050
+  m_Name: pb_Mesh-2156
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16159,7 +16159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5524500298167027900, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: _force
-      value: 80
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7280882848012791425, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_RootOrder
@@ -16220,6 +16220,14 @@ PrefabInstance:
     - target: {fileID: 7659724842038268440, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.50000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021408352904000306, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
+      propertyPath: Damper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021408352904000306, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
+      propertyPath: Spring
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8162265896534072478, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_LocalPosition.y
