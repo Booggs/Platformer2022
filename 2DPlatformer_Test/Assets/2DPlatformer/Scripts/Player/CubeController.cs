@@ -107,32 +107,23 @@ namespace GSGD2.Player
         [SerializeField]
         private int _allowedJumpCountWhenBumping = 1;
 
-        [Header("Dash")]
-        [SerializeField]
         private Dash _dash = null;
 
-        [SerializeField]
         private float _durationToDisableGroundRaycastWhenDashing = 0.5f;
 
         /*[SerializeField]
 		private bool _resetDashCountWhenFalling = true;*/
 
-        [SerializeField]
         private int _allowedDashCountWhenFalling = 1;
 
-        [SerializeField]
         private float _wallRaycastDistanceWhenDashing = 10f;
 
-        [SerializeField]
         private bool _resetDashCountWhenWallJumping = true;
 
-        [SerializeField]
         private int _allowedDashCountWhenWallJumping = 1;
 
-        [SerializeField]
         private bool _resetDashJumpCountWhenBumping = true;
 
-        [SerializeField]
         private int _allowedDashCountWhenBumping = 1;
 
         [Header("Wall Grab / Jump")]
@@ -140,28 +131,32 @@ namespace GSGD2.Player
         private bool _enableWallGrab = true;
 
         [SerializeField]
-        private Timer _wallGrabDuration;
+        private Timer _stickyModeDuration;
+
+        [SerializeField]
+        private float _completeStaminaRegenDuration = 7.5f;
+
+        [SerializeField]
+        private Timer _staminaRegenTimer;
+
+        private bool _stickyModeOn = false;
 
         /// <summary>
         /// Height applied to the jump force when releasing the wall jump button
         /// </summary>
-        [SerializeField]
         private float _wallJumpHeight = 3f;
 
         /// <summary>
         /// Force applied to the normal vector of the wall (horizontally) to send away the character from the wall
         /// </summary>
-        [SerializeField]
         private int _wallJumpWallNormalForce = 8;
 
         /// <summary>
         /// Delay at which the character cannot grab a wall with the same normal direction after a previous wall jump.
         /// It prevent from "bunny hopping" a wall, while preserving grabbing the opposite wall.
         /// </summary>
-        [SerializeField]
         private float _wallGrabDisableDuration = 0.5f;
 
-        [SerializeField]
         private bool _resetWallGrabDisableDurationWhenDashing = true;
 
         [Header("Bump")]
@@ -196,8 +191,8 @@ namespace GSGD2.Player
         private float _maxVelocitySqr = -1f;
         private float _inputMovement;
         private float _rawInputMovement;
-        private State _previousState = State.Grounded;
-        private State _currentState = State.Grounded;
+        private State _previousState = State.Falling;
+        private State _currentState = State.Falling;
         private float _currentTurnTime = 1f;
         private int _lastMovementDirection;
         private float _currentDurationToDisableGroundRaycastWhenJumping = 0f;
@@ -209,6 +204,7 @@ namespace GSGD2.Player
         private bool _hasBeganToFallFromGroundedState = false;
         private float _currentAirSpeed = 0f;
         private float _currentDescendingGravityScale = 0f;
+        private float _currentGrabbingStamina = 0f;
         private Collider[] _colliders = null; // TODO AL : move this to PlayerReferences
 
         private bool _hasBeganToFallFromGroundedStateAndDidJump = false;
@@ -262,6 +258,10 @@ namespace GSGD2.Player
         public bool HasASlopeInFrontOfOrBehindCharacter => _characterCollision.HasASlopeInFrontOfOrBehindCharacter;
 
         public int MaxJumpCount => _jump.MaximumAllowedForcesWhileInAir;
+
+        public float CurrentStamina => _currentGrabbingStamina;
+
+        public bool StickyModeOn => _stickyModeOn;
 
         public float AirMoveSpeed
         {
@@ -342,6 +342,7 @@ namespace GSGD2.Player
         public void EnableGrab(bool isEnabled)
         {
             _enableWallGrab = isEnabled;
+            _staminaRegenTimer.Start();
         }
 
         public void AddMaximumAllowedForceToJump(int toAdd)
@@ -371,7 +372,7 @@ namespace GSGD2.Player
 
         public void ResetRigidbodiesVelocity()
         {
-            foreach(var rigidbody in _rigidbodies)
+            foreach (var rigidbody in _rigidbodies)
             {
                 rigidbody.velocity = Vector3.zero;
             }
@@ -401,9 +402,7 @@ namespace GSGD2.Player
             _maxVelocitySqr = _maxVelocity * _maxVelocity;
 
             _jump.cubeController = this;
-            _dash.cubeController = this;
             _jump.displacementEstimationUpdater = _displacementEstimationUpdater;
-            _dash.displacementEstimationUpdater = _displacementEstimationUpdater;
 
             _currentAirSpeed = _airMoveSpeed;
             _currentDescendingGravityScale = _descendingGravityScale;
@@ -421,6 +420,10 @@ namespace GSGD2.Player
             // TODO AL retake, PlayerDamageable should listen to CubeController and change its state
             BindInput(true);
             _colliders = GetComponentsInChildren<Collider>();
+            if (_enableWallGrab == true)
+            {
+                _staminaRegenTimer.Start(7.5f);
+            }
         }
 
         private void OnDisable()
@@ -519,6 +522,7 @@ namespace GSGD2.Player
                 default:
                     break;
             }
+            TryWallGrab();
         }
         private void PlayerController_WallJumpPerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
@@ -549,7 +553,6 @@ namespace GSGD2.Player
             _currentDurationToDisableControlDuringBump = _durationToDisableControlDuringBump;
             _currentWallGrabDisableDuration = _wallGrabDisableDuration;
             _jump.ResetCurrentForceCount();
-            _dash.ResetCurrentForceCount();
 
             _characterCollision.ResetCurrentValues();
             ResetInputs();
@@ -643,8 +646,6 @@ namespace GSGD2.Player
                     break;
                 case State.WallJump:
                     {
-                        _wallGrabDuration.ForceFinishState();
-                        _characterCollision.SlopeNormalThreshold = _characterCollision.DefaultSlopeNormalThreshold;
                     }
                     break;
                 case State.Dashing:
@@ -719,8 +720,6 @@ namespace GSGD2.Player
                 case State.WallGrab:
                     {
                         //_wallNormalDuringLastWallGrab = _characterCollision.WallNormal;
-                        _wallGrabDuration.Start();
-                        _characterCollision.SlopeNormalThreshold = 0;
                     }
                     break;
                 case State.WallJump:
@@ -813,7 +812,7 @@ namespace GSGD2.Player
                         }
                         CheckGround();
                         _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                        TryWallGrab();
+                        //TryWallGrab();
                         if (TryJump() == false)
                         {
                             DisableGroundRaycastWhenJumping();
@@ -832,7 +831,7 @@ namespace GSGD2.Player
                         }
                         CheckGround();
                         _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                        TryWallGrab();
+                        //TryWallGrab();
                         if (TryJump() == false)
                         {
                             DisableGroundRaycastWhenJumping();
@@ -858,7 +857,7 @@ namespace GSGD2.Player
                         if (_currentState == State.Jumping) // CheckGround can change state
                         {
                             _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                            TryWallGrab();
+                            //TryWallGrab();
 
                             if (_shouldChangeToFallingStateWhenReleasingJump == true && _playerController.IsJumpButtonPressed == false)
                             {
@@ -884,11 +883,6 @@ namespace GSGD2.Player
                     break;
                 case State.WallGrab:
                     {
-                        if (_wallGrabDuration.IsRunning == true)
-                        {
-                            _wallGrabDuration.Update();
-                        }
-                        else _characterCollision.SlopeNormalThreshold = _characterCollision.DefaultSlopeNormalThreshold;
                         TryWallJump();
                         DisableGroundRaycastWhenJumping(); // check this
                     }
@@ -898,7 +892,7 @@ namespace GSGD2.Player
                         DisableWallGrabForAShortTime();
                         CheckGround();
                         _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                        TryWallGrab();
+                        //TryWallGrab();
 
                         if (TryJump() == false)
                         {
@@ -918,7 +912,7 @@ namespace GSGD2.Player
                         if (hasDashEnded == false)
                         {
                             _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                            TryWallGrab();
+                            //TryWallGrab();
 
                             // TODO AL : try jump check
                             if (_canJumpDuringDash == true && TryJump() == false)
@@ -988,18 +982,8 @@ namespace GSGD2.Player
                 }
             }
 
-            void TryWallGrab()
+            /*void TryWallGrab()
             {
-                if (_enableWallGrab == false)
-                {
-                    return;
-                }
-                bool canChangeState = CanChangeState(State.WallGrab);
-                if (canChangeState == true && _wallGrabDuration.IsRunning == false && _willPerformWallGrab == true && (HasAWallInFrontOfCharacter == true || HasAWallBehindCharacter == true))
-                {
-                    ChangeState(State.WallGrab);
-                }
-                else return;
                 /*var wallNormal = _characterCollision.WallNormal;
                 bool canWallGrabOppositeWall = wallNormal != _wallNormalDuringLastWallGrab;
                 if (IsWallGrabDisabled == false || canWallGrabOppositeWall == true)
@@ -1014,12 +998,12 @@ namespace GSGD2.Player
                             ChangeState(State.WallGrab);
                         }
                     }
-                }*/
-            }
+                }
+            }*/
 
             void TryWallJump()
             {
-                if (_willPerformWallJump == true)
+                /*if (_willPerformWallJump == true)
                 {
                     // Consume input in every cases
                     _willPerformWallJump = false;
@@ -1035,7 +1019,7 @@ namespace GSGD2.Player
                         }
                         ChangeState(State.WallJump);
                     }
-                }
+                }*/
             }
 
             bool TryJump()
@@ -1112,6 +1096,21 @@ namespace GSGD2.Player
                     //Debug.LogFormat("DisableGroundRaycastWhenDashing {0}", _currentState);
                     _currentDurationToDisableGroundRaycastWhenDashing += Time.deltaTime;
                 }
+            }
+
+            if (_stickyModeDuration.IsRunning == true)
+            {
+                _stickyModeDuration.Update();
+                _currentGrabbingStamina = 1 - _stickyModeDuration.Progress;
+                if (_currentGrabbingStamina <= 0)
+                {
+                    SetStickyMode(false);
+                }
+            }
+            if (_staminaRegenTimer.IsRunning == true)
+            {
+                _staminaRegenTimer.Update();
+                _currentGrabbingStamina = _staminaRegenTimer.Progress;
             }
         }
 
@@ -1304,6 +1303,45 @@ namespace GSGD2.Player
 
             Debug.DrawLine(transform.position, transform.position + velocity * 5, Color.yellow);
         }
+
+        private void TryWallGrab()
+        {
+            if (_enableWallGrab == false)
+            {
+                return;
+            }
+
+            if (_stickyModeOn == false && _stickyModeDuration.IsRunning == false && _currentGrabbingStamina > 0.1)
+            {
+                SetStickyMode(true);
+            }
+            else if (_stickyModeOn == true && _stickyModeDuration.IsRunning == true)
+            {
+                SetStickyMode(false);
+            }
+        }
+
+        private void SetStickyMode(bool status)
+        {
+            print("sticky mode set to " + status);
+            if (status == true && _stickyModeOn == false)
+            {
+                _stickyModeDuration.Start();
+                _stickyModeDuration.TimeElapsed = (1 - _currentGrabbingStamina) * _stickyModeDuration.Duration;
+                _characterCollision.SlopeNormalThreshold = 0;
+                _stickyModeOn = true;
+                _staminaRegenTimer.ForceFinishState();
+            }
+            else if  (status == false && _stickyModeOn == true)
+            {
+                _characterCollision.SlopeNormalThreshold = _characterCollision.DefaultSlopeNormalThreshold;
+                _stickyModeOn = false;
+                _stickyModeDuration.ForceFinishState();
+                _staminaRegenTimer.Start(_completeStaminaRegenDuration);
+                _staminaRegenTimer.TimeElapsed = (_currentGrabbingStamina * _completeStaminaRegenDuration);
+            }
+        }
+
 
         private void ApplyGravity(ref Vector3 velocity)
         {

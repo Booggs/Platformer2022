@@ -32,6 +32,17 @@
 
 		public delegate void TimerEvent(Timer timer, State state);
 		public event TimerEvent StateChanged = null;
+		public float TimeElapsed
+        {
+			get
+            {
+				return _timeElapsed;
+            }
+			set
+            {
+				_timeElapsed = value;
+            }
+        }
 
 		public void ForceFinishState()
 		{
