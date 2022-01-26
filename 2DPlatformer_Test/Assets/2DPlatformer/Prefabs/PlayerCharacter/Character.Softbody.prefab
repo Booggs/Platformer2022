@@ -700,7 +700,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979883796742175144}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.899999, z: 0.50000024}
+  m_LocalPosition: {x: 0, y: 0.90000093, z: 0.50000024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -822,7 +822,7 @@ MonoBehaviour:
     _duration: 0.2
   _playerController: {fileID: 8963912016909959918}
   Spring: 1000
-  Damper: 0.01
+  Damper: 0
   Shape: 1
   ColliderSize: 0.002
   RigidbodyMass: 1
@@ -955,7 +955,7 @@ MonoBehaviour:
       m_Bits: 1
     _drawGizmos: 1
   _characterZExtent: 1
-  _slopeNormalThreshold: 0.7
+  _slopeNormalThreshold: 0.1
 --- !u!114 &4608137964132476650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,7 +982,7 @@ MonoBehaviour:
     displacementEstimationUpdater: {fileID: 0}
     _gravityScale: 9
     _jumpHeight: 50
-    _jumpHeightBonusWhenFalling: 50
+    _jumpHeightBonusWhenFalling: 10
     _jumpHeightBonusSpeedThreshold: 10
   _changeToFallingStateWhenReleasingJump: 0
   _canJumpDuringDash: 1
@@ -993,28 +993,12 @@ MonoBehaviour:
   _allowedJumpCountWhenWallJumping: 1
   _resetJumpCountWhenBumping: 1
   _allowedJumpCountWhenBumping: 1
-  _dash:
-    enabled: 1
-    _maximumAllowedForces: 1
-    cubeController: {fileID: 0}
-    displacementEstimationUpdater: {fileID: 0}
-    _dashForce: 100
-    _timerUntilDashEnd:
-      _duration: 0.25
-    _positionOffsetWhenEnteringDash: 0.1
-    _debugMode: 1
-  _durationToDisableGroundRaycastWhenDashing: 0.5
-  _allowedDashCountWhenFalling: 1
-  _wallRaycastDistanceWhenDashing: 1.1
-  _resetDashCountWhenWallJumping: 1
-  _allowedDashCountWhenWallJumping: 1
-  _resetDashJumpCountWhenBumping: 1
-  _allowedDashCountWhenBumping: 1
   _enableWallGrab: 1
-  _wallJumpHeight: 3
-  _wallJumpWallNormalForce: 8
-  _wallGrabDisableDuration: 0.25
-  _resetWallGrabDisableDurationWhenDashing: 1
+  _stickyModeDuration:
+    _duration: 10
+  _completeStaminaRegenDuration: 7.5
+  _staminaRegenTimer:
+    _duration: 0
   _durationToDisableControlDuringBump: 0.4
   _turnSpeed: 10
   _uturnCurve:
@@ -1056,12 +1040,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932762b6ae828dd44a7afa664a233dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubeController: {fileID: 0}
-  _playerController: {fileID: 0}
-  _force: 50
-  _enableControlsAfterTimer:
-    _duration: 0
-  _usableInState: 0
+  _cubeController: {fileID: 4608137964132476650}
+  _playerController: {fileID: 8963912016909959918}
+  _force: 30
+  _groundDashMultiplier: 1.2
+  _dashTimeLimit:
+    _duration: 0.5
+  _usableInState: 147
 --- !u!114 &5524500298167027900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1446,7 +1431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2671628357469391244}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: -0.40799993, z: 0.7}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1533,7 +1518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3105910168043448705
 Transform:
   m_ObjectHideFlags: 0
@@ -1542,7 +1527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3657291303670173881}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.0005738998, y: -0.9140002, z: 0.5}
+  m_LocalPosition: {x: 0.0005738998, y: -0.81199974, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1557,8 +1542,8 @@ PositionConstraint:
   m_GameObject: {fileID: 3657291303670173881}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0.0005738998, y: -0.914, z: 0.50000024}
-  m_TranslationOffset: {x: 0, y: -0.0008704066, z: 0.5}
+  m_TranslationAtRest: {x: 0.0005738998, y: -0.81199974, z: 0.5}
+  m_TranslationOffset: {x: 0, y: 0.10112983, z: 0.5}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -1802,7 +1787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5400643977553422582}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: -0.408, z: -0.7}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2373,7 +2358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6732645064505343830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.899999, z: -0.49999976}
+  m_LocalPosition: {x: 0, y: 0.90000093, z: -0.49999976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2664,7 +2649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3559233093539606322
 Transform:
   m_ObjectHideFlags: 0
@@ -2673,7 +2658,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7952755719839057162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.9000002, z: -0.50000024}
+  m_LocalPosition: {x: 0, y: -0.8122, z: -0.50000024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2688,8 +2673,8 @@ PositionConstraint:
   m_GameObject: {fileID: 7952755719839057162}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: -0.9, z: -0.5}
-  m_TranslationOffset: {x: -0.0005738998, y: 0.013129592, z: -0.50000024}
+  m_TranslationAtRest: {x: 0, y: -0.8122, z: -0.50000024}
+  m_TranslationOffset: {x: -0.0005738998, y: 0.10092956, z: -0.50000024}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1

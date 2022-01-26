@@ -65,6 +65,8 @@ namespace GSGD2.Player
 		private bool _hasAWallBehindCharacter = false;
 		private bool _hasASlopeInFrontOfOrBehindCharacter = false;
 		private float slopeNormalThreshold;
+		private bool _midRightResult = true;
+		private bool _midLeftResult = true;
 		#endregion Fields
 
 		#region Properties
@@ -76,7 +78,9 @@ namespace GSGD2.Player
 		public bool HasAWallInFrontOfCharacter => _hasAWallInFrontOfCharacter;
 		public bool HasAWallBehindCharacter => _hasAWallBehindCharacter;
 		public bool HasASlopeInFrontOfOrBehindCharacter => _hasASlopeInFrontOfOrBehindCharacter;
-		public bool HasAWallNearCharacter => HasAWallBehindCharacter && HasAWallInFrontOfCharacter;
+		public bool HasAWallNearCharacter => HasAWallBehindCharacter || HasAWallInFrontOfCharacter;
+		public bool IsOnWallRight => _midRightResult;
+		public bool IsOnWallLeft => _midLeftResult;
 
 		public float SlopeNormalThreshold
         {
@@ -118,6 +122,7 @@ namespace GSGD2.Player
             bool yRightReplacerBonusResult = _yRightReplacerBonusRaycaster.RaycastAll(out RaycastHit[] yRightReplacerBonusHits, debug: debug);
             bool topRightSlopeResult = false, downRightSlopeResult = false, midRightSlopeResult = false;
             Vector3 rightWallNormal = Vector3.zero;
+
             if (topRightResult == true)
             {
                 topRightResult = IsNormalIndicateAnyOfThisAsAWall(ref topRightHits, out rightWallNormal);
@@ -155,6 +160,7 @@ namespace GSGD2.Player
             if (midRightResult == true)
             {
                 midRightResult = IsNormalIndicateAnyOfThisAsAWall(ref midRightHits, out rightWallNormal);
+				_midRightResult = midRightResult;
                 if (midRightResult == true)
                 {
                     chosenWallRaycastHitResult = midRightHits[0];
@@ -180,8 +186,8 @@ namespace GSGD2.Player
             bool midLeftResult = _midLeftWallRaycaster.RaycastAll(out RaycastHit[] midLeftHits, debug: debug);
             bool yLeftReplacerBonusResult = _yLeftReplacerBonusRaycaster.RaycastAll(out RaycastHit[] yLeftReplacerBonusHits, debug: debug);
             bool topLeftSlopeResult = false, downLeftSlopeResult = false, midLeftSlopeResult = false;
-
             Vector3 leftWallNormal = Vector3.zero;
+
             if (topLeftResult == true)
             {
                 topLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref topLeftHits, out leftWallNormal);
@@ -218,7 +224,8 @@ namespace GSGD2.Player
             if (midLeftResult == true)
             {
                 midLeftResult = IsNormalIndicateAnyOfThisAsAWall(ref midLeftHits, out leftWallNormal);
-                if (midLeftResult == true)
+				_midLeftResult = midLeftResult;
+				if (midLeftResult == true)
                 {
                     chosenWallRaycastHitResult = midLeftHits[0];
                 }
@@ -258,14 +265,14 @@ namespace GSGD2.Player
                     _hasAWallInFrontOfCharacter = topRightResult || midRightResult || downRightResult;
                     _hasAWallBehindCharacter = topLeftResult || midLeftResult || downLeftResult;
                     _wallNormal = rightWallNormal;
-                    _hasASlopeInFrontOfOrBehindCharacter = topRightSlopeResult || downRightSlopeResult || midRightSlopeResult;
+                    _hasASlopeInFrontOfOrBehindCharacter = topRightSlopeResult || downRightSlopeResult || midRightSlopeResult || topLeftSlopeResult || downLeftSlopeResult || midLeftSlopeResult;
                 }
                 else
                 {
                     _hasAWallInFrontOfCharacter = topLeftResult || midLeftResult || downLeftResult;
                     _hasAWallBehindCharacter = topRightResult || midRightResult || downRightResult;
                     _wallNormal = leftWallNormal;
-                    _hasASlopeInFrontOfOrBehindCharacter = topLeftSlopeResult || downLeftSlopeResult || midLeftSlopeResult;
+                    _hasASlopeInFrontOfOrBehindCharacter = topRightSlopeResult || downRightSlopeResult || midRightSlopeResult || topLeftSlopeResult || downLeftSlopeResult || midLeftSlopeResult;
                 }
             }
         }
@@ -367,7 +374,6 @@ namespace GSGD2.Player
 				if (hit.normal.y < slopeNormalThreshold)
 				{
 					wallNormal = hit.normal;
-
 					Debug.DrawLine(hit.point, hit.point + hit.normal, Color.red);
 					return true;
 				}

@@ -126,7 +126,6 @@ namespace GSGD2.Player
             }
             if (_snapTimer.IsRunning == true)
             {
-
                 _snapTimer.Update();
             }
         }

@@ -12,10 +12,13 @@ namespace GSGD2.Gameplay
         private TextMeshProUGUI _debugText = null;
         [SerializeField]
         private CubeController _cubeController = null;
+        [SerializeField]
+        private CharacterCollision _characterCollision = null;
 
         void Update()
         {
-            //_debugText.text = "Sticky mode status = " + _cubeController.StickyModeOn.ToString();
+            _debugText.text = _characterCollision.HasAWallNearCharacter.ToString();
+            //_debugText.text = _cubeController.CurrentState.ToString();
         }
     }
 }

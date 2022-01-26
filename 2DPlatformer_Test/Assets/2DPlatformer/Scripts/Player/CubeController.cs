@@ -136,6 +136,7 @@ namespace GSGD2.Player
         [SerializeField]
         private float _completeStaminaRegenDuration = 7.5f;
 
+        [Header("Don't touch")]
         [SerializeField]
         private Timer _staminaRegenTimer;
 
@@ -342,7 +343,11 @@ namespace GSGD2.Player
         public void EnableGrab(bool isEnabled)
         {
             _enableWallGrab = isEnabled;
-            _staminaRegenTimer.Start();
+            if(_staminaRegenTimer.IsRunning == false)
+            {
+                _staminaRegenTimer.Start(_completeStaminaRegenDuration);
+                _staminaRegenTimer.TimeElapsed = (_currentGrabbingStamina * _completeStaminaRegenDuration);
+            }
         }
 
         public void AddMaximumAllowedForceToJump(int toAdd)
@@ -513,8 +518,6 @@ namespace GSGD2.Player
                 case State.Jumping:
                 case State.WallJump:
                 case State.Dashing:
-                    _willPerformWallGrab = true;
-                    break;
                 case State.StartJump:
                 case State.EndJump:
                 case State.WallGrab:
@@ -1027,7 +1030,7 @@ namespace GSGD2.Player
                 if (IsWallGrabDisabled == false && _willPerformJump == true)
                 {
                     _willPerformJump = false;
-
+                    //if (_stickyModeOn == true && (_characterCollision. || _characterCollision.))
                     if (_hasBeganToFallFromGroundedState == true && _hasBeganToFallFromGroundedStateAndDidJump == false && _resetJumpCountWhenFalling == true)
                     {
                         ResetJumpCount(_allowedJumpCountWhenFalling);
@@ -1051,7 +1054,7 @@ namespace GSGD2.Player
 
             bool TryDash()
             {
-                if (_willPerformDash == true && (Rigidbody.velocity.z >= 0.5f || Rigidbody.velocity.z <= -0.5f))
+                /*if (_willPerformDash == true && (Rigidbody.velocity.z >= 0.5f || Rigidbody.velocity.z <= -0.5f))
                 {
                     _willPerformDash = false;
                     bool result = false;
@@ -1076,7 +1079,7 @@ namespace GSGD2.Player
                         }
                     }
                     return result;
-                }
+                }*/
                 return false;
             }
 
@@ -1246,11 +1249,6 @@ namespace GSGD2.Player
             }
 
             // Then apply velocity to rigidbody
-            foreach (var rigidbody in _rigidbodies)
-            {
-                rigidbody.velocity = velocity;
-            }
-
             bool DisableControlDuringBump()
             {
                 if (_currentDurationToDisableControlDuringBump < _durationToDisableControlDuringBump)
@@ -1268,7 +1266,7 @@ namespace GSGD2.Player
                 if (_inputMovement != 0)
                 {
                     // do not enter if we're in WallJump with a wall in front of us to avoid wall clipping / stucking
-                    if (_currentState != State.WallJump || HasAWallInFrontOfCharacter == false)
+                    if (_currentState != State.WallJump || (HasAWallInFrontOfCharacter == false && HasAWallBehindCharacter == false))
                     {
                         velocity.z = _inputMovement * (isGrounded == true ? _groundMoveSpeed : _currentAirSpeed);
                     }
@@ -1284,7 +1282,7 @@ namespace GSGD2.Player
             void NullifyMovementAgainstAWallInFrontOf()
             {
                 // Check if we collide against a wall and nullify horizontal movement if so
-                if (HasAWallInFrontOfCharacter == true)
+                if (HasAWallInFrontOfCharacter == true && _inputMovement < 0)
                 {
                     // let only vertical movement pass through
                     velocity = new Vector3(0f, velocity.y, 0f);
@@ -1294,11 +1292,16 @@ namespace GSGD2.Player
             void NullifyMovementAgainstAWallBehind()
             {
                 // Check if we collide against a wall and nullify horizontal movement if so
-                if (HasAWallBehindCharacter == true)
+                if (HasAWallBehindCharacter == true && _inputMovement > 0)
                 {
                     // let only vertical movement pass through
                     velocity = new Vector3(0f, velocity.y, 0f);
                 }
+            }
+
+            foreach (var rigidbody in _rigidbodies)
+            {
+                rigidbody.velocity = velocity;
             }
 
             Debug.DrawLine(transform.position, transform.position + velocity * 5, Color.yellow);
@@ -1323,7 +1326,6 @@ namespace GSGD2.Player
 
         private void SetStickyMode(bool status)
         {
-            print("sticky mode set to " + status);
             if (status == true && _stickyModeOn == false)
             {
                 _stickyModeDuration.Start();
@@ -1332,7 +1334,7 @@ namespace GSGD2.Player
                 _stickyModeOn = true;
                 _staminaRegenTimer.ForceFinishState();
             }
-            else if  (status == false && _stickyModeOn == true)
+            else if (status == false && _stickyModeOn == true)
             {
                 _characterCollision.SlopeNormalThreshold = _characterCollision.DefaultSlopeNormalThreshold;
                 _stickyModeOn = false;

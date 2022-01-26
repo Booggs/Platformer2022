@@ -5,10 +5,6 @@ namespace GSGD2.Player
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	/// <summary>
-	/// This class is an example of how you can add movement behavior to the player without digging into <see cref="CubeController"/>.
-	/// It can enable a mario like "ground smash" 
-	/// </summary>
 	public class AirGliding : MonoBehaviour
 	{
 		[SerializeField]
@@ -84,7 +80,7 @@ namespace GSGD2.Player
 				{
 					StopGliding();
 				}
-				if (_characterCollision.HasAWallInFrontOfCharacter == true)
+				if (_characterCollision.HasAWallInFrontOfCharacter == true || _characterCollision.HasAWallBehindCharacter)
 				{
 					StopGliding();
 				}

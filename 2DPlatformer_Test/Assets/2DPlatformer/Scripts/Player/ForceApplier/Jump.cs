@@ -22,15 +22,27 @@
 		[SerializeField]
 		private float _jumpHeightBonusSpeedThreshold = 10f;
 
+		private float _lateralOffset = 300f;
+
 		protected override void DoApplyForce(Rigidbody rigidbody)
 		{
+			LevelReferences.Instance.PlayerReferences.TryGetCharacterCollision(out CharacterCollision collisionRef);
+			if (collisionRef.IsOnWallRight == false)
+            {
+				_lateralOffset = _lateralOffset * -1;
+            }
+			else if (collisionRef.IsOnWallLeft == true && collisionRef.IsOnWallRight == true)
+            {
+				_lateralOffset = 0f;
+            }
+			Debug.Log(_lateralOffset);
 			// We zeroing out the velocity in bonus jump, otherwise the character falling velocity can be too high
 			if (currentAllowedForces > 0)
 			{
 				rigidbody.velocity = Vector3.zero;
 			}
 
-			float height = displacementEstimationUpdater.MovementDirection.Down &&  displacementEstimationUpdater.AverageSpeed > _jumpHeightBonusSpeedThreshold ? _jumpHeight + _jumpHeightBonusWhenFalling : _jumpHeight;
+			float height = displacementEstimationUpdater.MovementDirection.Down && displacementEstimationUpdater.AverageSpeed > _jumpHeightBonusSpeedThreshold ? _jumpHeight + _jumpHeightBonusWhenFalling : _jumpHeight;
 			var vel = rigidbody.velocity;
 			vel.y = 0f;
 			rigidbody.velocity = vel;
@@ -47,7 +59,7 @@
 			(
 				0f, 
 				Mathf.Sqrt(2 * (height * _gravityScale) * Mathf.Abs(Physics.gravity.y)), 
-				0f//_reflectRigidbodyVelocity == true ? -vel.z : 0f
+				_lateralOffset//_reflectRigidbodyVelocity == true ? -vel.z : 0f
 			);
 
 			if (inverseY == true)
