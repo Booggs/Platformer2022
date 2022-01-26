@@ -7690,7 +7690,7 @@ MonoBehaviour:
   _cubeController: {fileID: 5294502397730390921}
   _playerController: {fileID: 7546945425791701378}
   _testTimer:
-    _duration: 1
+    _duration: 10
 --- !u!43 &889710494
 Mesh:
   m_ObjectHideFlags: 0
@@ -16327,6 +16327,14 @@ PrefabInstance:
       propertyPath: _groundFriction
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4608137964132476650, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
+      propertyPath: _jump._collisionRef
+      value: 
+      objectReference: {fileID: 729333657}
+    - target: {fileID: 4608137964132476650, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
+      propertyPath: _jump._cubeController
+      value: 
+      objectReference: {fileID: 5294502397730390921}
     - target: {fileID: 5034125913269527770, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_TranslationOffset.z
       value: -0.1112448

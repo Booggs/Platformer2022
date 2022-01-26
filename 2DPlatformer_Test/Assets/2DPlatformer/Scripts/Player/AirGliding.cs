@@ -14,9 +14,6 @@ namespace GSGD2.Player
 		private float _glidingSpeedMultiplier = 0.8f;
 
 		[SerializeField]
-		private float _glidingGravityDivider = 15f;
-
-		[SerializeField]
 		private CubeController.State _usableInState = CubeController.State.None;
 
 		private float _defaultAirSpeed;
@@ -58,7 +55,8 @@ namespace GSGD2.Player
 
 				_isGliding = true;
 				_cubeController.AirMoveSpeed = _defaultAirSpeed * _glidingSpeedMultiplier;
-				_cubeController.DescendingGravityScale = _defaultDescendingGravityScale / _glidingGravityDivider;
+				//_cubeController.DescendingGravityScale = _defaultDescendingGravityScale / _glidingGravityDivider;
+				_cubeController.Gliding = true;
 			}
 		}
 
@@ -92,7 +90,8 @@ namespace GSGD2.Player
 			_cubeController.enabled = true;
 			_isGliding = false;
 			_cubeController.AirMoveSpeed = _defaultAirSpeed;
-			_cubeController.DescendingGravityScale = _defaultDescendingGravityScale;
+			//_cubeController.DescendingGravityScale = _defaultDescendingGravityScale;
+			_cubeController.Gliding = false;
 		}
 	}
 }

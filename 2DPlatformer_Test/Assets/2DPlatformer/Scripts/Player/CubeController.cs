@@ -76,6 +76,10 @@ namespace GSGD2.Player
         [SerializeField]
         private float _descendingGravityScale = 5f;
 
+        [SerializeField]
+        private float _glidingSpeedDivider = 1.05f;
+
+
         [Header("Jump")]
         [SerializeField]
         private Jump _jump = null;
@@ -125,6 +129,9 @@ namespace GSGD2.Player
         private bool _resetDashJumpCountWhenBumping = true;
 
         private int _allowedDashCountWhenBumping = 1;
+
+        private bool _gliding = false;
+
 
         [Header("Wall Grab / Jump")]
         [SerializeField]
@@ -219,6 +226,7 @@ namespace GSGD2.Player
         public delegate TResult CanChangeStateFunc<out TResult>(State currentState, State newState);
 
         private List<CanChangeStateFunc<bool>> _canChangeToMovementStateList = new List<CanChangeStateFunc<bool>>();
+        private int _wallJumpLateralOffset = 300;
         #endregion Fields
 
         #region Properties
@@ -263,6 +271,20 @@ namespace GSGD2.Player
         public float CurrentStamina => _currentGrabbingStamina;
 
         public bool StickyModeOn => _stickyModeOn;
+
+        public int LateralOffset => _wallJumpLateralOffset;
+
+        public bool Gliding
+        {
+            get
+            {
+                return _gliding;
+            }
+            set
+            {
+                _gliding = value;
+            }
+        }
 
         public float AirMoveSpeed
         {
@@ -1038,6 +1060,15 @@ namespace GSGD2.Player
                     }
 
                     bool canJump = _jump.CanApplyForce() && CanChangeState(State.StartJump);
+                    //LATERAL OFFSET MARCHE PAS
+                    if (_characterCollision.IsOnWallRight == false)
+                    {
+                        _wallJumpLateralOffset = _wallJumpLateralOffset * -1;
+                    }
+                    else if (_characterCollision.IsOnWallLeft == true && _characterCollision.IsOnWallRight == true)
+                    {
+                        _wallJumpLateralOffset = 0;
+                    }
                     if (canJump == true)
                     {
                         foreach (var rigidbody in _rigidbodies)
@@ -1144,6 +1175,13 @@ namespace GSGD2.Player
                         NullifyMovementAgainstAWallInFrontOf();
                         NullifyMovementAgainstAWallBehind();
                         ApplyGravity(ref velocity);
+                        if (_gliding == true)
+                        {
+                            foreach (var rigidbody in _rigidbodies)
+                            {
+                                rigidbody.velocity = velocity;
+                            }
+                        }
                     }
                     break;
                 case State.Bumping:
@@ -1301,6 +1339,10 @@ namespace GSGD2.Player
 
             foreach (var rigidbody in _rigidbodies)
             {
+                if (_gliding == true)
+                {
+                    velocity.y = velocity.y / _glidingSpeedDivider;
+                }
                 rigidbody.velocity = velocity;
             }
 

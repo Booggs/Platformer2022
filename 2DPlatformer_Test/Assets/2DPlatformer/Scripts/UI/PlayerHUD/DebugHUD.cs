@@ -17,7 +17,7 @@ namespace GSGD2.Gameplay
 
         void Update()
         {
-            _debugText.text = _characterCollision.HasAWallNearCharacter.ToString();
+            _debugText.text = _characterCollision.IsOnWallRight.ToString();
             //_debugText.text = _cubeController.CurrentState.ToString();
         }
     }
