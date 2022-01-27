@@ -48,6 +48,8 @@ namespace GSGD2.Player
         private Vector3[] _bonesPositions = new Vector3[6];
         private float[] _bonesDistance = new float[6];
 
+        public GameObject[] Bones => _bones;
+
         private void Awake()
         {
             Softbody.Init(Shape, ColliderSize, RigidbodyMass, Spring, Damper, RigidbodyConstraints.FreezeRotation, PrefabLine, ViewLines);
@@ -57,7 +59,7 @@ namespace GSGD2.Player
             Softbody.AddCollider(ref x2);
             Softbody.AddCollider(ref y);
             Softbody.AddCollider(ref y2);
-            Softbody.AddCollider(ref z);
+            Softbody.AddUndersideCollider(ref z);
             Softbody.AddCollider(ref z2);
             /*Softbody.AddCollider(ref newBone);
             Softbody.AddCollider(ref newBone2);
