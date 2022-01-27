@@ -148,6 +148,7 @@ namespace GSGD2.Player
         private Timer _staminaRegenTimer;
 
         private bool _stickyModeOn = false;
+        private bool _stickingToWall = false;
 
         /// <summary>
         /// Height applied to the jump force when releasing the wall jump button
@@ -214,6 +215,7 @@ namespace GSGD2.Player
         private float _currentDescendingGravityScale = 0f;
         private float _currentGrabbingStamina = 0f;
         private Collider[] _colliders = null; // TODO AL : move this to PlayerReferences
+        private bool _stickingLeft = false;
 
         private bool _hasBeganToFallFromGroundedStateAndDidJump = false;
         private bool _hasBeganToFallFromGroundedStateAndDidDash = false;
@@ -272,7 +274,6 @@ namespace GSGD2.Player
 
         public bool StickyModeOn => _stickyModeOn;
 
-        public int LateralOffset => _wallJumpLateralOffset;
 
         public bool Gliding
         {
@@ -365,7 +366,7 @@ namespace GSGD2.Player
         public void EnableGrab(bool isEnabled)
         {
             _enableWallGrab = isEnabled;
-            if(_staminaRegenTimer.IsRunning == false)
+            if (_staminaRegenTimer.IsRunning == false)
             {
                 _staminaRegenTimer.Start(_completeStaminaRegenDuration);
                 _staminaRegenTimer.TimeElapsed = (_currentGrabbingStamina * _completeStaminaRegenDuration);
@@ -549,6 +550,7 @@ namespace GSGD2.Player
             }
             TryWallGrab();
         }
+
         private void PlayerController_WallJumpPerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
             switch (_currentState)
@@ -745,6 +747,7 @@ namespace GSGD2.Player
                 case State.WallGrab:
                     {
                         //_wallNormalDuringLastWallGrab = _characterCollision.WallNormal;
+                        _stickingToWall = true;
                     }
                     break;
                 case State.WallJump:
@@ -793,7 +796,7 @@ namespace GSGD2.Player
 
         private void ResetDashCount(int allowedForceCount)
         {
-            _dash.ResetCurrentForceCount(_dash.MaximumAllowedForcesWhileInAir - allowedForceCount);
+            //_dash.ResetCurrentForceCount(_dash.MaximumAllowedForcesWhileInAir - allowedForceCount);
         }
 
         private void ResetWallGrabDisableDuration()
@@ -837,7 +840,7 @@ namespace GSGD2.Player
                         }
                         CheckGround();
                         _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                        //TryWallGrab();
+                        TryStickingToWall();
                         if (TryJump() == false)
                         {
                             DisableGroundRaycastWhenJumping();
@@ -856,7 +859,7 @@ namespace GSGD2.Player
                         }
                         CheckGround();
                         _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                        //TryWallGrab();
+                        TryStickingToWall();
                         if (TryJump() == false)
                         {
                             DisableGroundRaycastWhenJumping();
@@ -882,7 +885,7 @@ namespace GSGD2.Player
                         if (_currentState == State.Jumping) // CheckGround can change state
                         {
                             _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                            //TryWallGrab();
+                            TryStickingToWall();
 
                             if (_shouldChangeToFallingStateWhenReleasingJump == true && _playerController.IsJumpButtonPressed == false)
                             {
@@ -917,7 +920,7 @@ namespace GSGD2.Player
                         DisableWallGrabForAShortTime();
                         CheckGround();
                         _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                        //TryWallGrab();
+                        TryStickingToWall();
 
                         if (TryJump() == false)
                         {
@@ -937,7 +940,7 @@ namespace GSGD2.Player
                         if (hasDashEnded == false)
                         {
                             _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
-                            //TryWallGrab();
+                            TryStickingToWall();
 
                             // TODO AL : try jump check
                             if (_canJumpDuringDash == true && TryJump() == false)
@@ -1007,28 +1010,51 @@ namespace GSGD2.Player
                 }
             }
 
-            /*void TryWallGrab()
+            void TryStickingToWall()
             {
-                /*var wallNormal = _characterCollision.WallNormal;
-                bool canWallGrabOppositeWall = wallNormal != _wallNormalDuringLastWallGrab;
-                if (IsWallGrabDisabled == false || canWallGrabOppositeWall == true)
+                if (_stickyModeOn == true && _stickingToWall == false)
                 {
-                    bool isNotASlope = Mathf.Abs(wallNormal.z) == 1;
-                    if (HasAWallInFrontOfCharacter == true && isNotASlope == true && _willPerformWallGrab == true)
+                    bool foundWall = false;
+                    _characterCollision.MidLeftRaycaster.RaycastAll(out RaycastHit[] midLeftHits);
+                    _characterCollision.MidRightRaycaster.RaycastAll(out RaycastHit[] midRightHits);
+                    foreach(RaycastHit raycastHit in midLeftHits)
                     {
-                        _willPerformWallGrab = false;
-                        bool canChangeState = CanChangeState(State.WallGrab);
-                        if (canChangeState == true)
+                        if (raycastHit.normal.z > 0.7 && foundWall == false)
                         {
-                            ChangeState(State.WallGrab);
+                            foundWall = true;
+                            _stickingLeft = true;
+                            break;
+                        }
+                        else
+                        {
+                            foundWall = false;
+                            _stickingLeft = false;
                         }
                     }
+                    foreach (RaycastHit raycastHit in midRightHits)
+                    {
+                        if (raycastHit.normal.z < -0.7 && foundWall == false)
+                        {
+                            foundWall = true;
+                            _stickingLeft = false;
+                            break;
+                        }
+                        else
+                        {
+                            foundWall = false;
+                            _stickingLeft = false;
+                        }
+                    }
+                    if (foundWall == true)
+                    {
+                        StickToWall();
+                    }
                 }
-            }*/
+            }
 
             void TryWallJump()
             {
-                /*if (_willPerformWallJump == true)
+                if (_willPerformWallJump == true)
                 {
                     // Consume input in every cases
                     _willPerformWallJump = false;
@@ -1042,9 +1068,10 @@ namespace GSGD2.Player
                         {
                             rigidbody.AddForce(impulseDirection, ForceMode.Impulse);
                         }
+                        _stickingToWall = false;
                         ChangeState(State.WallJump);
                     }
-                }*/
+                }
             }
 
             bool TryJump()
@@ -1061,14 +1088,14 @@ namespace GSGD2.Player
 
                     bool canJump = _jump.CanApplyForce() && CanChangeState(State.StartJump);
                     //LATERAL OFFSET MARCHE PAS
-                    if (_characterCollision.IsOnWallRight == false)
+                    /*if (_characterCollision.IsOnWallRight == false)
                     {
                         _wallJumpLateralOffset = _wallJumpLateralOffset * -1;
                     }
                     else if (_characterCollision.IsOnWallLeft == true && _characterCollision.IsOnWallRight == true)
                     {
                         _wallJumpLateralOffset = 0;
-                    }
+                    }*/
                     if (canJump == true)
                     {
                         foreach (var rigidbody in _rigidbodies)
@@ -1138,7 +1165,9 @@ namespace GSGD2.Player
                 _currentGrabbingStamina = 1 - _stickyModeDuration.Progress;
                 if (_currentGrabbingStamina <= 0)
                 {
+                    _willPerformWallJump = true;
                     SetStickyMode(false);
+                    TryWallJump();
                 }
             }
             if (_staminaRegenTimer.IsRunning == true)
@@ -1220,7 +1249,7 @@ namespace GSGD2.Player
                 case State.WallGrab:
                     {
                         // Nullify velocity when wall grabbing
-                        velocity = Vector3.zero;
+                        velocity = new Vector3(0f, 0f, 0.25f * AirMoveSpeed * (_stickingLeft == true ? -1 : 1));
                     }
                     break;
                 case State.WallJump:
@@ -1380,12 +1409,21 @@ namespace GSGD2.Player
             {
                 _characterCollision.SlopeNormalThreshold = _characterCollision.DefaultSlopeNormalThreshold;
                 _stickyModeOn = false;
+                _stickingToWall = false;
                 _stickyModeDuration.ForceFinishState();
                 _staminaRegenTimer.Start(_completeStaminaRegenDuration);
                 _staminaRegenTimer.TimeElapsed = (_currentGrabbingStamina * _completeStaminaRegenDuration);
             }
         }
 
+        private void StickToWall()
+        {
+            bool canChangeState = CanChangeState(State.WallGrab);
+            if (canChangeState == true)
+            {
+                ChangeState(State.WallGrab);
+            }
+        }
 
         private void ApplyGravity(ref Vector3 velocity)
         {
@@ -1397,12 +1435,14 @@ namespace GSGD2.Player
         {
             Vector3 gravityVelocity = _rootRigidbody.velocity;
             ApplyGravity(ref gravityVelocity);
-            foreach (var rigidbody in _rigidbodies)
+            if (_stickingToWall == false)
             {
-                rigidbody.velocity = gravityVelocity;
+                foreach (var rigidbody in _rigidbodies)
+                {
+                    rigidbody.velocity = gravityVelocity;
+                }
             }
         }
-
 
         private void CheckGroundAndChangeStateAccordingly()
         {
@@ -1489,4 +1529,5 @@ namespace GSGD2.Player
         #endregion Editor
     }
     #endregion Methods
+
 }

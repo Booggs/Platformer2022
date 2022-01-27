@@ -81,6 +81,8 @@ namespace GSGD2.Player
 		public bool HasAWallNearCharacter => HasAWallBehindCharacter || HasAWallInFrontOfCharacter;
 		public bool IsOnWallRight => _midRightResult;
 		public bool IsOnWallLeft => _midLeftResult;
+		public Raycaster MidRightRaycaster => _midRightWallRaycaster;
+		public Raycaster MidLeftRaycaster => _midLeftWallRaycaster;
 
 		public float SlopeNormalThreshold
         {

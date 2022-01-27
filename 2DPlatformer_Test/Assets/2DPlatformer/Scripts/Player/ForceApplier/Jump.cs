@@ -22,9 +22,6 @@
 		[SerializeField]
 		private float _jumpHeightBonusSpeedThreshold = 10f;
 
-		[SerializeField]
-		private CubeController _cubeController = null;
-
 		protected override void DoApplyForce(Rigidbody rigidbody)
 		{
 			// We zeroing out the velocity in bonus jump, otherwise the character falling velocity can be too high
@@ -50,7 +47,7 @@
 			(
 				0f, 
 				Mathf.Sqrt(2 * (height * _gravityScale) * Mathf.Abs(Physics.gravity.y)),
-				_cubeController.LateralOffset//_reflectRigidbodyVelocity == true ? -vel.z : 0f
+				0f//_reflectRigidbodyVelocity == true ? -vel.z : 0f
 			);
 
 			if (inverseY == true)
