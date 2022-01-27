@@ -22,6 +22,8 @@
 		[SerializeField]
 		private float _jumpHeightBonusSpeedThreshold = 10f;
 
+		public float Height => _jumpHeight;
+
 		protected override void DoApplyForce(Rigidbody rigidbody)
 		{
 			// We zeroing out the velocity in bonus jump, otherwise the character falling velocity can be too high
@@ -45,7 +47,7 @@
 
 			Vector3 force = new Vector3
 			(
-				0f, 
+				0f,
 				Mathf.Sqrt(2 * (height * _gravityScale) * Mathf.Abs(Physics.gravity.y)),
 				0f//_reflectRigidbodyVelocity == true ? -vel.z : 0f
 			);

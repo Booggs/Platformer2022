@@ -700,7 +700,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979883796742175144}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.90000093, z: 0.50000024}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -715,8 +715,8 @@ PositionConstraint:
   m_GameObject: {fileID: 1979883796742175144}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.9, z: 0.5}
-  m_TranslationOffset: {x: 0.0005372744, y: 0.019423842, z: 0.50000024}
+  m_TranslationAtRest: {x: 0, y: 0.9, z: 0}
+  m_TranslationOffset: {x: 0.0005372744, y: 0.019423842, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -821,7 +821,7 @@ MonoBehaviour:
   _snapTimer:
     _duration: 0.2
   _playerController: {fileID: 8963912016909959918}
-  Spring: 1000
+  Spring: 500
   Damper: 0
   Shape: 1
   ColliderSize: 0.002
@@ -900,7 +900,7 @@ MonoBehaviour:
     _drawGizmos: 1
   _topRightWallRaycaster:
     fromTransform: {fileID: 8162265896534072478}
-    _maxDistance: 1.35
+    _maxDistance: 1.1
     _layerMask:
       serializedVersion: 2
       m_Bits: 1
@@ -921,7 +921,7 @@ MonoBehaviour:
     _drawGizmos: 1
   _topLeftWallRaycaster:
     fromTransform: {fileID: 7659724842038268440}
-    _maxDistance: 1.35
+    _maxDistance: 1.1
     _layerMask:
       serializedVersion: 2
       m_Bits: 1
@@ -975,6 +975,7 @@ MonoBehaviour:
   _airMoveSpeed: 11
   _ascendingGravityScale: 2
   _descendingGravityScale: 2
+  _glidingSpeedDivider: 1.05
   _jump:
     enabled: 1
     _maximumAllowedForces: 1
@@ -985,13 +986,13 @@ MonoBehaviour:
     _jumpHeightBonusWhenFalling: 10
     _jumpHeightBonusSpeedThreshold: 10
   _changeToFallingStateWhenReleasingJump: 0
-  _canJumpDuringDash: 1
+  _canJumpDuringDash: 0
   _durationToDisableGroundRaycastWhenJumping: 0.5
-  _resetJumpCountWhenFalling: 1
+  _resetJumpCountWhenFalling: 0
   _allowedJumpCountWhenFalling: 1
   _resetJumpCountWhenWallJumping: 1
   _allowedJumpCountWhenWallJumping: 1
-  _resetJumpCountWhenBumping: 1
+  _resetJumpCountWhenBumping: 0
   _allowedJumpCountWhenBumping: 1
   _enableWallGrab: 1
   _stickyModeDuration:
@@ -1079,7 +1080,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerReferences: {fileID: 6559671171331571633}
   _glidingSpeedMultiplier: 0.8
-  _glidingGravityDivider: 50
   _usableInState: 146
 --- !u!114 &8330099605319962634
 MonoBehaviour:
@@ -2358,7 +2358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6732645064505343830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.90000093, z: -0.49999976}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2373,8 +2373,8 @@ PositionConstraint:
   m_GameObject: {fileID: 6732645064505343830}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.9, z: -0.5}
-  m_TranslationOffset: {x: 0.0005372744, y: 0.019423842, z: -0.49999976}
+  m_TranslationAtRest: {x: 0, y: 0.9, z: 0}
+  m_TranslationOffset: {x: 0.0005372744, y: 0.019423842, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -2408,7 +2408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6826529305701720769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.003211415, y: -0.0058250427, z: -1.0199997}
+  m_LocalPosition: {x: 0, y: 0, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2423,13 +2423,13 @@ PositionConstraint:
   m_GameObject: {fileID: 6826529305701720769}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0.003211415, y: -0.0058243275, z: -1.02}
-  m_TranslationOffset: {x: 0, y: 0, z: -0.123244524}
+  m_TranslationAtRest: {x: 0, y: 0, z: -0.3}
+  m_TranslationOffset: {x: -0.003211415, y: 0.005824089, z: 0.5967552}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
-  m_IsLocked: 1
+  m_IsLocked: 0
   m_Sources:
   - sourceTransform: {fileID: 5835507120861775067}
     weight: 1
@@ -2819,7 +2819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8823338168772009037}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.003211415, y: -0.0031871796, z: 1.0230002}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2834,13 +2834,13 @@ PositionConstraint:
   m_GameObject: {fileID: 8823338168772009037}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0.003211415, y: -0.0031867027, z: 1.023}
-  m_TranslationOffset: {x: 0, y: 0, z: 0.10778189}
+  m_TranslationAtRest: {x: 0, y: 0, z: 0.3}
+  m_TranslationOffset: {x: -0.003211415, y: 0.0031871796, z: -0.61521834}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
-  m_IsLocked: 1
+  m_IsLocked: 0
   m_Sources:
   - sourceTransform: {fileID: 1960906516490775978}
     weight: 1

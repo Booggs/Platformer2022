@@ -5,7 +5,6 @@ namespace GSGD2.Gameplay
     using UnityEngine;
     using UnityEngine.InputSystem;
     using GSGD2.Player;
-    using UnityEditor;
 
     public class Shop : AEnvironmentInteractable
     {
@@ -90,7 +89,8 @@ namespace GSGD2.Gameplay
                     if (_shopItems.Length > 1)
                     {
                         shopItem.gameObject.SetActive(false);
-                        ArrayUtility.RemoveAt<ShopItem>(ref _shopItems, _currentItemIndex);
+                        //TODO remplacer par une liste
+                        //System.Array.remo.RemoveAt<ShopItem>(ref _shopItems, _currentItemIndex);
                         if (_currentItemIndex > 0)
                         {
                             _currentItemIndex--;

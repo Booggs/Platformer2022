@@ -3,8 +3,6 @@ namespace GSGD2.Player
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-    using UnityEditor;
-    using UnityEditor.PackageManager;
 
     public static class Softbody
     {
@@ -60,9 +58,14 @@ namespace GSGD2.Player
             return sp;
         }
 
+        public static Rigidbody AddUndersideCollider(ref GameObject go)
+        {
+            return AddCollider(ref go, Shape, ColliderSize, RigidbodyMass * 2f);
+        }
+
         public static SpringJoint AddUndersideSpring(ref GameObject go1, ref GameObject go2)
         {
-            SpringJoint sp = AddSpring(ref go1, ref go2, Spring / 10, Damper);
+            SpringJoint sp = AddSpring(ref go1, ref go2, Spring / 5f, Damper);
 
             if (ViewLines == true)
                 AddLine(ref go1, ref go2);
@@ -95,8 +98,10 @@ namespace GSGD2.Player
             rb.angularDrag = 10f;
             rb.constraints = Constraints;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
             return rb;
         }
+
         public static SpringJoint AddSpring(ref GameObject go1, ref GameObject go2, float spring, float damper)
         {
             SpringJoint sp = go1.AddComponent<SpringJoint>();

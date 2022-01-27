@@ -141,11 +141,15 @@ namespace GSGD2.Player
         private Timer _stickyModeDuration;
 
         [SerializeField]
+        private float _wallJumpHeight = 3f;
+
+        [SerializeField]
         private float _completeStaminaRegenDuration = 7.5f;
 
         [Header("Don't touch")]
         [SerializeField]
         private Timer _staminaRegenTimer;
+
 
         private bool _stickyModeOn = false;
         private bool _stickingToWall = false;
@@ -153,7 +157,6 @@ namespace GSGD2.Player
         /// <summary>
         /// Height applied to the jump force when releasing the wall jump button
         /// </summary>
-        private float _wallJumpHeight = 3f;
 
         /// <summary>
         /// Force applied to the normal vector of the wall (horizontally) to send away the character from the wall
@@ -164,7 +167,7 @@ namespace GSGD2.Player
         /// Delay at which the character cannot grab a wall with the same normal direction after a previous wall jump.
         /// It prevent from "bunny hopping" a wall, while preserving grabbing the opposite wall.
         /// </summary>
-        private float _wallGrabDisableDuration = 0.5f;
+        private float _wallGrabDisableDuration = 0.25f;
 
         private bool _resetWallGrabDisableDurationWhenDashing = true;
 
@@ -228,7 +231,6 @@ namespace GSGD2.Player
         public delegate TResult CanChangeStateFunc<out TResult>(State currentState, State newState);
 
         private List<CanChangeStateFunc<bool>> _canChangeToMovementStateList = new List<CanChangeStateFunc<bool>>();
-        private int _wallJumpLateralOffset = 300;
         #endregion Fields
 
         #region Properties
@@ -728,8 +730,6 @@ namespace GSGD2.Player
                     break;
                 case State.StartJump:
                     {
-
-
                         if (_previousState == State.WallJump)
                         {
                             _shouldChangeToFallingStateWhenReleasingJump = false;
@@ -878,7 +878,7 @@ namespace GSGD2.Player
                     {
                         if (Rigidbody.velocity.magnitude < 0.1f)
                         {
-                            ChangeState(State.Grounded);
+                            //ChangeState(State.Grounded);
                         }
                         CheckGround();
 
@@ -1062,7 +1062,7 @@ namespace GSGD2.Player
                     bool canChangeState = CanChangeState(State.WallJump);
                     if (canChangeState == true)
                     {
-                        var impulseDirection = _characterCollision.WallNormal * _wallJumpWallNormalForce + new Vector3(0f, Mathf.Sqrt(2 * (_wallJumpHeight * _ascendingGravityScale) * Mathf.Abs(Physics.gravity.y)), 0f);
+                        var impulseDirection = _characterCollision.WallNormal * _wallJumpWallNormalForce + new Vector3(0f, Mathf.Sqrt(2 * (_wallJumpHeight * _ascendingGravityScale) * Mathf.Abs(Physics.gravity.y)), Mathf.Sqrt(2 * (_wallJumpHeight / 4 * _ascendingGravityScale) * Mathf.Abs(Physics.gravity.y)) * (_stickingLeft ? 1 : -1));
                         Debug.DrawRay(transform.position, transform.position + impulseDirection, Color.blue, 10f);
                         foreach (var rigidbody in _rigidbodies)
                         {
@@ -1076,10 +1076,9 @@ namespace GSGD2.Player
 
             bool TryJump()
             {
-                if (IsWallGrabDisabled == false && _willPerformJump == true)
+                if (IsWallGrabDisabled == false && _willPerformJump == true && _currentState != CubeController.State.Jumping)
                 {
                     _willPerformJump = false;
-                    //if (_stickyModeOn == true && (_characterCollision. || _characterCollision.))
                     if (_hasBeganToFallFromGroundedState == true && _hasBeganToFallFromGroundedStateAndDidJump == false && _resetJumpCountWhenFalling == true)
                     {
                         ResetJumpCount(_allowedJumpCountWhenFalling);
@@ -1087,15 +1086,7 @@ namespace GSGD2.Player
                     }
 
                     bool canJump = _jump.CanApplyForce() && CanChangeState(State.StartJump);
-                    //LATERAL OFFSET MARCHE PAS
-                    /*if (_characterCollision.IsOnWallRight == false)
-                    {
-                        _wallJumpLateralOffset = _wallJumpLateralOffset * -1;
-                    }
-                    else if (_characterCollision.IsOnWallLeft == true && _characterCollision.IsOnWallRight == true)
-                    {
-                        _wallJumpLateralOffset = 0;
-                    }*/
+
                     if (canJump == true)
                     {
                         foreach (var rigidbody in _rigidbodies)
@@ -1312,7 +1303,7 @@ namespace GSGD2.Player
             // Clamp maximum velocity
             if (velocity.sqrMagnitude > _maxVelocitySqr)
             {
-                velocity = Vector3.ClampMagnitude(velocity, _maxVelocity);
+                //velocity = Vector3.ClampMagnitude(velocity, _maxVelocity);
             }
 
             // Then apply velocity to rigidbody
