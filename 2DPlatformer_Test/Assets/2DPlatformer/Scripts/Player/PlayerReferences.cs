@@ -28,6 +28,19 @@ namespace GSGD2.Player
 		[SerializeField] private InteractionManager _interactionManager = null;
 		[SerializeField] private BoneSphere _boneSphere = null;
 		private Rigidbody _rigidbody = null;
+		private float _currentScale = 1f;
+
+		public float CurrentScale
+        {
+			get
+            {
+				return _currentScale;
+            }
+			set
+            {
+				_currentScale = value;
+            }
+        }
 
         private void Awake()
         {

@@ -12,17 +12,21 @@ namespace GSGD2.Gameplay
         private GameObject _canvasParent = null;
 
         private LootManager _lootManager = null;
-        private ShopItem[] _shopItems = null;
+        private List<ShopItem> _shopItems = new List<ShopItem>();
         private bool _shopOpened = false;
         private int _currentItemIndex = 0;
 
         private void Awake()
         {
             _lootManager = LevelReferences.FindObjectOfType<LootManager>();
-            _shopItems = GetComponentsInChildren<ShopItem>(); //Be sure to get shop item list BEFORE the shop items are disabled by the CloseShop() function
-            if (_shopItems.Length > 1)
+            //Be sure to get shop item list BEFORE the shop items are disabled by the CloseShop() function
+            foreach (ShopItem shopItem in GetComponentsInChildren<ShopItem>())
             {
-                for (int i = 1; i < _shopItems.Length; i++)
+                _shopItems.Add(shopItem);
+            }
+            if (_shopItems.Count > 1)
+            {
+                for (int i = 1; i < _shopItems.Count; i++)
                 {
                     _shopItems[i].canvasGroup.alpha = 0f;
                 }
@@ -86,16 +90,16 @@ namespace GSGD2.Gameplay
 
                 if (shopItem.BuyLimit > 0 && shopItem.BoughtAmount >= shopItem.BuyLimit)
                 {
-                    if (_shopItems.Length > 1)
+                    if (_shopItems.Count > 1)
                     {
                         shopItem.gameObject.SetActive(false);
-                        //TODO remplacer par une liste
-                        //System.Array.remo.RemoveAt<ShopItem>(ref _shopItems, _currentItemIndex);
+
+                        _shopItems.RemoveAt(_currentItemIndex);
                         if (_currentItemIndex > 0)
                         {
                             _currentItemIndex--;
                         }
-                        else _currentItemIndex = _shopItems.Length - 1;
+                        else _currentItemIndex = _shopItems.Count - 1;
 
                         CheckItemAvailability();
                     }
@@ -123,7 +127,7 @@ namespace GSGD2.Gameplay
             {
                 _currentItemIndex--;
             }
-            else _currentItemIndex = _shopItems.Length - 1;
+            else _currentItemIndex = _shopItems.Count - 1;
 
             CheckItemAvailability();
         }
@@ -132,7 +136,7 @@ namespace GSGD2.Gameplay
         {
             _shopItems[_currentItemIndex].canvasGroup.alpha = 0f;
 
-            if (_currentItemIndex < _shopItems.Length - 1)
+            if (_currentItemIndex < _shopItems.Count - 1)
             {
                 _currentItemIndex++;
             }
