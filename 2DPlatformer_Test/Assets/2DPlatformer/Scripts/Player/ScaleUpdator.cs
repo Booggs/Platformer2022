@@ -3,6 +3,7 @@ namespace GSGD2.Player
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using GSGD2.Gameplay;
 
     public class ScaleUpdator : MonoBehaviour
     {
@@ -15,6 +16,7 @@ namespace GSGD2.Player
         private CubeController _cubeController = null;
         private BoneSphere _boneSphere = null;
         private CharacterCollision _characterCollision = null;
+        private PlayerDamageable _playerDamageable = null;
         private float _currentScale = 1f;
 
         private void Awake()
@@ -22,10 +24,13 @@ namespace GSGD2.Player
             _playerRefs.TryGetCubeController(out _cubeController);
             _playerRefs.TryGetBoneSphere(out _boneSphere);
             _playerRefs.TryGetCharacterCollision(out _characterCollision);
+            _playerRefs.TryGetPlayerDamageable(out _playerDamageable);
         }
 
         public void UpdateScale()
         {
+            _currentScale = _playerDamageable.CurrentHealth / 10;
+            transform.localScale = new Vector3(_currentScale, _currentScale, _currentScale);
             UpdateCubeController();
             UpdateBoneSphere();
             UpdateCharacterCollision();
@@ -39,7 +44,7 @@ namespace GSGD2.Player
 
         private void UpdateBoneSphere()
         {
-
+            _boneSphere.UpdateOnScaleChange(_currentScale);
         }
 
         private void UpdateCharacterCollision()

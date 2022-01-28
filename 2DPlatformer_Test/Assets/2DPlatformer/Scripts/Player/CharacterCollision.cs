@@ -67,6 +67,8 @@ namespace GSGD2.Player
 		private float slopeNormalThreshold;
 		private bool _midRightResult = true;
 		private bool _midLeftResult = true;
+
+		private Raycaster[] _wallRaycasters = new Raycaster[8];
 		#endregion Fields
 
 		#region Properties
@@ -83,6 +85,8 @@ namespace GSGD2.Player
 		public bool IsOnWallLeft => _midLeftResult;
 		public Raycaster MidRightRaycaster => _midRightWallRaycaster;
 		public Raycaster MidLeftRaycaster => _midLeftWallRaycaster;
+
+		public Raycaster[] WallRaycasters => _wallRaycasters;
 
 		public float SlopeNormalThreshold
         {

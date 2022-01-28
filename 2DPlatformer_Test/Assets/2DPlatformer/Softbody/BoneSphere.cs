@@ -46,7 +46,10 @@ namespace GSGD2.Player
 
         private GameObject[] _bones = new GameObject[6];
         private Vector3[] _bonesPositions = new Vector3[6];
+        private Vector3[] _defaultBonesPositions = new Vector3[6];
         private float[] _bonesDistance = new float[6];
+        private float[] _defaultBonesDistance = new float[6];
+        private float _currentScale = 1f;
 
         public GameObject[] Bones => _bones;
 
@@ -90,11 +93,7 @@ namespace GSGD2.Player
             _bones.SetValue(y2, 3);
             _bones.SetValue(z, 4);
             _bones.SetValue(z2, 5);
-            for (int i = 0; i < _bones.Length; i++)
-            {
-                _bonesPositions.SetValue(_bones[i].transform.localPosition, i);
-                _bonesDistance.SetValue(Vector3.Distance(_bonesPositions[i], _bonesCenter.transform.localPosition), i);
-            }
+
         }
 
         private void OnEnable()
@@ -103,6 +102,13 @@ namespace GSGD2.Player
             _snapTimer.StateChanged += SnapBones;
             _playerController.ResetPlayerPerformed -= ResetPlayer;
             _playerController.ResetPlayerPerformed += ResetPlayer;
+            for (int i = 0; i < _bones.Length; i++)
+            {
+                _bonesPositions.SetValue(_bones[i].transform.localPosition, i);
+                _bonesDistance.SetValue(Vector3.Distance(_bonesPositions[i], _bonesCenter.transform.localPosition), i);
+            }
+            _defaultBonesPositions = _bonesPositions;
+            _defaultBonesDistance = _bonesDistance;
         }
 
         private void OnDisable()
@@ -118,18 +124,18 @@ namespace GSGD2.Player
 
         private void Update()
         {
-            for (int i = 0; i < _bones.Length; i++)
-            {
-                //Debug.Log("Current bone = " + _bones[i].name + " // " + "Default distance to root = " + _bonesDistance[i] + " // " + "Current distance to root = " + Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition));
-                if (Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor && _snapTimer.IsRunning == false)
-                {
-                    _snapTimer.Start();
-                }
-            }
-            if (_snapTimer.IsRunning == true)
-            {
-                _snapTimer.Update();
-            }
+            //for (int i = 0; i < _bones.Length; i++)
+            //{
+            //    //Debug.Log("Current bone = " + _bones[i].name + " // " + "Default distance to root = " + _bonesDistance[i] + " // " + "Current distance to root = " + Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition));
+            //    if ((Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor || z.transform.position.y > z2.transform.position.y) && _snapTimer.IsRunning == false)
+            //    {
+            //        _snapTimer.Start();
+            //    }
+            //}
+            //if (_snapTimer.IsRunning == true)
+            //{
+            //    _snapTimer.Update();
+            //}
         }
 
         private void SnapBones(Timer timer, Timer.State state)
@@ -141,11 +147,29 @@ namespace GSGD2.Player
                     _bones[i].transform.localPosition = _bonesPositions[i];
                 }
             }
+            if (z.transform.position.y > z2.transform.position.y)
+            {
+                _bones[4].transform.localPosition = _bonesPositions[4];
+            }
         }
 
         private void ResetPlayer(PlayerController sender, InputAction.CallbackContext obj)
         {
             LevelReferences.Instance.PlayerStart.ResetPlayerPosition();
+            if (_snapTimer.IsRunning == false)
+            {
+                _snapTimer.Start();
+            }
+        }
+
+        public void UpdateOnScaleChange(float scale)
+        {
+            _currentScale = scale;
+            for (int i = 0; i < _bonesPositions.Length; i++)
+            {
+                _bonesPositions[i] = new Vector3(_defaultBonesPositions[i].x * _currentScale, _defaultBonesPositions[i].y * _currentScale, _defaultBonesPositions[i].z * _currentScale);
+                _bonesDistance.SetValue(Vector3.Distance(_bonesPositions[i], _bonesCenter.transform.localPosition), i);
+            }
         }
     }
 }

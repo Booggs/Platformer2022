@@ -770,7 +770,7 @@ namespace GSGD2.Player
                         {
                             ResetWallGrabDisableDuration();
                         }
-                        _characterCollision.SetMaxDistance(_wallRaycastDistanceWhenDashing);
+                        //_characterCollision.SetMaxDistance(_wallRaycastDistanceWhenDashing);
 
                     }
                     break;
