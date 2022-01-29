@@ -22,7 +22,18 @@
 		[SerializeField]
 		private float _jumpHeightBonusSpeedThreshold = 10f;
 
-		public float Height => _jumpHeight;
+		public float JumpHeight
+        {
+			get
+            {
+				return _jumpHeight;
+            }
+			set
+            {
+				_jumpHeight = value;
+            }
+        }
+
 
 		protected override void DoApplyForce(Rigidbody rigidbody)
 		{

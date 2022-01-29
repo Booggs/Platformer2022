@@ -24,14 +24,14 @@ namespace GSGD2.Player
         private Timer _snapTimer;
         [SerializeField]
         private PlayerController _playerController = null;
-        /*public GameObject newBone = null;
-        public GameObject newBone2 = null;
-        public GameObject newBone3 = null;
-        public GameObject newBone4 = null;
-        public GameObject newBone5 = null;
-        public GameObject newBone6 = null;
-        public GameObject newBone7 = null;
-        public GameObject newBone8 = null;*/
+        //public GameObject newBone = null;
+        //public GameObject newBone2 = null;
+        //public GameObject newBone3 = null;
+        //public GameObject newBone4 = null;
+        //public GameObject newBone5 = null;
+        //public GameObject newBone6 = null;
+        //public GameObject newBone7 = null;
+        //public GameObject newBone8 = null;
         [Header("Spring Joint Settings")]
         [Tooltip("Strength of spring")]
         public float Spring = 100f;
@@ -40,6 +40,7 @@ namespace GSGD2.Player
         [Header("Other Settings")]
         public Softbody.ColliderShape Shape = Softbody.ColliderShape.Box;
         public float ColliderSize = 0.002f;
+        public float RootColliderSize = 0.45f;
         public float RigidbodyMass = 1f;
         public LineRenderer PrefabLine = null;
         public bool ViewLines = true;
@@ -50,6 +51,8 @@ namespace GSGD2.Player
         private float[] _bonesDistance = new float[6];
         private float[] _defaultBonesDistance = new float[6];
         private float _currentScale = 1f;
+
+        private List<SpringJoint> _springJoints = new List<SpringJoint>();
 
         public GameObject[] Bones => _bones;
 
@@ -64,14 +67,14 @@ namespace GSGD2.Player
             Softbody.AddCollider(ref y2);
             Softbody.AddUndersideCollider(ref z);
             Softbody.AddCollider(ref z2);
-            /*Softbody.AddCollider(ref newBone);
-            Softbody.AddCollider(ref newBone2);
-            Softbody.AddCollider(ref newBone3);
-            Softbody.AddCollider(ref newBone4);
-            Softbody.AddCollider(ref newBone5);
-            Softbody.AddCollider(ref newBone6);
-            Softbody.AddCollider(ref newBone7);
-            Softbody.AddCollider(ref newBone8);*/
+            //Softbody.AddCollider(ref newBone);
+            //Softbody.AddCollider(ref newBone2);
+            //Softbody.AddCollider(ref newBone3);
+            //Softbody.AddCollider(ref newBone4);
+            //Softbody.AddCollider(ref newBone5);
+            //Softbody.AddCollider(ref newBone6);
+            //Softbody.AddCollider(ref newBone7);
+            //Softbody.AddCollider(ref newBone8);
 
             Softbody.AddSpring(ref x, ref root);
             Softbody.AddSpring(ref x2, ref root);
@@ -79,14 +82,14 @@ namespace GSGD2.Player
             Softbody.AddSpring(ref y2, ref root);
             Softbody.AddUndersideSpring(ref z, ref root);
             Softbody.AddSpring(ref z2, ref root);
-            /*Softbody.AddSpring(ref newBone, ref root);
-            Softbody.AddSpring(ref newBone2, ref root);
-            Softbody.AddSpring(ref newBone3, ref root);
-            Softbody.AddSpring(ref newBone4, ref root);
-            Softbody.AddSpring(ref newBone5, ref root);
-            Softbody.AddSpring(ref newBone6, ref root);
-            Softbody.AddSpring(ref newBone7, ref root);
-            Softbody.AddSpring(ref newBone8, ref root);*/
+            //Softbody.AddSpring(ref newBone, ref root);
+            //Softbody.AddSpring(ref newBone2, ref root);
+            //Softbody.AddSpring(ref newBone3, ref root);
+            //Softbody.AddSpring(ref newBone4, ref root);
+            //Softbody.AddSpring(ref newBone5, ref root);
+            //Softbody.AddSpring(ref newBone6, ref root);
+            //Softbody.AddSpring(ref newBone7, ref root);
+            //Softbody.AddSpring(ref newBone8, ref root);
             _bones.SetValue(x, 0);
             _bones.SetValue(x2, 1);
             _bones.SetValue(y, 2);
@@ -94,6 +97,7 @@ namespace GSGD2.Player
             _bones.SetValue(z, 4);
             _bones.SetValue(z2, 5);
 
+            _springJoints.AddRange(GetComponentsInChildren<SpringJoint>());
         }
 
         private void OnEnable()
@@ -124,18 +128,18 @@ namespace GSGD2.Player
 
         private void Update()
         {
-            //for (int i = 0; i < _bones.Length; i++)
-            //{
-            //    //Debug.Log("Current bone = " + _bones[i].name + " // " + "Default distance to root = " + _bonesDistance[i] + " // " + "Current distance to root = " + Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition));
-            //    if ((Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor || z.transform.position.y > z2.transform.position.y) && _snapTimer.IsRunning == false)
-            //    {
-            //        _snapTimer.Start();
-            //    }
-            //}
-            //if (_snapTimer.IsRunning == true)
-            //{
-            //    _snapTimer.Update();
-            //}
+            for (int i = 0; i < _bones.Length; i++)
+            {
+                //Debug.Log("Current bone = " + _bones[i].name + " // " + "Default distance to root = " + _bonesDistance[i] + " // " + "Current distance to root = " + Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition));
+                if ((Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor || z.transform.position.y > z2.transform.position.y) && _snapTimer.IsRunning == false)
+                {
+                    _snapTimer.Start();
+                }
+            }
+            if (_snapTimer.IsRunning == true)
+            {
+                _snapTimer.Update();
+            }
         }
 
         private void SnapBones(Timer timer, Timer.State state)
@@ -165,11 +169,23 @@ namespace GSGD2.Player
         public void UpdateOnScaleChange(float scale)
         {
             _currentScale = scale;
+            foreach (SpringJoint springJoint in _springJoints)
+            {
+                Destroy(springJoint);
+            }
+            _springJoints.Clear();
             for (int i = 0; i < _bonesPositions.Length; i++)
             {
                 _bonesPositions[i] = new Vector3(_defaultBonesPositions[i].x * _currentScale, _defaultBonesPositions[i].y * _currentScale, _defaultBonesPositions[i].z * _currentScale);
                 _bonesDistance.SetValue(Vector3.Distance(_bonesPositions[i], _bonesCenter.transform.localPosition), i);
             }
+            Softbody.AddSpring(ref x, ref root);
+            Softbody.AddSpring(ref x2, ref root);
+            Softbody.AddSpring(ref y, ref root);
+            Softbody.AddSpring(ref y2, ref root);
+            Softbody.AddUndersideSpring(ref z, ref root);
+            Softbody.AddSpring(ref z2, ref root);
+            _springJoints.AddRange(GetComponentsInChildren<SpringJoint>());
         }
     }
 }

@@ -36,10 +36,9 @@ namespace GSGD2.Player
             UpdateCharacterCollision();
         }
 
-
         private void UpdateCubeController()
         {
-
+            _cubeController.UpdateScale(_currentScale);
         }
 
         private void UpdateBoneSphere()
@@ -49,7 +48,7 @@ namespace GSGD2.Player
 
         private void UpdateCharacterCollision()
         {
-
+            _characterCollision.UpdateScale(_currentScale);
         }
     }
 }

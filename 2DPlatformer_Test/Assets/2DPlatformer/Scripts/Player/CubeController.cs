@@ -58,6 +58,8 @@ namespace GSGD2.Player
         [SerializeField]
         private float _groundFriction = 1f;
 
+        private float _defaultGroundFriction = 1f;
+
         /// <summary>
         /// Speed applied to character velocity in the direction of <see cref="InputMovement"/> while in air.
         /// </summary>
@@ -110,6 +112,8 @@ namespace GSGD2.Player
 
         [SerializeField]
         private int _allowedJumpCountWhenBumping = 1;
+
+        private float _defaultJumpHeight = 40f;
 
         private Dash _dash = null;
 
@@ -200,6 +204,7 @@ namespace GSGD2.Player
         private Rigidbody[] _rigidbodies = null;
         private DisplacementEstimationUpdater _displacementEstimationUpdater = null;
         private CharacterCollision _characterCollision = null;
+        private BoneSphere _boneSphere = null;
         private float _maxVelocitySqr = -1f;
         private float _inputMovement;
         private float _rawInputMovement;
@@ -428,18 +433,21 @@ namespace GSGD2.Player
             _playerReferences.TryGetPlayerController(out _playerController);
             _playerReferences.TryGetDisplacementEstimationUpdater(out _displacementEstimationUpdater);
             _playerReferences.TryGetCharacterCollision(out _characterCollision);
+            _playerReferences.TryGetBoneSphere(out _boneSphere);
 
             _maxVelocitySqr = _maxVelocity * _maxVelocity;
 
+            _defaultGroundFriction = _groundFriction;
+
             _jump.cubeController = this;
             _jump.displacementEstimationUpdater = _displacementEstimationUpdater;
+            _defaultJumpHeight = _jump.JumpHeight;
 
             _currentAirSpeed = _airMoveSpeed;
             _currentDescendingGravityScale = _descendingGravityScale;
 
             _rootRigidbody = GetComponentInChildren<Rigidbody>();
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
-
             ResetCurrentValues();
         }
 
@@ -448,8 +456,8 @@ namespace GSGD2.Player
             LevelReferences.Instance.PlayerStart.BeforePlayerPositionReset -= PlayerStartOnPlayerPositionReset;
             LevelReferences.Instance.PlayerStart.BeforePlayerPositionReset += PlayerStartOnPlayerPositionReset;
             // TODO AL retake, PlayerDamageable should listen to CubeController and change its state
-            BindInput(true);
             _colliders = GetComponentsInChildren<Collider>();
+            BindInput(true);
             if (_enableWallGrab == true)
             {
                 _staminaRegenTimer.Start(7.5f);
@@ -1459,6 +1467,24 @@ namespace GSGD2.Player
             }
         }
 
+        public void UpdateScale(float scale)
+        {
+            _jump.JumpHeight = _defaultJumpHeight * scale;
+            foreach (Rigidbody rigidbody in _rigidbodies)
+            {
+                rigidbody.mass = 1 * scale;
+            }
+            _groundFriction = _defaultGroundFriction * (1 + (1 - scale));
+            SphereCollider rootCollider = _colliders[0] as SphereCollider;
+            rootCollider.radius = _boneSphere.RootColliderSize * scale;
+
+            for (int i = 1; i < _colliders.Length; i++)
+            {
+                SphereCollider collider = _colliders[i] as SphereCollider;
+                collider.radius = _boneSphere.ColliderSize * scale;
+            }
+        }
+
         private void LookToDirection()
         {
             //float currentMovementDirection;
@@ -1520,5 +1546,4 @@ namespace GSGD2.Player
         #endregion Editor
     }
     #endregion Methods
-
 }
