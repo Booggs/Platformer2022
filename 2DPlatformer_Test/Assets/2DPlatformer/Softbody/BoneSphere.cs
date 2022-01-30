@@ -45,16 +45,18 @@ namespace GSGD2.Player
         public LineRenderer PrefabLine = null;
         public bool ViewLines = true;
 
-        private GameObject[] _bones = new GameObject[6];
-        private Vector3[] _bonesPositions = new Vector3[6];
-        private Vector3[] _defaultBonesPositions = new Vector3[6];
-        private float[] _bonesDistance = new float[6];
-        private float[] _defaultBonesDistance = new float[6];
+
+        private List<GameObject> _bones = new List<GameObject>();
+        private List<SpringJoint> _springJoints = new List<SpringJoint>();
+        private List<Vector3> _jointsAnchorsPositions = new List<Vector3>();
+        private List<Vector3> _defaultAnchorsPositions = new List<Vector3>();
+        private List<float> _jointsDistance = new List<float>();
+        private List<float> _defaultBonesDistance = new List<float>();
         private float _currentScale = 1f;
 
-        private List<SpringJoint> _springJoints = new List<SpringJoint>();
 
-        public GameObject[] Bones => _bones;
+        public List<GameObject> Bones => _bones;
+        public List<SpringJoint> SpringJoints => _springJoints;
 
         private void Awake()
         {
@@ -65,7 +67,7 @@ namespace GSGD2.Player
             Softbody.AddCollider(ref x2);
             Softbody.AddCollider(ref y);
             Softbody.AddCollider(ref y2);
-            Softbody.AddUndersideCollider(ref z);
+            Softbody.AddCollider(ref z);
             Softbody.AddCollider(ref z2);
             //Softbody.AddCollider(ref newBone);
             //Softbody.AddCollider(ref newBone2);
@@ -80,7 +82,7 @@ namespace GSGD2.Player
             Softbody.AddSpring(ref x2, ref root);
             Softbody.AddSpring(ref y, ref root);
             Softbody.AddSpring(ref y2, ref root);
-            Softbody.AddUndersideSpring(ref z, ref root);
+            Softbody.AddSpring(ref z, ref root);
             Softbody.AddSpring(ref z2, ref root);
             //Softbody.AddSpring(ref newBone, ref root);
             //Softbody.AddSpring(ref newBone2, ref root);
@@ -90,12 +92,12 @@ namespace GSGD2.Player
             //Softbody.AddSpring(ref newBone6, ref root);
             //Softbody.AddSpring(ref newBone7, ref root);
             //Softbody.AddSpring(ref newBone8, ref root);
-            _bones.SetValue(x, 0);
-            _bones.SetValue(x2, 1);
-            _bones.SetValue(y, 2);
-            _bones.SetValue(y2, 3);
-            _bones.SetValue(z, 4);
-            _bones.SetValue(z2, 5);
+            _bones.Add(x);
+            _bones.Add(x2);
+            _bones.Add(y);
+            _bones.Add(y2);
+            _bones.Add(z);
+            _bones.Add(z2);
 
             _springJoints.AddRange(GetComponentsInChildren<SpringJoint>());
         }
@@ -106,13 +108,14 @@ namespace GSGD2.Player
             _snapTimer.StateChanged += SnapBones;
             _playerController.ResetPlayerPerformed -= ResetPlayer;
             _playerController.ResetPlayerPerformed += ResetPlayer;
-            for (int i = 0; i < _bones.Length; i++)
+
+            for (int i = 0; i < _bones.Count; i++)
             {
-                _bonesPositions.SetValue(_bones[i].transform.localPosition, i);
-                _bonesDistance.SetValue(Vector3.Distance(_bonesPositions[i], _bonesCenter.transform.localPosition), i);
+                _jointsAnchorsPositions.Add(_springJoints[i].connectedAnchor);
+                _jointsDistance.Add(Vector3.Distance(_jointsAnchorsPositions[i], _bonesCenter.transform.localPosition));
             }
-            _defaultBonesPositions = _bonesPositions;
-            _defaultBonesDistance = _bonesDistance;
+            _defaultAnchorsPositions.AddRange(_jointsAnchorsPositions);
+            _defaultBonesDistance.AddRange(_jointsDistance);
         }
 
         private void OnDisable()
@@ -128,10 +131,10 @@ namespace GSGD2.Player
 
         private void Update()
         {
-            for (int i = 0; i < _bones.Length; i++)
+            for (int i = 0; i < _bones.Count - 1; i++)
             {
                 //Debug.Log("Current bone = " + _bones[i].name + " // " + "Default distance to root = " + _bonesDistance[i] + " // " + "Current distance to root = " + Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition));
-                if ((Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor || z.transform.position.y > z2.transform.position.y) && _snapTimer.IsRunning == false)
+                if ((Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) * 100 > _jointsDistance[i] * _snapFactor || z.transform.position.y > z2.transform.position.y) && _snapTimer.IsRunning == false)
                 {
                     _snapTimer.Start();
                 }
@@ -144,16 +147,12 @@ namespace GSGD2.Player
 
         private void SnapBones(Timer timer, Timer.State state)
         {
-            for (int i = 0; i < _bones.Length; i++)
+            for (int i = 0; i < _bones.Count - 1; i++)
             {
-                if (Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) > _bonesDistance[i] * _snapFactor)
+                if (Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) * 100 > _jointsDistance[i] * _snapFactor)
                 {
-                    _bones[i].transform.localPosition = _bonesPositions[i];
+                    _bones[i].transform.localPosition = new Vector3(_jointsAnchorsPositions[i].x / 100, _jointsAnchorsPositions[i].y / 100, _jointsAnchorsPositions[i].z / 100);
                 }
-            }
-            if (z.transform.position.y > z2.transform.position.y)
-            {
-                _bones[4].transform.localPosition = _bonesPositions[4];
             }
         }
 
@@ -169,23 +168,19 @@ namespace GSGD2.Player
         public void UpdateOnScaleChange(float scale)
         {
             _currentScale = scale;
-            foreach (SpringJoint springJoint in _springJoints)
+            for (int i = 0; i < _bones.Count; i++)
             {
-                Destroy(springJoint);
+                _springJoints[i].autoConfigureConnectedAnchor = false;
+                _springJoints[i].connectedAnchor = new Vector3(_defaultAnchorsPositions[i].x * scale, _defaultAnchorsPositions[i].y * scale, _defaultAnchorsPositions[i].z * scale);
             }
-            _springJoints.Clear();
-            for (int i = 0; i < _bonesPositions.Length; i++)
+
+            _jointsAnchorsPositions.Clear();
+            _jointsDistance.Clear();
+            for (int i = 0; i < _bones.Count; i++)
             {
-                _bonesPositions[i] = new Vector3(_defaultBonesPositions[i].x * _currentScale, _defaultBonesPositions[i].y * _currentScale, _defaultBonesPositions[i].z * _currentScale);
-                _bonesDistance.SetValue(Vector3.Distance(_bonesPositions[i], _bonesCenter.transform.localPosition), i);
+                _jointsAnchorsPositions.Add(_springJoints[i].connectedAnchor);
+                _jointsDistance.Add(Vector3.Distance(_jointsAnchorsPositions[i], _bonesCenter.transform.localPosition));
             }
-            Softbody.AddSpring(ref x, ref root);
-            Softbody.AddSpring(ref x2, ref root);
-            Softbody.AddSpring(ref y, ref root);
-            Softbody.AddSpring(ref y2, ref root);
-            Softbody.AddUndersideSpring(ref z, ref root);
-            Softbody.AddSpring(ref z2, ref root);
-            _springJoints.AddRange(GetComponentsInChildren<SpringJoint>());
         }
     }
 }

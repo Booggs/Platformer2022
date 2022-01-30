@@ -207,7 +207,7 @@ namespace GSGD2.Player
                     topLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref topLeftHits, out leftWallNormal);
                     if (topLeftSlopeResult == true)
                     {
-                        chosenSlopeRaycastHitResult = midRightHits[0];
+                        chosenSlopeRaycastHitResult = topLeftHits[0];
                     }
                 }
             }
@@ -460,7 +460,9 @@ namespace GSGD2.Player
             {
 				raycaster.UpdateDistance(newScale);
             }
-        }
+			_backGroundRaycaster.UpdateDistance(newScale);
+			_frontGroundRaycaster.UpdateDistance(newScale);
+		}
 		#endregion Methods
 	}
 }

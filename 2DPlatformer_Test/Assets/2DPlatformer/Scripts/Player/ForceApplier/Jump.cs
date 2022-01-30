@@ -43,9 +43,9 @@
 				rigidbody.velocity = Vector3.zero;
 			}
 
-			float height = displacementEstimationUpdater.MovementDirection.Down && displacementEstimationUpdater.AverageSpeed > _jumpHeightBonusSpeedThreshold ? _jumpHeight + _jumpHeightBonusWhenFalling : _jumpHeight;
+			float height = _jumpHeight;//displacementEstimationUpdater.MovementDirection.Down && displacementEstimationUpdater.AverageSpeed > _jumpHeightBonusSpeedThreshold ? _jumpHeight + _jumpHeightBonusWhenFalling : _jumpHeight;
 			var vel = rigidbody.velocity;
-			vel.y = 0f;
+			vel = Vector3.zero;
 			rigidbody.velocity = vel;
 
 			// Can't divide a square root by a negative number, so we remember the direction then inverse it if so

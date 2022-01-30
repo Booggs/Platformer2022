@@ -13,6 +13,9 @@ namespace GSGD2.Gameplay
 		[SerializeField]
 		private PickupCommand _pickupCommand = null;
 
+		[SerializeField]
+		private bool _destroyOnPickup = true;
+
 		public override void InteractFromTriggerEnter(PhysicsTriggerEvent sender, Collider other)
 		{
 			base.InteractFromTriggerEnter(sender, other);
@@ -26,6 +29,10 @@ namespace GSGD2.Gameplay
 		public override void Interact()
 		{
 			_pickupCommand.Apply(this);
+			if (_destroyOnPickup == true)
+            {
+				Destroy(this.gameObject);
+            }
 		}
 
 		GameObject ICommandSender.GetGameObject() => gameObject;

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &972144916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972144917}
+  m_Layer: 6
+  m_Name: Character.CameraAimSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &972144917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972144916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7280882848012791425}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &588197022257783591
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +788,7 @@ GameObject:
   - component: {fileID: 4824230165174943828}
   - component: {fileID: 6817740376375966763}
   - component: {fileID: 7791287364633039995}
+  - component: {fileID: 2059892273}
   m_Layer: 6
   m_Name: Character.Softbody
   m_TagString: Untagged
@@ -794,6 +825,7 @@ Transform:
   - {fileID: 2112215263736636862}
   - {fileID: 2856957866302981648}
   - {fileID: 1011265884313809812}
+  - {fileID: 972144917}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -817,9 +849,9 @@ MonoBehaviour:
   z: {fileID: 5056790090854604934}
   z2: {fileID: 1619455909875995448}
   _bonesCenter: {fileID: 1163597484721821439}
-  _snapFactor: 2
+  _snapFactor: 1.3
   _snapTimer:
-    _duration: 0.2
+    _duration: 0.1
   _playerController: {fileID: 8963912016909959918}
   Spring: 350
   Damper: 0
@@ -887,14 +919,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frontGroundRaycaster:
     fromTransform: {fileID: 4657082351141777159}
-    _maxDistance: 0.45
+    _maxDistance: 1
     _layerMask:
       serializedVersion: 2
       m_Bits: 959
     _drawGizmos: 1
   _backGroundRaycaster:
     fromTransform: {fileID: 1465845327748852557}
-    _maxDistance: 0.45
+    _maxDistance: 1
     _layerMask:
       serializedVersion: 2
       m_Bits: 959
@@ -1222,7 +1254,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2177101262253061136}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f00ed4126fbe4ad49a9bbf4bf4aabcfa, type: 3}
   m_Name: 
@@ -1277,18 +1309,6 @@ MonoBehaviour:
   DamageTaken_UnityEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8239428974043230489}
-        m_TargetAssemblyTypeName: GSGD2.Utilities.DebugLog, Assembly-CSharp
-        m_MethodName: Log
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Player Damage Taken !
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3603357115734113580}
         m_TargetAssemblyTypeName: GSGD2.Gameplay.PlayerDamageFeedbackHandler, Assembly-CSharp
         m_MethodName: OnTakeDamage
@@ -1301,9 +1321,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2059892273}
+        m_TargetAssemblyTypeName: GSGD2.Player.ScaleUpdator, Assembly-CSharp
+        m_MethodName: UpdateScale
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   HealthRestored_UnityEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2059892273}
+        m_TargetAssemblyTypeName: GSGD2.Player.ScaleUpdator, Assembly-CSharp
+        m_MethodName: UpdateScale
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   DamageTakenAndHealthBelowZero_UnityEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1409,6 +1453,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6098de913a00f24d9a9429a41a9fab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2059892273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177101262253061136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951768e8e98e8e549b9c66dda3578405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRefs: {fileID: 6559671171331571633}
+  _sphereParent: {fileID: 4411907334222646362}
+  _cameraAimParent: {fileID: 0}
+  _maxScale: 1.3
+  _minScale: 0.7
 --- !u!1 &2671628357469391244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2671628357469391244}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1789,7 +1850,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5400643977553422582}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -2895,5 +2956,5 @@ PositionConstraint:
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 7280882848012791425}
+  - sourceTransform: {fileID: 972144917}
     weight: 1

@@ -6,7 +6,7 @@ namespace GSGD2.Gameplay
 
     public class LootManager : MonoBehaviour
     {
-        private int _currentLoot = 0;
+        private int _currentLoot = 50;
 
         public int CurrentLoot
         {

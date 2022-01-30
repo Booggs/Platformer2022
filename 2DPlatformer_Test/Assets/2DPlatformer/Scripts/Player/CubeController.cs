@@ -661,6 +661,7 @@ namespace GSGD2.Player
                         {
                             _hasBeganToFallFromGroundedState = true;
                         }
+                        _boneSphere.SpringJoints[4].spring *= 5f;
                     }
                     break;
                 case State.Falling:
@@ -713,6 +714,7 @@ namespace GSGD2.Player
                 case State.Grounded:
                     {
                         ResetCurrentValues();
+                        _boneSphere.SpringJoints[4].spring /= 5f;
                     }
                     break;
                 case State.Falling:
@@ -1025,7 +1027,7 @@ namespace GSGD2.Player
                     bool foundWall = false;
                     _characterCollision.MidLeftRaycaster.RaycastAll(out RaycastHit[] midLeftHits);
                     _characterCollision.MidRightRaycaster.RaycastAll(out RaycastHit[] midRightHits);
-                    foreach(RaycastHit raycastHit in midLeftHits)
+                    foreach (RaycastHit raycastHit in midLeftHits)
                     {
                         if (raycastHit.normal.z > 0.7 && foundWall == false)
                         {
@@ -1097,6 +1099,7 @@ namespace GSGD2.Player
 
                     if (canJump == true)
                     {
+                        ResetRigidbodiesVelocity();
                         foreach (var rigidbody in _rigidbodies)
                         {
                             _jump.TryApplyForce(rigidbody);
@@ -1363,6 +1366,10 @@ namespace GSGD2.Player
                     // let only vertical movement pass through
                     velocity = new Vector3(0f, velocity.y, 0f);
                 }
+            }
+            if (velocity.z < 0.1f && _playerController.HorizontalMove == 0)
+            {
+                velocity.z = 0f;
             }
 
             foreach (var rigidbody in _rigidbodies)
