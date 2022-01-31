@@ -60,5 +60,11 @@ namespace GSGD2.Gameplay
 			}
 		}
 
+		public bool AddMaxHealth(int healthToAdd)
+        {
+			maxHealth += healthToAdd;
+			RestoreHealth(healthToAdd);
+			return true;
+        }
 	}
 }

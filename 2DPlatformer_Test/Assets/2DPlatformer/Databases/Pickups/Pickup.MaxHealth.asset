@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf72432bc2dd8b34ea3a704b824b7079, type: 3}
-  m_Name: Pickup.Health
+  m_Script: {fileID: 11500000, guid: cf2fc26ffcd332541afe8a4762215242, type: 3}
+  m_Name: Pickup.MaxHealth
   m_EditorClassIdentifier: 
-  _destroyPickupOnApply: 1
-  _healthToRestore: 1
+  _healthToAdd: 1

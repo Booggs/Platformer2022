@@ -36,7 +36,6 @@ namespace GSGD2.Player
         public LineRenderer PrefabLine = null;
         public bool ViewLines = true;
 
-        private Transform _startingTransform;
         private void Awake()
         {
             Softbody.Init(Shape, ColliderSize, RigidbodyMass, Spring, Damper, RigidbodyConstraints.FreezeRotation, PrefabLine, ViewLines);
@@ -73,18 +72,9 @@ namespace GSGD2.Player
             Softbody.AddSpring(ref newBone8, ref root);*/
         }
 
-        private void OnEnable()
-        {
-            _startingTransform = transform;
-        }
-
         private void FixedUpdate()
         {
-            transform.position = _startingTransform.position;
-        }
-        private void Update()
-        {
-            transform.position = _startingTransform.position;
+            root.transform.position = new Vector3(0, root.transform.position.y, root.transform.position.z);
         }
     }
 }

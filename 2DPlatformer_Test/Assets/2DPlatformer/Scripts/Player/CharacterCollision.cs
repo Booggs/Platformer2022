@@ -67,6 +67,8 @@ namespace GSGD2.Player
 		private float slopeNormalThreshold;
 		private bool _midRightResult = true;
 		private bool _midLeftResult = true;
+
+		private List<Raycaster> _wallRaycasters = new List<Raycaster>();
 		#endregion Fields
 
 		#region Properties
@@ -84,6 +86,8 @@ namespace GSGD2.Player
 		public Raycaster MidRightRaycaster => _midRightWallRaycaster;
 		public Raycaster MidLeftRaycaster => _midLeftWallRaycaster;
 
+		public List<Raycaster> WallRaycasters => _wallRaycasters;
+
 		public float SlopeNormalThreshold
         {
 			get
@@ -95,6 +99,7 @@ namespace GSGD2.Player
 				slopeNormalThreshold = value;
             }
         }
+
 		public float DefaultSlopeNormalThreshold => _slopeNormalThreshold;
 
 		/// <summary>
@@ -202,7 +207,7 @@ namespace GSGD2.Player
                     topLeftSlopeResult = IsNormalIndicateAnyOfThisAsASlope(ref topLeftHits, out leftWallNormal);
                     if (topLeftSlopeResult == true)
                     {
-                        chosenSlopeRaycastHitResult = midRightHits[0];
+                        chosenSlopeRaycastHitResult = topLeftHits[0];
                     }
                 }
             }
@@ -356,6 +361,15 @@ namespace GSGD2.Player
 			_yRightReplacerBonusRaycaster.Initialize();
 			_yLeftReplacerBonusRaycaster.Initialize();
 			slopeNormalThreshold = _slopeNormalThreshold;
+
+			_wallRaycasters.Add(_topRightWallRaycaster);
+			_wallRaycasters.Add(_midRightWallRaycaster);
+			_wallRaycasters.Add(_downRightWallRaycaster);
+			_wallRaycasters.Add(_topLeftWallRaycaster);
+			_wallRaycasters.Add(_midLeftWallRaycaster);
+			_wallRaycasters.Add(_downLeftWallRaycaster);
+			_wallRaycasters.Add(_yRightReplacerBonusRaycaster);
+			_wallRaycasters.Add(_yLeftReplacerBonusRaycaster);
 		}
 
 		// TODO AL : improve perfs by checking walls and slopes in the same loop
@@ -438,6 +452,16 @@ namespace GSGD2.Player
 			_yLeftReplacerBonusRaycaster.DrawGizmos();
 
 			Gizmos.DrawWireCube(transform.position, new Vector3(2f, 2f, _characterZExtent * 2));
+		}
+
+		public void UpdateScale(float newScale)
+        {
+            foreach (Raycaster raycaster in _wallRaycasters)
+            {
+				raycaster.UpdateDistance(newScale);
+            }
+			_backGroundRaycaster.UpdateDistance(newScale);
+			_frontGroundRaycaster.UpdateDistance(newScale);
 		}
 		#endregion Methods
 	}

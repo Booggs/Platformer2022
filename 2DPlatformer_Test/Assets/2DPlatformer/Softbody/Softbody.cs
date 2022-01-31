@@ -33,6 +33,7 @@ namespace GSGD2.Player
             Constraints = constraints;
             ViewLines = false;
         }
+
         public static void Init(ColliderShape shape, float collidersize, float rigidbodymass, float spring, float damper, RigidbodyConstraints constraints, LineRenderer prefabline, bool viewlines)
         {
             Shape = shape;
@@ -44,10 +45,12 @@ namespace GSGD2.Player
             PrefabLine = prefabline;
             ViewLines = viewlines;
         }
+
         public static Rigidbody AddCollider(ref GameObject go)
         {
             return AddCollider(ref go, Shape, ColliderSize, RigidbodyMass);
         }
+
         public static SpringJoint AddSpring(ref GameObject go1, ref GameObject go2)
         {
             SpringJoint sp = AddSpring(ref go1, ref go2, Spring, Damper);
@@ -109,6 +112,8 @@ namespace GSGD2.Player
             sp.spring = spring;
             sp.damper = damper;
             sp.connectedBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            //sp.minDistance = 0.05f;
+            sp.enablePreprocessing = false;
             return sp;
         }
 

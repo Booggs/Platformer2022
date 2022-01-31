@@ -59,6 +59,7 @@ namespace GSGD2.UI
 		{
 			float perc = Mathf.Clamp01(health / maxHealth);
 			_healthbarForeground.fillAmount = perc;
+			transform.localScale = new Vector3((maxHealth - 10f) * 0.05f + 0.5f, transform.localScale.y, transform.localScale.z);
 		}
 	}
 }
