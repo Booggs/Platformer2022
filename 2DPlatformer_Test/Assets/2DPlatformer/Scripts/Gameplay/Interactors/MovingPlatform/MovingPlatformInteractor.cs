@@ -119,6 +119,7 @@ namespace GSGD2.Gameplay
 
 		// runtime
 		private List<MovingPlatformInteractorActivator> _activators = new List<MovingPlatformInteractorActivator>();
+
 		#endregion Fields
 
 		#region Methods

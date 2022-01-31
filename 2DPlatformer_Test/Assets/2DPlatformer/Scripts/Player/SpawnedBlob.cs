@@ -11,6 +11,7 @@ namespace GSGD2.Gameplay
         private Timer _blobLifespan;
 
         private BlobSeparation _parentScript = null;
+        private MovingPlatformInteractorActivator = null;
 
         public BlobSeparation ParentScript
         {
@@ -49,9 +50,14 @@ namespace GSGD2.Gameplay
         {
             if(status == Timer.State.Finished)
             {
-                _parentScript.SpawnedBlob = null;
-                Destroy(gameObject);
+                KillBlob();
             }
+        }
+
+        public void KillBlob()
+        {
+            _parentScript.SpawnedBlob = null;
+            Destroy(gameObject);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace GSGD2.Gameplay
 
 		private Vector3 _cachedStartWorldPosition;
 
-		private State _currentState = 0;
+		protected State _currentState = 0;
 
 		private bool _isFalling = false;
 
@@ -103,7 +103,7 @@ namespace GSGD2.Gameplay
 			MaterialChanged?.Invoke(this, GetEventArgs(_currentState, _currentState));
 		}
 
-		public void ChangeState(State newState)
+		public virtual void ChangeState(State newState)
 		{
 			State previousState = _currentState;
 
@@ -177,7 +177,7 @@ namespace GSGD2.Gameplay
 			_swappingMaterialInstance.SetCachedOriginalMaterial(_meshRenderers);
 		}
 
-		private void Update()
+		protected virtual void Update()
 		{
 			if (_isFalling == true)
 			{
