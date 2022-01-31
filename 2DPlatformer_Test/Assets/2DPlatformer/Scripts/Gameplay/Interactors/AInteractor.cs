@@ -84,7 +84,6 @@ namespace GSGD2.Gameplay
 					}
 				}
 			}
-
 			return shouldInteract;
 		}
 

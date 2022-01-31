@@ -176,11 +176,11 @@ namespace GSGD2.Gameplay
 
         private void Update()
         {
-            if (_activators.Count == 0 && _activated == true)
+            /*if (_activators.Count == 0 && _activated == true)
             {
 				_activated = false;
-				_exitSettings.Apply(_movingPlatform);
-			}
+				_movingPlatform.PlayReverse(true, true);
+			}*/
         }
 
 #if UNITY_EDITOR

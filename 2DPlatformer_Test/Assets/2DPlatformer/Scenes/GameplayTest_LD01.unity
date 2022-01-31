@@ -903,17 +903,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &135747623 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2196546130007148683, guid: 2c3459fa62903284b91be95f9c99be4e, type: 3}
-  m_PrefabInstance: {fileID: 8481505}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151d1e9132f2e9d40853535f725d2a34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &135747625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2196546130007148681, guid: 2c3459fa62903284b91be95f9c99be4e, type: 3}
@@ -2064,7 +2053,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-109810
+  m_Name: pb_Mesh-1812
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4553,7 +4542,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-109820
+  m_Name: pb_Mesh-1822
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8954,15 +8943,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6786313332634779500, guid: 70f4ab924bc06e948858e313c3e0b944, type: 3}
       propertyPath: _restrictionList.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6786313332634779500, guid: 70f4ab924bc06e948858e313c3e0b944, type: 3}
       propertyPath: _restrictionList.Array.data[0]
       value: 
-      objectReference: {fileID: 135747623}
+      objectReference: {fileID: -4154772076090812123, guid: 0d9771ae1fd67fe45b177d6ef9b27588, type: 3}
     - target: {fileID: 6786313332634779500, guid: 70f4ab924bc06e948858e313c3e0b944, type: 3}
       propertyPath: _autoAddPlayerToRestrictionList
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6786313332634779500, guid: 70f4ab924bc06e948858e313c3e0b944, type: 3}
       propertyPath: _exitSettings._stopWhenAtEndOfPath._value
@@ -9054,7 +9043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6786313333175608470, guid: 70f4ab924bc06e948858e313c3e0b944, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.125
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6786313333175608470, guid: 70f4ab924bc06e948858e313c3e0b944, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11255,7 +11244,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-109796
+  m_Name: pb_Mesh-1798
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

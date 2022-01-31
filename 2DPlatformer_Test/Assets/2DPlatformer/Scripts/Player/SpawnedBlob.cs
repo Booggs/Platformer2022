@@ -16,6 +16,11 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private float _blobJumpForce = 10f;
 
+        [SerializeField]
+        private GameObject _healthBlob;
+
+        private int _healthBlobsToSpawn = 3;
+
         private BlobSeparation _parentScript = null;
 
         private Rigidbody[] _rigidbodies = null;
@@ -63,8 +68,7 @@ namespace GSGD2.Gameplay
         {
             if(status == Timer.State.Finished)
             {
-                //_blobExplosionTimer.Start();
-                KillBlob();
+                _blobExplosionTimer.Start();
             }
         }
 
@@ -93,6 +97,10 @@ namespace GSGD2.Gameplay
         public void KillBlob()
         {
             _parentScript.SpawnedBlob = null;
+            for (int i = 0; i < _healthBlobsToSpawn; i++)
+            {
+                Instantiate(_healthBlob);
+            }
             Destroy(gameObject);
         }
     }
