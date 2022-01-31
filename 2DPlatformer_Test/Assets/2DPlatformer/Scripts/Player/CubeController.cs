@@ -281,6 +281,8 @@ namespace GSGD2.Player
 
         public bool StickyModeOn => _stickyModeOn;
 
+        public Jump Jump => _jump;
+
 
         public bool Gliding
         {
@@ -825,7 +827,7 @@ namespace GSGD2.Player
                 case State.Grounded:
                     {
                         CheckGround();
-                        _characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
+                        //_characterCollision.HandleWallCollisionAndApplyBonusYReplacement(_lastMovementDirection);
 
                         if (TryJump() == false)
                         {
@@ -1489,6 +1491,14 @@ namespace GSGD2.Player
             {
                 SphereCollider collider = _colliders[i] as SphereCollider;
                 collider.radius = _boneSphere.ColliderSize * scale;
+            }
+        }
+
+        public void LaunchBlob(Vector3 impulse)
+        {
+            foreach (var rigidbody in _rigidbodies)
+            {
+                rigidbody.AddForce(impulse, ForceMode.Impulse);
             }
         }
 

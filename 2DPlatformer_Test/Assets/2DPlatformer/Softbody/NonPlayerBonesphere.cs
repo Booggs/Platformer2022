@@ -72,7 +72,7 @@ namespace GSGD2.Player
             Softbody.AddSpring(ref newBone8, ref root);*/
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             root.transform.position = new Vector3(0, root.transform.position.y, root.transform.position.z);
         }

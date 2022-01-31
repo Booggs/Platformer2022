@@ -29,6 +29,10 @@ namespace GSGD2.Player
 		private const string RELEASE_GLIDER_ACTION_NAME = "ReleaseGlider";
 		private const string RESET_PLAYER_ACTION_NAME = "ResetPlayer";
 		private const string START_TIMER_ACTION_NAME = "StartTestTimer";
+		private const string BLOB_SEPARATION_ACTION_NAME = "BlobSeparation";
+		private const string SHOOT_ACTION_NAME = "Shoot";
+		private const string CHARGE_SLINGSHOT_ACTION_NAME = "ChargeSlingshot";
+		private const string RELEASE_SLINGSHOT_ACTION_NAME = "ReleaseSlingshot";
 
 		[SerializeField]
 		private InputActionMapWrapper _inputActionMapWrapper;
@@ -55,6 +59,10 @@ namespace GSGD2.Player
 		private InputAction _releaseGliderInputAction = null;
 		private InputAction _resetPlayerInputAction = null;
 		private InputAction _startTimerInputAction = null;
+		private InputAction _blobSeparationInputAction = null;
+		private InputAction _shootInputAction = null;
+		private InputAction _chargeSlingshotInputAction = null;
+		private InputAction _releaseSlingshotInputAction = null;
 
 		public bool UseMouseForLookDirection => _useMouseForLookDirection;
 		public float HorizontalMove => _horizontalMoveInputAction.ReadValue<float>();
@@ -80,6 +88,10 @@ namespace GSGD2.Player
 		public event InputEvent ReleaseGliderPerformed = null;
 		public event InputEvent ResetPlayerPerformed = null;
 		public event InputEvent StartTimerPerformed = null;
+		public event InputEvent BlobSeparationPerformed = null;
+		public event InputEvent ShootPerformed = null;
+		public event InputEvent ChargeSlingshotPerformed = null;
+		public event InputEvent ReleaseSlingshotPerformed = null;
 
 		private void OnEnable()
 		{
@@ -183,6 +195,30 @@ namespace GSGD2.Player
 				_startTimerInputAction.performed -= StartTimerInputAction_performed;
 				_startTimerInputAction.performed += StartTimerInputAction_performed;
 			}
+
+			if (_inputActionMapWrapper.TryFindAction(BLOB_SEPARATION_ACTION_NAME, out _blobSeparationInputAction, true) == true)
+			{
+				_blobSeparationInputAction.performed -= BlobSeparationInputAction_performed;
+				_blobSeparationInputAction.performed += BlobSeparationInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(SHOOT_ACTION_NAME, out _shootInputAction, true) == true)
+			{
+				_shootInputAction.performed -= ShootInputAction_performed;
+				_shootInputAction.performed += ShootInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(CHARGE_SLINGSHOT_ACTION_NAME, out _chargeSlingshotInputAction, true) == true)
+			{
+				_chargeSlingshotInputAction.performed -= ChargeSlingshotInputAction_performed;
+				_chargeSlingshotInputAction.performed += ChargeSlingshotInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(RELEASE_SLINGSHOT_ACTION_NAME, out _releaseSlingshotInputAction, true) == true)
+			{
+				_releaseSlingshotInputAction.performed -= ReleaseSlingshotInputAction_performed;
+				_releaseSlingshotInputAction.performed += ReleaseSlingshotInputAction_performed;
+			}
 		}
 
 		private void OnDisable()
@@ -207,6 +243,10 @@ namespace GSGD2.Player
 			_releaseGliderInputAction.Disable();
 			_resetPlayerInputAction.Disable();
 			_startTimerInputAction.Disable();
+			_blobSeparationInputAction.Disable();
+			_shootInputAction.Disable();
+			_chargeSlingshotInputAction.Disable();
+			_releaseSlingshotInputAction.Disable();
 
 			_jumpInputAction.performed -= JumpInputAction_performed;
 			_dashInputAction.performed -= DashInputAction_performed;
@@ -224,6 +264,10 @@ namespace GSGD2.Player
 			_releaseGliderInputAction.performed -= ReleaseGliderInputAction_performed;
 			_resetPlayerInputAction.performed -= ResetPlayerInputAction_performed;
 			_startTimerInputAction.performed -= StartTimerInputAction_performed;
+			_blobSeparationInputAction.performed -= BlobSeparationInputAction_performed;
+			_shootInputAction.performed -= ShootInputAction_performed;
+			_chargeSlingshotInputAction.performed -= ChargeSlingshotInputAction_performed;
+			_releaseSlingshotInputAction.performed -= ReleaseSlingshotInputAction_performed;
 		}
 
 		private void JumpInputAction_performed(InputAction.CallbackContext obj)
@@ -303,6 +347,26 @@ namespace GSGD2.Player
 		private void StartTimerInputAction_performed(InputAction.CallbackContext obj)
 		{
 			StartTimerPerformed?.Invoke(this, obj);
+		}
+
+		private void BlobSeparationInputAction_performed(InputAction.CallbackContext obj)
+		{
+			BlobSeparationPerformed?.Invoke(this, obj);
+		}
+
+		private void ShootInputAction_performed(InputAction.CallbackContext obj)
+		{
+			ShootPerformed?.Invoke(this, obj);
+		}
+
+		private void ChargeSlingshotInputAction_performed(InputAction.CallbackContext obj)
+		{
+			ChargeSlingshotPerformed?.Invoke(this, obj);
+		}
+
+		private void ReleaseSlingshotInputAction_performed(InputAction.CallbackContext obj)
+		{
+			ReleaseSlingshotPerformed?.Invoke(this, obj);
 		}
 	}
 }
