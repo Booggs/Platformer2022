@@ -117,6 +117,8 @@ namespace GSGD2.Gameplay
 		[SerializeField]
 		private DrawLinkUtility _drawLinkToPlatform = null;
 
+		private bool _activated = false;
+
 		// runtime
 		private List<MovingPlatformInteractorActivator> _activators = new List<MovingPlatformInteractorActivator>();
 
@@ -133,6 +135,7 @@ namespace GSGD2.Gameplay
 				{
 					_enterSettings.Apply(_movingPlatform);
 					_activators.Add(activator);
+					_activated = true;
 				}
 			}
 		}
@@ -171,8 +174,17 @@ namespace GSGD2.Gameplay
 			return ShouldInteractWith<MovingPlatformInteractorActivator>(other);
 		}
 
+        private void Update()
+        {
+            if (_activators.Count == 0 && _activated == true)
+            {
+				_activated = false;
+				_exitSettings.Apply(_movingPlatform);
+			}
+        }
+
 #if UNITY_EDITOR
-		protected override void OnDrawGizmos()
+        protected override void OnDrawGizmos()
 		{
 			base.OnDrawGizmos();
 			if (_movingPlatform != null)

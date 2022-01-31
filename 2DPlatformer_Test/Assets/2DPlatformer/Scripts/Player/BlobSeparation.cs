@@ -63,7 +63,7 @@ namespace GSGD2.Gameplay
             if (_spawnedBlob == null && _blobCooldown.IsRunning == false && _cubeController.IsGrounded)
             {
                 _blobCooldown.Start();
-                float jumpHeight = Mathf.Sqrt(2 * (_cubeController.Jump.JumpHeight * _cubeController.Jump.GravityScale) * Mathf.Abs(Physics.gravity.y));
+                //float jumpHeight = Mathf.Sqrt(2 * (_cubeController.Jump.JumpHeight * _cubeController.Jump.GravityScale) * Mathf.Abs(Physics.gravity.y));
                 _cubeController.LaunchBlob(new Vector3(0f, 7.5f, 0f));
                 GameObject spawnedBlob = Instantiate(_blobPrefab, transform.position, Quaternion.identity);
                 _spawnedBlob = spawnedBlob.GetComponent<SpawnedBlob>();

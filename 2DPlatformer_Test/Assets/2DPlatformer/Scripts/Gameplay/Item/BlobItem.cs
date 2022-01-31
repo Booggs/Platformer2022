@@ -15,6 +15,7 @@ namespace GSGD2.Gameplay
 				case State.Highlighted:
 				case State.Held:
 					{
+                        print("blob held");
                         SpawnedBlob spawnedBlob = GetComponent<SpawnedBlob>();
                         if (spawnedBlob != null)
                         {

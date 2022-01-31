@@ -293,7 +293,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blobLifespan:
-    _duration: 10
+    _duration: 2
+  _blobExplosionTimer:
+    _duration: 0.5
+  _blobJumpForce: 25
 --- !u!1 &1144327585242210704
 GameObject:
   m_ObjectHideFlags: 0
