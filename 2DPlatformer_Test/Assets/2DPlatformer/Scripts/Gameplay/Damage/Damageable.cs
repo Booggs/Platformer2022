@@ -32,6 +32,8 @@ namespace GSGD2.Gameplay
 		[SerializeField]
 		protected int maxHealth = 1;
 
+		protected int _defaultHealth = 1;
+
 		[SerializeField]
 		protected bool destroyIfHealthBelowZero = false;
 
@@ -53,6 +55,8 @@ namespace GSGD2.Gameplay
 		public float MaxHealth => maxHealth;
 		public bool IsRecovering => _currentRecoveryDuration < recoveryDuration;
 		public bool IsReceiveDOT => _damageOnTime.IsReceiveDOT;
+
+		public int DefaultHealth => _defaultHealth;
 		#endregion Properties
 
 		#region Events
@@ -165,7 +169,10 @@ namespace GSGD2.Gameplay
 		{
 		}
 
-		protected virtual void Awake() { }
+		protected virtual void Awake() 
+		{
+			_defaultHealth = healthAtStart;
+		}
 		protected virtual void OnEnable()
 		{
 			_currentHealth = healthAtStart;

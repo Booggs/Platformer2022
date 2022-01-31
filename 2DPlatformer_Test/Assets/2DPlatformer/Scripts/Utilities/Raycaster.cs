@@ -25,6 +25,9 @@
 
 		private bool _lastResult = false;
 
+		private float defaultDistance = 1f;
+
+
 		public float MaxDistance => _maxDistance;
 		public bool LastResult => _lastResult;
 
@@ -38,6 +41,7 @@
 			{
 				fromTransform.parent = null;
 			}
+			defaultDistance = _maxDistance;
 		}
 
 		public void SetMaxDistance(float newDistance)
@@ -115,5 +119,10 @@
 			var endPosition = startPosition + fromTransform.forward * _maxDistance;
 			Debug.DrawLine(startPosition, endPosition, _lastResult == true ? goodResultColor : badResultColor);
 		}
+
+		public void UpdateDistance(float newScale)
+        {
+			SetMaxDistance(defaultDistance * newScale);
+        }
 	}
 }
