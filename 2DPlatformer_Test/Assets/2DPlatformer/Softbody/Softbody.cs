@@ -46,9 +46,9 @@ namespace GSGD2.Player
             ViewLines = viewlines;
         }
 
-        public static Rigidbody AddCollider(ref GameObject go)
+        public static Rigidbody AddCollider(ref GameObject go, bool interpolate)
         {
-            return AddCollider(ref go, Shape, ColliderSize, RigidbodyMass);
+            return AddCollider(ref go, Shape, ColliderSize, RigidbodyMass, interpolate);
         }
 
         public static SpringJoint AddSpring(ref GameObject go1, ref GameObject go2)
@@ -61,9 +61,9 @@ namespace GSGD2.Player
             return sp;
         }
 
-        public static Rigidbody AddUndersideCollider(ref GameObject go)
+        public static Rigidbody AddUndersideCollider(ref GameObject go, bool interpolate)
         {
-            return AddCollider(ref go, Shape, ColliderSize, RigidbodyMass * 2f);
+            return AddCollider(ref go, Shape, ColliderSize, RigidbodyMass * 2f, interpolate);
         }
 
         public static SpringJoint AddUndersideSpring(ref GameObject go1, ref GameObject go2)
@@ -81,7 +81,7 @@ namespace GSGD2.Player
             return AddLine(ref go1, ref go2, ref PrefabLine);
         }
 
-        public static Rigidbody AddCollider(ref GameObject go, ColliderShape shape, float size, float mass)
+        public static Rigidbody AddCollider(ref GameObject go, ColliderShape shape, float size, float mass, bool interpolate)
         {
             switch (shape)
             {
@@ -101,7 +101,8 @@ namespace GSGD2.Player
             rb.angularDrag = 10f;
             rb.constraints = Constraints;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            if (interpolate)
+                rb.interpolation = RigidbodyInterpolation.Interpolate;
             return rb;
         }
 

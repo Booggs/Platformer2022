@@ -643,7 +643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327738012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.377}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 102849446}
@@ -1315,7 +1315,19 @@ MonoBehaviour:
         m_CallState: 2
   _onTriggerStay:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6786313332634779500}
+        m_TargetAssemblyTypeName: GSGD2.Gameplay.MovingPlatformInteractor, Assembly-CSharp
+        m_MethodName: InteractFromTriggerStay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onTriggerExit:
     m_PersistentCalls:
       m_Calls:
@@ -1344,7 +1356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _memento: 
-  _restrictionList: []
+  _restrictionList:
+  - {fileID: -4154772076090812123, guid: 0d9771ae1fd67fe45b177d6ef9b27588, type: 3}
   _drawLinkUtilityToRestricted:
     _drawGizmos: 0
     _bezierStartOffset: {x: 0, y: 1, z: 0}
@@ -1352,29 +1365,29 @@ MonoBehaviour:
     _bezierUpTangentOffset: 0.5
     _color: {r: 0, g: 0, b: 1, a: 1}
     _width: 2
-  _autoAddPlayerToRestrictionList: 0
+  _autoAddPlayerToRestrictionList: 1
   _movingPlatform: {fileID: 0}
   _enterSettings:
     _enabled: 1
-    _behavior: 2
+    _behavior: 0
     _interrupt: 1
     _stopWhenAtEndOfPath:
-      _enabled: 0
-      _value: 0
+      _enabled: 1
+      _value: 1
   _staySettings:
     _enabled: 0
     _behavior: 0
     _interrupt: 0
     _stopWhenAtEndOfPath:
-      _enabled: 0
-      _value: 0
+      _enabled: 1
+      _value: 1
   _exitSettings:
     _enabled: 1
-    _behavior: 3
+    _behavior: 1
     _interrupt: 1
     _stopWhenAtEndOfPath:
-      _enabled: 0
-      _value: 0
+      _enabled: 1
+      _value: 1
   _directInteractionSettings:
     _enabled: 0
     _behavior: 0
@@ -1447,8 +1460,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6786313333175608465}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.385, z: 0.137}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 6786313332634779503}
   m_RootOrder: 0

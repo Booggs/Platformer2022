@@ -169,6 +169,38 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: BlobSeparation
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 6e85aae8-c9eb-428a-9648-98b12da525ba
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Shoot
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 3238dc97-6f52-411e-b2ef-dab40f7184e0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: ChargeSlingshot
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: c0965270-1385-42b9-8822-97087fa33893
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: ReleaseSlingshot
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: c9df1e43-e9a2-4bca-8bb5-da946db0e2ce
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
     - m_Name: 
       m_Id: b82491d4-813d-4be0-bea8-2217def02fb7
@@ -457,4 +489,36 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: StartTestTimer
+      m_Flags: 0
+    - m_Name: 
+      m_Id: dc0b2ba3-e331-4590-8775-f81baf30708c
+      m_Path: <Gamepad>/rightShoulder
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: BlobSeparation
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 2f994a23-c9fa-4685-8e7c-589ff7e35cac
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shoot
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 6371a03d-ad2c-41d1-829e-b13f71e1016a
+      m_Path: <Gamepad>/leftTrigger
+      m_Interactions: Hold(duration=0.1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: ChargeSlingshot
+      m_Flags: 0
+    - m_Name: 
+      m_Id: a68bca11-cfb2-4d4f-9fe8-bdd43b5183c5
+      m_Path: <Gamepad>/leftTrigger
+      m_Interactions: Press(behavior=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: ReleaseSlingshot
       m_Flags: 0

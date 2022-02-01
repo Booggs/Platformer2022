@@ -34,6 +34,7 @@
             }
         }
 
+		public float GravityScale => _gravityScale;
 
 		protected override void DoApplyForce(Rigidbody rigidbody)
 		{
@@ -44,9 +45,7 @@
 			}
 
 			float height = _jumpHeight;//displacementEstimationUpdater.MovementDirection.Down && displacementEstimationUpdater.AverageSpeed > _jumpHeightBonusSpeedThreshold ? _jumpHeight + _jumpHeightBonusWhenFalling : _jumpHeight;
-			var vel = rigidbody.velocity;
-			vel = Vector3.zero;
-			rigidbody.velocity = vel;
+			//rigidbody.velocity = Vector3.zero;
 
 			// Can't divide a square root by a negative number, so we remember the direction then inverse it if so
 			bool inverseY = false;
@@ -57,11 +56,7 @@
 			}
 
 			Vector3 force = new Vector3
-			(
-				0f,
-				Mathf.Sqrt(2 * (height * _gravityScale) * Mathf.Abs(Physics.gravity.y)),
-				0f//_reflectRigidbodyVelocity == true ? -vel.z : 0f
-			);
+			(0f, Mathf.Sqrt(2 * (height * _gravityScale) * Mathf.Abs(Physics.gravity.y)), rigidbody.velocity.z * -1f);
 
 			if (inverseY == true)
 			{
