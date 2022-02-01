@@ -4,6 +4,7 @@ namespace GSGD2.Player
 	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.Animations;
+	using GSGD2.Gameplay;
 
 	/// <summary>
 	/// Class that can listen to horizontal and vertical look inputs and move <see cref="CameraAim"/>, the gameobject that being aim at by cinemachine's vcam. It can shift the CameraAim position in Y, Z or YZ axis and can be placed on the player as well as on an <see cref="Item"/> (See ProjectileLauncher prefab for an example).
@@ -34,6 +35,12 @@ namespace GSGD2.Player
 
 		[SerializeField]
 		private float _speed = 10f;
+
+		[SerializeField]
+		private SlingshotHandler _slingshotHandler = null;
+
+		[SerializeField]
+		private ProjectileLauncher _projectileLauncher = null;
 
 		private PlayerController _playerController = null;
 
