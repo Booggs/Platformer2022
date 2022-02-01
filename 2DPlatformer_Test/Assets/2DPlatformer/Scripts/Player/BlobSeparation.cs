@@ -18,10 +18,15 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private Timer _blobCooldown;
 
+        [SerializeField]
+        private Damage _spawningDamage;
+
         private PlayerController _playerController = null;
         private PlayerDamageable _playerDamageable = null;
         private CubeController _cubeController = null;
         private SpawnedBlob _spawnedBlob = null;
+
+
 
         public SpawnedBlob SpawnedBlob
         {
@@ -60,14 +65,17 @@ namespace GSGD2.Gameplay
 
         private void SeparationPerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_spawnedBlob == null && _blobCooldown.IsRunning == false)
+            if (_spawnedBlob == null && _blobCooldown.IsRunning == false && _playerDamageable.CurrentHealth > _spawningDamage.DamageValue)
             {
                 _blobCooldown.Start();
-                //float jumpHeight = Mathf.Sqrt(2 * (_cubeController.Jump.JumpHeight * _cubeController.Jump.GravityScale) * Mathf.Abs(Physics.gravity.y));
-                _cubeController.LaunchBlob(new Vector3(0f, 0f, 0f));
+                _cubeController.LaunchBlob(new Vector3(0f, 7.5f, 0f));
+                _playerDamageable.TakeDamage(_spawningDamage);
+
                 GameObject spawnedBlob = Instantiate(_blobPrefab, transform.position, Quaternion.identity);
                 _spawnedBlob = spawnedBlob.GetComponent<SpawnedBlob>();
                 _spawnedBlob.ParentScript = this;
+                _spawnedBlob.HealthBlobsToSpawn = _spawningDamage.DamageValue;
+
                 return;
             }
             if (_spawnedBlob != null)
@@ -76,5 +84,6 @@ namespace GSGD2.Gameplay
                 //_spawnedBlob._blobLifespanTimer.ForceFinishState();
             }
         }
+
     }
 }
