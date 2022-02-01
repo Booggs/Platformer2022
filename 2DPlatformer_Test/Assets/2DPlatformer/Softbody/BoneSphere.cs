@@ -62,13 +62,13 @@ namespace GSGD2.Player
         {
             Softbody.Init(Shape, ColliderSize, RigidbodyMass, Spring, Damper, RigidbodyConstraints.FreezeRotation, PrefabLine, ViewLines);
 
-            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, 0.45f, 1f);
-            Softbody.AddCollider(ref x);
-            Softbody.AddCollider(ref x2);
-            Softbody.AddCollider(ref y);
-            Softbody.AddCollider(ref y2);
-            Softbody.AddCollider(ref z);
-            Softbody.AddCollider(ref z2);
+            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, 0.45f, 1f, true);
+            Softbody.AddCollider(ref x, true);
+            Softbody.AddCollider(ref x2, true);
+            Softbody.AddCollider(ref y, true);
+            Softbody.AddCollider(ref y2, true);
+            Softbody.AddCollider(ref z, true);
+            Softbody.AddCollider(ref z2, true);
             //Softbody.AddCollider(ref newBone);
             //Softbody.AddCollider(ref newBone2);
             //Softbody.AddCollider(ref newBone3);

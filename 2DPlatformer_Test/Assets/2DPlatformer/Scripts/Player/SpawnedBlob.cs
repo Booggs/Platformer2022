@@ -7,23 +7,25 @@ namespace GSGD2.Gameplay
 
     public class SpawnedBlob : MonoBehaviour
     {
-        [SerializeField]
-        private Timer _blobLifespan;
+        //[SerializeField]
+        public Timer _blobLifespanTimer;
 
         [SerializeField]
         private Timer _blobExplosionTimer;
 
         [SerializeField]
-        private float _blobJumpForce = 10f;
+        private float _blobJumpForce = 5f;
 
         [SerializeField]
         private GameObject _healthBlob;
 
+        [SerializeField]
         private int _healthBlobsToSpawn = 3;
 
         private BlobSeparation _parentScript = null;
 
         private Rigidbody[] _rigidbodies = null;
+
 
         public BlobSeparation ParentScript
         {
@@ -39,14 +41,14 @@ namespace GSGD2.Gameplay
 
         private void Awake()
         {
-            _blobLifespan.Start();
+            _blobLifespanTimer.Start();
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
         }
 
         private void OnEnable()
         {
-            _blobLifespan.StateChanged -= BlobLifespanChanged;
-            _blobLifespan.StateChanged += BlobLifespanChanged;
+            _blobLifespanTimer.StateChanged -= BlobLifespanChanged;
+            _blobLifespanTimer.StateChanged += BlobLifespanChanged;
 
             _blobExplosionTimer.StateChanged -= BlobExplosionTimerChanged;
             _blobExplosionTimer.StateChanged += BlobExplosionTimerChanged;
@@ -54,13 +56,13 @@ namespace GSGD2.Gameplay
 
         private void OnDisable()
         {
-            _blobLifespan.StateChanged -= BlobLifespanChanged;
+            _blobLifespanTimer.StateChanged -= BlobLifespanChanged;
             _blobExplosionTimer.StateChanged -= BlobExplosionTimerChanged;
         }
 
         private void Update()
         {
-            _blobLifespan.Update();
+            _blobLifespanTimer.Update();
             _blobExplosionTimer.Update();
         }
 
@@ -99,7 +101,7 @@ namespace GSGD2.Gameplay
             _parentScript.SpawnedBlob = null;
             for (int i = 0; i < _healthBlobsToSpawn; i++)
             {
-                Instantiate(_healthBlob);
+                Instantiate(_healthBlob, transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
         }

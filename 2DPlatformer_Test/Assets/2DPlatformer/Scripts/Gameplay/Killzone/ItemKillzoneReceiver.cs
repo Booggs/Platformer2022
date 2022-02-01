@@ -11,9 +11,14 @@
 		[SerializeField]
 		private Item _item = null;
 
+		[SerializeField]
+		private bool _shouldDestroyItem = false;
+
 		public override void OnEnterKillzone(Killzone killzone)
 		{
-			_item.ResetWorldPosition();
+			if (_shouldDestroyItem)
+				Destroy(gameObject);
+			else _item.ResetWorldPosition();
 		}
 	}
 }

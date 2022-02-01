@@ -30,6 +30,7 @@ namespace GSGD2.Player
         [Tooltip("Higher the value the faster the spring oscillation stops")]
         public float Damper = 0.2f;
         [Header("Other Settings")]
+        public bool _specialUndersideBone = false;
         public Softbody.ColliderShape Shape = Softbody.ColliderShape.Box;
         public float ColliderSize = 0.002f;
         public float RigidbodyMass = 1f;
@@ -40,13 +41,15 @@ namespace GSGD2.Player
         {
             Softbody.Init(Shape, ColliderSize, RigidbodyMass, Spring, Damper, RigidbodyConstraints.FreezeRotation, PrefabLine, ViewLines);
 
-            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, 0.6f, 1f);
-            Softbody.AddCollider(ref x);
-            Softbody.AddCollider(ref x2);
-            Softbody.AddCollider(ref y);
-            Softbody.AddCollider(ref y2);
-            Softbody.AddUndersideCollider(ref z);
-            Softbody.AddCollider(ref z2);
+            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, 0.6f, 1f, false);
+            Softbody.AddCollider(ref x, false);
+            Softbody.AddCollider(ref x2, false);
+            Softbody.AddCollider(ref y, false);
+            Softbody.AddCollider(ref y2, false);
+            if (_specialUndersideBone)
+                Softbody.AddUndersideCollider(ref z, false);
+            else Softbody.AddCollider(ref z, false);
+            Softbody.AddCollider(ref z2, false);
             /*Softbody.AddCollider(ref newBone);
             Softbody.AddCollider(ref newBone2);
             Softbody.AddCollider(ref newBone3);
@@ -60,7 +63,9 @@ namespace GSGD2.Player
             Softbody.AddSpring(ref x2, ref root);
             Softbody.AddSpring(ref y, ref root);
             Softbody.AddSpring(ref y2, ref root);
-            Softbody.AddUndersideSpring(ref z, ref root);
+            if (_specialUndersideBone)
+                Softbody.AddUndersideSpring(ref z, ref root);
+            else Softbody.AddSpring(ref z, ref root);
             Softbody.AddSpring(ref z2, ref root);
             /*Softbody.AddSpring(ref newBone, ref root);
             Softbody.AddSpring(ref newBone2, ref root);

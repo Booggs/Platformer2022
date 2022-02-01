@@ -141,8 +141,9 @@ GameObject:
   - component: {fileID: -4154772076090812123}
   - component: {fileID: 1144327585221088212}
   - component: {fileID: 4040496993252397337}
+  - component: {fileID: 1682687927463601515}
   m_Layer: 6
-  m_Name: SpawnedBlob
+  m_Name: DecoyBlob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,11 +274,12 @@ MonoBehaviour:
   y2: {fileID: 1144327585683998474}
   z: {fileID: 1144327584840844647}
   z2: {fileID: 1144327584901187515}
-  Spring: 150
-  Damper: 0.5
+  Spring: 100
+  Damper: 10
+  _specialUndersideBone: 1
   Shape: 1
   ColliderSize: 0.002
-  RigidbodyMass: 3
+  RigidbodyMass: 5
   PrefabLine: {fileID: 0}
   ViewLines: 0
 --- !u!114 &4040496993252397337
@@ -292,11 +294,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1e0ccf3f2355145a7145940b73b332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blobLifespan:
-    _duration: 2
+  _blobLifespanTimer:
+    _duration: 10
   _blobExplosionTimer:
     _duration: 0.5
-  _blobJumpForce: 25
+  _blobJumpForce: 6
+  _healthBlob: {fileID: 1710151689424917779, guid: 5a2bfc36164e3524d8644f96d1de0add, type: 3}
+  _healthBlobsToSpawn: 3
+--- !u!114 &1682687927463601515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144327585221088214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9614606ccb136fa4f8f2946a77aaa50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _item: {fileID: 1579085293578825867}
+  _shouldDestroyItem: 1
 --- !u!1 &1144327585242210704
 GameObject:
   m_ObjectHideFlags: 0

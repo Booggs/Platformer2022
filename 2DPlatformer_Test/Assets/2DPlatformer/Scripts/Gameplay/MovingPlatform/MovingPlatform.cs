@@ -217,7 +217,7 @@ namespace GSGD2.Gameplay
 			//_timerBetweenPingPong.ResetTimeElapsed();
 		}
 
-		private void FixedUpdate()
+		private void Update()
 		{
 			if (_timerBetweenPingPong.Update() == true)
 			{

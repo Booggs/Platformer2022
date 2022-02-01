@@ -60,14 +60,20 @@ namespace GSGD2.Gameplay
 
         private void SeparationPerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_spawnedBlob == null && _blobCooldown.IsRunning == false && _cubeController.IsGrounded)
+            if (_spawnedBlob == null && _blobCooldown.IsRunning == false)
             {
                 _blobCooldown.Start();
                 //float jumpHeight = Mathf.Sqrt(2 * (_cubeController.Jump.JumpHeight * _cubeController.Jump.GravityScale) * Mathf.Abs(Physics.gravity.y));
-                _cubeController.LaunchBlob(new Vector3(0f, 7.5f, 0f));
+                _cubeController.LaunchBlob(new Vector3(0f, 0f, 0f));
                 GameObject spawnedBlob = Instantiate(_blobPrefab, transform.position, Quaternion.identity);
                 _spawnedBlob = spawnedBlob.GetComponent<SpawnedBlob>();
                 _spawnedBlob.ParentScript = this;
+                return;
+            }
+            if (_spawnedBlob != null)
+            {
+                _spawnedBlob._blobLifespanTimer.TimeElapsed = _spawnedBlob._blobLifespanTimer.Duration;
+                //_spawnedBlob._blobLifespanTimer.ForceFinishState();
             }
         }
     }

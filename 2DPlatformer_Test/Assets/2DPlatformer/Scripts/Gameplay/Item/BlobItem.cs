@@ -6,28 +6,7 @@ namespace GSGD2.Gameplay
 
     public class BlobItem : Item
     {
-		public override void ChangeState(State newState)
-		{
-            base.ChangeState(newState);
-            switch(newState)
-            {
-				case State.Idle:
-				case State.Highlighted:
-				case State.Held:
-					{
-                        print("blob held");
-                        SpawnedBlob spawnedBlob = GetComponent<SpawnedBlob>();
-                        if (spawnedBlob != null)
-                        {
-                            spawnedBlob.KillBlob();
-                        }
-					}
-                    break;
-                default:
-                    break;
-			}
-
-        }
+		
 	}
 
 }

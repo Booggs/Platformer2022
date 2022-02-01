@@ -56,6 +56,8 @@ namespace GSGD2.Gameplay
 		public bool IsRecovering => _currentRecoveryDuration < recoveryDuration;
 		public bool IsReceiveDOT => _damageOnTime.IsReceiveDOT;
 
+		public bool IsInjured => _currentHealth < maxHealth;
+
 		public int DefaultHealth => _defaultHealth;
 		#endregion Properties
 
