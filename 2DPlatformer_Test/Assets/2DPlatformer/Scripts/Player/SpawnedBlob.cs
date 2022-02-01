@@ -26,6 +26,17 @@ namespace GSGD2.Gameplay
 
         private Rigidbody[] _rigidbodies = null;
 
+        public int HealthBlobsToSpawn
+        {
+            get
+            {
+                return _healthBlobsToSpawn;
+            }
+            set
+            {
+                _healthBlobsToSpawn = value;
+            }
+        }
 
         public BlobSeparation ParentScript
         {
