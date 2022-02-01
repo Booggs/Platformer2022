@@ -35,7 +35,7 @@ namespace GSGD2.Gameplay
         private bool _preventUseIfNoDirection = false; // only gamepad
 
         private PlayerController _playerController = null;
-        private CameraAimController _playerCameraAimController = null;
+        private CameraAimController _slingshotCameraAimController = null;
         private Vector3 _rotatorLocalPositionAtStart;
 
         private void Awake()
@@ -44,7 +44,7 @@ namespace GSGD2.Gameplay
 
             LevelReferences levelReference = LevelReferences.Instance;
             levelReference.PlayerReferences.TryGetPlayerController(out _playerController);
-            levelReference.PlayerReferences.TryGetCameraAimController(out _playerCameraAimController);
+            levelReference.PlayerReferences.TryGetSlingshotCameraAimController(out _slingshotCameraAimController);
 
             //if (_cameraAimController != null)
             //{
@@ -58,9 +58,9 @@ namespace GSGD2.Gameplay
             _playerController.ShootPerformed -= PlayerController_ShootPerformed;
             _playerController.ShootPerformed += PlayerController_ShootPerformed;
 
-            if (_playerCameraAimController != null)
+            if (_slingshotCameraAimController != null)
             {
-                _playerCameraAimController.SetComponentEnabled(false);
+                _slingshotCameraAimController.SetComponentEnabled(false);
             }
             if (_cameraAimController != null)
             {
@@ -73,9 +73,9 @@ namespace GSGD2.Gameplay
         {
             _playerController.ShootPerformed -= PlayerController_ShootPerformed;
 
-            if (_playerCameraAimController != null)
+            if (_slingshotCameraAimController != null)
             {
-                _playerCameraAimController.SetComponentEnabled(true);
+                _slingshotCameraAimController.SetComponentEnabled(true);
             }
             if (_cameraAimController != null)
             {

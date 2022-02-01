@@ -56,10 +56,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3880992368049433197}
+  m_Children: []
   m_Father: {fileID: 7280882848012791425}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &588197022257783591
 GameObject:
@@ -413,14 +412,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758342202677951435}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2659276037661566532}
   - {fileID: 257308016}
-  m_Father: {fileID: 972144917}
-  m_RootOrder: 0
+  m_Father: {fileID: 7280882848012791425}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1917130852
 MonoBehaviour:
@@ -797,6 +796,7 @@ GameObject:
   - component: {fileID: 6299231398197848385}
   - component: {fileID: 1083523738}
   - component: {fileID: 868043966410835398}
+  - component: {fileID: 1692861527}
   - component: {fileID: 8330099605319962634}
   - component: {fileID: 1766770694844520402}
   - component: {fileID: 1413790177752788334}
@@ -850,6 +850,7 @@ Transform:
   - {fileID: 2112215263736636862}
   - {fileID: 2856957866302981648}
   - {fileID: 1011265884313809812}
+  - {fileID: 3880992368049433197}
   - {fileID: 972144917}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -913,9 +914,11 @@ MonoBehaviour:
   _playerKillzoneReceiver: {fileID: 1777161982658101376}
   _playerDamageable: {fileID: 2332251551028677084}
   _playerDamageFeedbackHandler: {fileID: 3603357115734113580}
-  _cameraAimController: {fileID: 6299231398197848385}
+  _slingshotCameraAimController: {fileID: 1692861527}
+  _shootingCameraAimController: {fileID: 6299231398197848385}
   _interactionManager: {fileID: 6817740376375966763}
   _boneSphere: {fileID: 8021408352904000306}
+  _projectileLauncherController: {fileID: 1275202730724197374}
 --- !u!114 &8963912016909959918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,12 +1188,11 @@ MonoBehaviour:
     _maxDistance: 20
     _layerMask:
       serializedVersion: 2
-      m_Bits: 257
+      m_Bits: 1281
     _drawGizmos: 1
-  _lineRenderer: {fileID: 0}
+  _lineRenderer: {fileID: 6075231610071905281}
   _rotator: {fileID: 1917130852}
   _cameraAimController: {fileID: 6299231398197848385}
-  _overridingKeyLayoutDescription: {fileID: 11400000, guid: 8d930e56b3e2bec4c95c3c2faa5b9b42, type: 2}
   _preventUseIfNoDirection: 1
 --- !u!114 &6299231398197848385
 MonoBehaviour:
@@ -1204,12 +1206,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696f32400f51b8f4293ff913d7057c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _memento: USED FOR SHOOTING
   _enabledAtStart: 1
   _cameraAimTransformParent: {fileID: 8101763736310891629}
   _cameraAim: {fileID: 7038285111042879796}
   _axis: 2
   _distance: 5
   _speed: 30
+  _isSlingshotController: 0
   _slingshotHandler: {fileID: 868043966410835398}
   _projectileLauncher: {fileID: 1083523738}
 --- !u!114 &1083523738
@@ -1237,7 +1241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2177101262253061136}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da07257921a87204faf24fe92461f489, type: 3}
   m_Name: 
@@ -1246,7 +1250,40 @@ MonoBehaviour:
     _duration: 2
   _minLaunchForce: 20
   _maxLaunchForce: 100
+  _preventUseIfNoDirection: 1
   _playerRefs: {fileID: 6559671171331571633}
+  _lineRenderer: {fileID: 6075231610071905281}
+  _raycaster:
+    fromTransform: {fileID: 257308016}
+    _maxDistance: 20
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    _drawGizmos: 0
+  _projectileLauncher: {fileID: 1083523738}
+  _rotator: {fileID: 758342202677951435}
+--- !u!114 &1692861527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177101262253061136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696f32400f51b8f4293ff913d7057c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _memento: USED FOR SLINGSHOT
+  _enabledAtStart: 0
+  _cameraAimTransformParent: {fileID: 8101763736310891629}
+  _cameraAim: {fileID: 7038285111042879796}
+  _axis: 2
+  _distance: 5
+  _speed: 30
+  _isSlingshotController: 1
+  _slingshotHandler: {fileID: 868043966410835398}
+  _projectileLauncher: {fileID: 1083523738}
 --- !u!114 &8330099605319962634
 MonoBehaviour:
   m_ObjectHideFlags: 0

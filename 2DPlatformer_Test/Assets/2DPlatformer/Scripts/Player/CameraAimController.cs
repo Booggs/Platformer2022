@@ -19,6 +19,9 @@ namespace GSGD2.Player
 		}
 
 		[SerializeField]
+		private string _memento = null;
+
+		[SerializeField]
 		private bool _enabledAtStart = true;
 
 		[SerializeField]
@@ -35,6 +38,9 @@ namespace GSGD2.Player
 
 		[SerializeField]
 		private float _speed = 10f;
+
+		[SerializeField]
+		private bool _isSlingshotController = false;
 
 		[SerializeField]
 		private SlingshotHandler _slingshotHandler = null;
@@ -71,9 +77,19 @@ namespace GSGD2.Player
 			if (isPlayer == false)
 			{
 				playerReferences = LevelReferences.Instance.PlayerReferences;
-				if (playerReferences.TryGetCameraAimController(out CameraAimController cameraAimController) == true)
-				{
-					this.InitializeFromOthers(cameraAimController);
+				if (_isSlingshotController == false)
+                {
+					if (playerReferences.TryGetSlingshotCameraAimController(out CameraAimController cameraAimController) == true)
+					{
+						this.InitializeFromOthers(cameraAimController);
+					}
+                }
+				else
+                {
+					if (playerReferences.TryGetShootingCameraAimController(out CameraAimController cameraAimController) == true)
+					{
+						this.InitializeFromOthers(cameraAimController);
+					}
 				}
 			}
 
