@@ -155,7 +155,7 @@ namespace GSGD2.Player
                 }
             }
         }
-
+         
         private void ResetPlayer(PlayerController sender, InputAction.CallbackContext obj)
         {
             LevelReferences.Instance.PlayerStart.ResetPlayerPosition();

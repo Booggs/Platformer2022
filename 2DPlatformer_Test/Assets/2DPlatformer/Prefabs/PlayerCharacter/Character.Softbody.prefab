@@ -433,10 +433,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a542fae2c4c831418f1fd87d8d3be25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationForces: {x: 0, y: 180, z: 0}
   _space: 0
   _resetWorldRotationAtOnEnable: 0
   _resetWorldRotationAtOnDisable: 0
+  _slingshotHandler: {fileID: 868043966410835398}
 --- !u!1 &1063020546327857756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,20 +1248,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chargingDurationTimer:
     _duration: 2
-  _minLaunchForce: 20
-  _maxLaunchForce: 100
+  _slingshotDurationTimer:
+    _duration: 3
+  _minLaunchForce: 50
+  _maxLaunchForce: 500
+  _angleLimit: 40
   _preventUseIfNoDirection: 1
   _playerRefs: {fileID: 6559671171331571633}
   _lineRenderer: {fileID: 6075231610071905281}
   _raycaster:
     fromTransform: {fileID: 257308016}
-    _maxDistance: 20
+    _maxDistance: 10
     _layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 1041
     _drawGizmos: 0
   _projectileLauncher: {fileID: 1083523738}
   _rotator: {fileID: 758342202677951435}
+  _leftBone: {fileID: 0}
+  _rightBone: {fileID: 0}
 --- !u!114 &1692861527
 MonoBehaviour:
   m_ObjectHideFlags: 0
