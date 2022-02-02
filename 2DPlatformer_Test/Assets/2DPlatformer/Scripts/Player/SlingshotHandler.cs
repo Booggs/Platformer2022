@@ -62,6 +62,8 @@ namespace GSGD2.Gameplay
 
         public Timer SlingshotTimer => _slingshotDurationTimer;
 
+        public bool Slingshotting => _slingshotting;
+
         private void Awake()
         {
             _playerRefs.TryGetCubeController(out _cubeController);
@@ -79,11 +81,10 @@ namespace GSGD2.Gameplay
         {
             _playerController.ChargeSlingshotPerformed -= ChargeSlingshot;
             _playerController.ReleaseSlingshotPerformed -= ReleaseSlingshot;
+            _slingshotDurationTimer.StateChanged -= SlingshotTimerUpdated;
 
             _playerController.ChargeSlingshotPerformed += ChargeSlingshot;
             _playerController.ReleaseSlingshotPerformed += ReleaseSlingshot;
-
-            _slingshotDurationTimer.StateChanged -= SlingshotTimerUpdated;
             _slingshotDurationTimer.StateChanged += SlingshotTimerUpdated;
 
             _rigidbodies.AddRange(GetComponentsInChildren<Rigidbody>());
@@ -127,17 +128,14 @@ namespace GSGD2.Gameplay
                 }
                 UpdateLineRenderer();
 
-                if (_slingshotCharging == true)
-                {
-                    _chargingDurationTimer.Update();
-                    _raycaster.SetMaxDistance(_chargingDurationTimer.Progress * _maxRaycasterDistance);
-                    _currentLaunchForce = _maxLaunchForce * _chargingDurationTimer.Progress;
-                    if (_currentLaunchForce < _minLaunchForce)
-                        _currentLaunchForce = _minLaunchForce;
-                }
-                if (_slingshotDurationTimer.IsRunning)
-                    _slingshotDurationTimer.Update();
+                _chargingDurationTimer.Update();
+                _raycaster.SetMaxDistance(_chargingDurationTimer.Progress * _maxRaycasterDistance);
+                _currentLaunchForce = _maxLaunchForce * _chargingDurationTimer.Progress;
+                if (_currentLaunchForce < _minLaunchForce)
+                    _currentLaunchForce = _minLaunchForce;
             }
+            if (_slingshotDurationTimer.IsRunning)
+                _slingshotDurationTimer.Update();
         }
 
         private void ChargeSlingshot(PlayerController sender, InputAction.CallbackContext obj)
@@ -182,6 +180,7 @@ namespace GSGD2.Gameplay
                     break;
                 case Timer.State.Running:
                     {
+                        print("slingshot timer started");
                     }
                     break;
                 case Timer.State.Finished:
@@ -197,10 +196,12 @@ namespace GSGD2.Gameplay
 
         private void ResetSlingshot()
         {
+            print("resetting slingshot");
             _shootingCameraAimController.enabled = true;
             _projectileLauncherController.enabled = true;
             _slingshotting = false;
             _cubeController.enabled = true;
+
             _boneSphere.SpringJoints[4].spring /= 5f;
         }
 

@@ -205,6 +205,7 @@ namespace GSGD2.Player
         private DisplacementEstimationUpdater _displacementEstimationUpdater = null;
         private CharacterCollision _characterCollision = null;
         private BoneSphere _boneSphere = null;
+        private SlingshotHandler _slingshotHandler = null;
         private float _maxVelocitySqr = -1f;
         private float _inputMovement;
         private float _rawInputMovement;
@@ -436,6 +437,7 @@ namespace GSGD2.Player
             _playerReferences.TryGetDisplacementEstimationUpdater(out _displacementEstimationUpdater);
             _playerReferences.TryGetCharacterCollision(out _characterCollision);
             _playerReferences.TryGetBoneSphere(out _boneSphere);
+            _playerReferences.TryGetSlingshotHandler(out _slingshotHandler);
 
             _maxVelocitySqr = _maxVelocity * _maxVelocity;
 
@@ -1369,6 +1371,7 @@ namespace GSGD2.Player
                     velocity = new Vector3(0f, velocity.y, 0f);
                 }
             }
+
             if (velocity.z < 0.1f && _playerController.HorizontalMove == 0)
             {
                 velocity.z = 0f;

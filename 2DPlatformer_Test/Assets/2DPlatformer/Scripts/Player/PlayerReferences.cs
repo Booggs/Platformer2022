@@ -29,6 +29,8 @@ namespace GSGD2.Player
 		[SerializeField] private InteractionManager _interactionManager = null;
 		[SerializeField] private BoneSphere _boneSphere = null;
 		[SerializeField] private ProjectileLauncherController _projectileLauncherController = null;
+		[SerializeField] private SlingshotHandler _slingshotHandler = null;
+
 		private Rigidbody _rigidbody = null;
 		private float _currentScale = 1f;
 
@@ -173,6 +175,12 @@ namespace GSGD2.Player
 		{
 			projectileLauncherController = _projectileLauncherController;
 			return projectileLauncherController != null;
+		}
+
+		public bool TryGetSlingshotHandler(out SlingshotHandler slingshotHandler)
+		{
+			slingshotHandler = _slingshotHandler;
+			return slingshotHandler != null;
 		}
 	}
 }

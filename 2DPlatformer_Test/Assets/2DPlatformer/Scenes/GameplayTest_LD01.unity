@@ -13868,6 +13868,10 @@ PrefabInstance:
       propertyPath: _minLaunchForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 868043966410835398, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
+      propertyPath: _slingshotDurationTimer._duration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2177101262253061136, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_Name
       value: Character.Softbody
@@ -13884,6 +13888,10 @@ PrefabInstance:
       propertyPath: m_TranslationOffset.z
       value: -0.1112448
       objectReference: {fileID: 0}
+    - target: {fileID: 6559671171331571633, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
+      propertyPath: _slingshotHandler
+      value: 
+      objectReference: {fileID: 73482500}
     - target: {fileID: 7280882848012791425, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_RootOrder
       value: 1
