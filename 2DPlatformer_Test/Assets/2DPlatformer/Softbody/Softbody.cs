@@ -88,10 +88,12 @@ namespace GSGD2.Player
                 case ColliderShape.Box:
                     BoxCollider bc = go.AddComponent<BoxCollider>();
                     bc.size = new Vector3(size, size, size);
+                    bc.center = Vector3.zero;
                     break;
                 case ColliderShape.Sphere:
                     SphereCollider sc = go.AddComponent<SphereCollider>();
                     sc.radius = size;
+                    sc.center = Vector3.zero;
                     break;
             }
 

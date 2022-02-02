@@ -284,7 +284,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: d69efeda-325b-40fb-8c58-cd44f8d24019
-      m_Path: <Gamepad>/rightTrigger
+      m_Path: <Gamepad>/leftShoulder
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -300,7 +300,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: f6685742-0816-4912-9c48-d429bb37a1b0
-      m_Path: <Gamepad>/buttonWest
+      m_Path: <Gamepad>/leftTrigger
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -316,7 +316,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 1d5cc741-5a6a-4968-a5ef-fbd9f53dfdca
-      m_Path: <Gamepad>/buttonWest
+      m_Path: <Gamepad>/leftTrigger
       m_Interactions: Press(behavior=1)
       m_Processors: 
       m_Groups: 
@@ -364,7 +364,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 6f084cd3-fe8f-49ed-a8d4-9ed04c540231
-      m_Path: <Gamepad>/rightShoulder
+      m_Path: <Gamepad>/buttonWest
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -428,19 +428,11 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 7da90234-c486-46cc-9884-d159355e4718
-      m_Path: <Gamepad>/dpad/up
+      m_Path: <Gamepad>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: UseInteractable
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 3d6a8677-6f69-45e1-979e-aebf41f72138
-      m_Path: <Gamepad>/dpad/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: LeaveInteractable
       m_Flags: 0
     - m_Name: 
       m_Id: e0d59abe-2881-4558-a862-82f37f8bebac
@@ -492,7 +484,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: dc0b2ba3-e331-4590-8775-f81baf30708c
-      m_Path: <Gamepad>/rightShoulder
+      m_Path: <Gamepad>/buttonWest
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -500,7 +492,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 2f994a23-c9fa-4685-8e7c-589ff7e35cac
-      m_Path: 
+      m_Path: <Gamepad>/rightShoulder
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -508,7 +500,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 6371a03d-ad2c-41d1-829e-b13f71e1016a
-      m_Path: <Gamepad>/leftTrigger
+      m_Path: <Gamepad>/rightTrigger
       m_Interactions: Hold(duration=0.1)
       m_Processors: 
       m_Groups: 
@@ -516,7 +508,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: a68bca11-cfb2-4d4f-9fe8-bdd43b5183c5
-      m_Path: <Gamepad>/leftTrigger
+      m_Path: <Gamepad>/rightTrigger
       m_Interactions: Press(behavior=1)
       m_Processors: 
       m_Groups: 
