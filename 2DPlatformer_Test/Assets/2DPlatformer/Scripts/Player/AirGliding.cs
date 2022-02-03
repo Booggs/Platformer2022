@@ -78,7 +78,7 @@ namespace GSGD2.Player
 				{
 					StopGliding();
 				}
-				if (_characterCollision.HasAWallInFrontOfCharacter == true || _characterCollision.HasAWallBehindCharacter)
+				if (_characterCollision.HasAWallInFrontOfCharacter || _characterCollision.HasAWallBehindCharacter)
 				{
 					StopGliding();
 				}

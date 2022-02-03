@@ -880,7 +880,7 @@ MonoBehaviour:
     _duration: 0.1
   _playerController: {fileID: 8963912016909959918}
   Spring: 300
-  Damper: 0
+  Damper: 50
   Shape: 1
   ColliderSize: 0.002
   RootColliderSize: 0.45
@@ -919,6 +919,7 @@ MonoBehaviour:
   _interactionManager: {fileID: 6817740376375966763}
   _boneSphere: {fileID: 8021408352904000306}
   _projectileLauncherController: {fileID: 1275202730724197374}
+  _slingshotHandler: {fileID: 868043966410835398}
 --- !u!114 &8963912016909959918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,12 +1031,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerReferences: {fileID: 6559671171331571633}
-  _maxVelocity: 50
+  _maxVelocity: 75
   _groundMoveSpeed: 10
-  _groundFriction: 9
+  _groundFriction: 5
   _airMoveSpeed: 11
   _ascendingGravityScale: 1
-  _descendingGravityScale: 1
+  _descendingGravityScale: 5
   _glidingSpeedDivider: 1.05
   _jump:
     enabled: 1
@@ -1043,7 +1044,7 @@ MonoBehaviour:
     cubeController: {fileID: 0}
     displacementEstimationUpdater: {fileID: 0}
     _gravityScale: 9
-    _jumpHeight: 25
+    _jumpHeight: 50
     _jumpHeightBonusWhenFalling: 5
     _jumpHeightBonusSpeedThreshold: 10
   _changeToFallingStateWhenReleasingJump: 0
@@ -1250,8 +1251,8 @@ MonoBehaviour:
     _duration: 2
   _slingshotDurationTimer:
     _duration: 3
-  _minLaunchForce: 50
-  _maxLaunchForce: 500
+  _minLaunchForce: 5
+  _maxLaunchForce: 50
   _angleLimit: 40
   _preventUseIfNoDirection: 1
   _playerRefs: {fileID: 6559671171331571633}
@@ -1265,8 +1266,6 @@ MonoBehaviour:
     _drawGizmos: 0
   _projectileLauncher: {fileID: 1083523738}
   _rotator: {fileID: 758342202677951435}
-  _leftBone: {fileID: 0}
-  _rightBone: {fileID: 0}
 --- !u!114 &1692861527
 MonoBehaviour:
   m_ObjectHideFlags: 0
