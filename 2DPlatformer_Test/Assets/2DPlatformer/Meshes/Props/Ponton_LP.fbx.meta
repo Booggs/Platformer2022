@@ -3,7 +3,12 @@ guid: bd4f868a03d872742ad8db1f4db34205
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SM_Ponton
+    second: {fileID: 2100000, guid: d3ae00f3176f0b445bdedd44d1ed7cf4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

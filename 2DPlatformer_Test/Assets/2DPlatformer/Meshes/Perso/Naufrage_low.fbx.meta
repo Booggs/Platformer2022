@@ -3,7 +3,12 @@ guid: e52982a261d4c9741bdfb4fbfe177091
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Naufrage
+    second: {fileID: 2100000, guid: 5b92c6904f944b34ca542b94431acc63, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

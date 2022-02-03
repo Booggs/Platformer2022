@@ -3,7 +3,12 @@ guid: caa0d6343f6804e4fabf30e15bdb9fda
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Squeleton_1
+    second: {fileID: 2100000, guid: f763350c085a6db48b2880d84ce1d05b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,12 @@ guid: 9e35ee8a3b96b484b8d5f6073aa0425d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SM_PontCasse
+    second: {fileID: 2100000, guid: 9c11dde42d743cb4cb5c637157d211e3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

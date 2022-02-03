@@ -3,7 +3,12 @@ guid: 5ecdc784ca027e4449d068a292ebc77a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SM_Piege
+    second: {fileID: 2100000, guid: f3089dc784386b94ab4bb873efa64713, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

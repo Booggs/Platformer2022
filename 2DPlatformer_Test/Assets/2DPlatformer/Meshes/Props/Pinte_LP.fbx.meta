@@ -3,7 +3,12 @@ guid: 2785633cb6c3c8b4697eddc98807d944
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SM_Pinte
+    second: {fileID: 2100000, guid: 02d6502e49a04f24a8cbb278b4d50778, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

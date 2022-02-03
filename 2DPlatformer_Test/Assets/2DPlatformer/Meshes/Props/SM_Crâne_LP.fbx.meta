@@ -3,7 +3,12 @@ guid: 89ea7a70c3684d14a9d43d6519d77be9
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: crane_texture
+    second: {fileID: 2100000, guid: d8c87191977db104cb44db2e682a4c2f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

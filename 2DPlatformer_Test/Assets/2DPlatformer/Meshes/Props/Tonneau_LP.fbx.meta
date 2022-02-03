@@ -3,7 +3,12 @@ guid: b7cf68e2b1013e34ba176bf14e7db3f7
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SM_Tonneau
+    second: {fileID: 2100000, guid: 9b409b7ce693bee4f94faa94c0daa3b1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
