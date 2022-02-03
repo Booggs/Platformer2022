@@ -26622,7 +26622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1224131190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45953,10 +45953,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1830147811}
     m_Modifications:
-    - target: {fileID: 8020309834056049630, guid: 62cb83eef312704419dbb3e3a6eff339, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8020309834163162336, guid: 62cb83eef312704419dbb3e3a6eff339, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -46018,37 +46014,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1083523738, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: _projectilePrefab
-      value: 
-      objectReference: {fileID: 3141901799035707220, guid: d0af26ae3b3bae14d8698cee0a3fdb63, type: 3}
-    - target: {fileID: 868043966410835398, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: _raycaster._maxDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1275202730724197374, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: _raycaster._layerMask.m_Bits
-      value: 1025
-      objectReference: {fileID: 0}
     - target: {fileID: 2177101262253061136, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_Name
       value: Character.Softbody
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593872512912434520, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: m_TranslationOffset.z
-      value: 0.10778165
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510370588588690044, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: _glidingSpeedMultiplier
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4608137964132476650, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: _glidingSpeedDivider
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4608137964132476650, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: _descendingGravityScale
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7280882848012791425, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_RootOrder
@@ -46093,26 +46061,6 @@ PrefabInstance:
     - target: {fileID: 7280882848012791425, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7659724842038268440, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079367261450329543, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: m_TranslationOffset.y
-      value: 0.005824566
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162265896534072478, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8229920042229677643, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: m_TranslationOffset.y
-      value: 0.0031867027
-      objectReference: {fileID: 0}
-    - target: {fileID: 8229920042229677643, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
-      propertyPath: m_TranslationOffset.z
-      value: -0.61521834
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49edc4acae98e1d478eccd9afc0c39cd, type: 3}
