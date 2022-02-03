@@ -24,9 +24,13 @@ namespace GSGD2.Player
 		[SerializeField] private PlayerKillzoneReceiver _playerKillzoneReceiver = null;
 		[SerializeField] private PlayerDamageable _playerDamageable = null;
 		[SerializeField] private PlayerDamageFeedbackHandler _playerDamageFeedbackHandler = null;
-		[SerializeField] private CameraAimController _cameraAimController = null;
+		[SerializeField] private CameraAimController _slingshotCameraAimController = null;
+		[SerializeField] private CameraAimController _shootingCameraAimController = null;
 		[SerializeField] private InteractionManager _interactionManager = null;
 		[SerializeField] private BoneSphere _boneSphere = null;
+		[SerializeField] private ProjectileLauncherController _projectileLauncherController = null;
+		[SerializeField] private SlingshotHandler _slingshotHandler = null;
+
 		private Rigidbody _rigidbody = null;
 		private float _currentScale = 1f;
 
@@ -143,9 +147,15 @@ namespace GSGD2.Player
 			return playerDamageFeedbackHandler != null;
 		}
 
-		public bool TryGetCameraAimController(out CameraAimController cameraAimController)
+		public bool TryGetSlingshotCameraAimController(out CameraAimController cameraAimController)
 		{
-			cameraAimController = _cameraAimController;
+			cameraAimController = _slingshotCameraAimController;
+			return cameraAimController != null;
+		}
+
+		public bool TryGetShootingCameraAimController(out CameraAimController cameraAimController)
+		{
+			cameraAimController = _shootingCameraAimController;
 			return cameraAimController != null;
 		}
 
@@ -160,5 +170,17 @@ namespace GSGD2.Player
 			boneSphere = _boneSphere;
 			return boneSphere != null;
         }
+
+		public bool TryGetProjectileLauncherController(out ProjectileLauncherController projectileLauncherController)
+		{
+			projectileLauncherController = _projectileLauncherController;
+			return projectileLauncherController != null;
+		}
+
+		public bool TryGetSlingshotHandler(out SlingshotHandler slingshotHandler)
+		{
+			slingshotHandler = _slingshotHandler;
+			return slingshotHandler != null;
+		}
 	}
 }

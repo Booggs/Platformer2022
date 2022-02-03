@@ -10,8 +10,8 @@ namespace GSGD2.Gameplay
 	/// </summary>
 	public class Rotator : MonoBehaviour
 	{
-		[SerializeField]
-		private Vector3 _rotationForces = Vector3.up;
+		//[SerializeField]
+		//private Vector3 _rotationForces = Vector3.up;
 
 		[SerializeField]
 		private Space _space = 0;
@@ -37,7 +37,7 @@ namespace GSGD2.Gameplay
 		private void Awake()
 		{
 			_worldCachedRotationAtStart = transform.rotation;
-		}
+ 		}
 
 		private void OnEnable()
 		{
@@ -53,11 +53,6 @@ namespace GSGD2.Gameplay
 			{
 				transform.rotation = _worldCachedRotationAtStart;
 			}
-		}
-
-		private void Update()
-		{
-			transform.Rotate(_rotationForces * Time.deltaTime, _space);
 		}
 	}
 }

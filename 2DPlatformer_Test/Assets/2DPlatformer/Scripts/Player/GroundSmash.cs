@@ -54,10 +54,10 @@ namespace GSGD2.Player
 				// TODO AL : maybe reset vel to 0 before applying the bump
 				if (playerRefs.TryGetCubeController(out CubeController cubeController) == true)
                 {
-					foreach(var rigidbody in cubeController.Rigidbodies)
+                    foreach (var rigidbody in cubeController.Rigidbodies)
                     {
-						rigidbody.AddForce(new Vector3(0f, _force * -1, 0f), ForceMode.Impulse);
-					}
+                        rigidbody.AddForce(new Vector3(0f, _force * -1, 0f), ForceMode.Impulse);
+                    }
                 }
 				_cubeController.enabled = false;
 				_enableControlsAfterTimer.Start();

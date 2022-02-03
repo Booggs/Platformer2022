@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8020309833364835955}
   - component: {fileID: 8020309833364835954}
   - component: {fileID: 8020309833364835957}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8020309834056049568}
   - component: {fileID: 8020309834056049630}
   - component: {fileID: 8020309834056049569}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 135787008}
   - component: {fileID: 3616004236238697145}
   - component: {fileID: 135787009}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PathFollowingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,11 +234,11 @@ MonoBehaviour:
       cubeController: {fileID: 0}
       displacementEstimationUpdater: {fileID: 0}
       _gravityScale: 5
-      _jumpHeight: 3
+      _jumpHeight: 1
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
   _ignorePlayer: 0
-  _giveDOT: 1
+  _giveDOT: 0
   _DOTDamage:
     _damageValue: 1
     _bump:
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f86335c40cb4043a7e1f6cb86e6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lootPickup: {fileID: 4425828610075771448, guid: 8b7ace13a3411154cb7db4609ee2a843, type: 3}
+  _lootPickup: {fileID: 7258992233013335728, guid: eb33e53b5b0536f4a8ca1060630615ef, type: 3}
 --- !u!114 &135787009
 MonoBehaviour:
   m_ObjectHideFlags: 0

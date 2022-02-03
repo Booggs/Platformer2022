@@ -32,6 +32,7 @@ namespace GSGD2.Player
         [Header("Other Settings")]
         public bool _specialUndersideBone = false;
         public Softbody.ColliderShape Shape = Softbody.ColliderShape.Box;
+        public float CenterSphereSize = 0.6f;
         public float ColliderSize = 0.002f;
         public float RigidbodyMass = 1f;
         public LineRenderer PrefabLine = null;
@@ -41,7 +42,7 @@ namespace GSGD2.Player
         {
             Softbody.Init(Shape, ColliderSize, RigidbodyMass, Spring, Damper, RigidbodyConstraints.FreezeRotation, PrefabLine, ViewLines);
 
-            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, 0.6f, 1f, false);
+            Softbody.AddCollider(ref root, Softbody.ColliderShape.Sphere, CenterSphereSize, 1f, false);
             Softbody.AddCollider(ref x, false);
             Softbody.AddCollider(ref x2, false);
             Softbody.AddCollider(ref y, false);

@@ -205,6 +205,7 @@ namespace GSGD2.Player
         private DisplacementEstimationUpdater _displacementEstimationUpdater = null;
         private CharacterCollision _characterCollision = null;
         private BoneSphere _boneSphere = null;
+        private SlingshotHandler _slingshotHandler = null;
         private float _maxVelocitySqr = -1f;
         private float _inputMovement;
         private float _rawInputMovement;
@@ -436,6 +437,7 @@ namespace GSGD2.Player
             _playerReferences.TryGetDisplacementEstimationUpdater(out _displacementEstimationUpdater);
             _playerReferences.TryGetCharacterCollision(out _characterCollision);
             _playerReferences.TryGetBoneSphere(out _boneSphere);
+            _playerReferences.TryGetSlingshotHandler(out _slingshotHandler);
 
             _maxVelocitySqr = _maxVelocity * _maxVelocity;
 
@@ -663,7 +665,7 @@ namespace GSGD2.Player
                         {
                             _hasBeganToFallFromGroundedState = true;
                         }
-                        _boneSphere.SpringJoints[4].spring *= 5f;
+                        //_boneSphere.SpringJoints[4].spring *= 5f;
                     }
                     break;
                 case State.Falling:
@@ -716,7 +718,7 @@ namespace GSGD2.Player
                 case State.Grounded:
                     {
                         ResetCurrentValues();
-                        _boneSphere.SpringJoints[4].spring /= 5f;
+                        //_boneSphere.SpringJoints[4].spring /= 5f;
                     }
                     break;
                 case State.Falling:
@@ -1106,6 +1108,7 @@ namespace GSGD2.Player
                         {
                             _jump.TryApplyForce(rigidbody);
                         }
+                        //_jump.TryApplyForce(Rigidbody);
                         ChangeState(State.StartJump);
                         _currentDurationToDisableGroundRaycastWhenJumping = 0;
                     }
@@ -1369,18 +1372,25 @@ namespace GSGD2.Player
                     velocity = new Vector3(0f, velocity.y, 0f);
                 }
             }
+
             if (velocity.z < 0.1f && _playerController.HorizontalMove == 0)
             {
                 velocity.z = 0f;
             }
-
-            foreach (var rigidbody in _rigidbodies)
+            if (_slingshotHandler.Slingshotting == false && _slingshotHandler.ChargingSlingshot == false)
             {
+
                 if (_gliding == true)
                 {
                     velocity.y = velocity.y / _glidingSpeedDivider;
                 }
-                rigidbody.velocity = velocity;
+                for (int i = 1; i < _rigidbodies.Length; i++)
+                {
+                    _rigidbodies[i].velocity = _rigidbodies[i].velocity * 0.975f;
+                }
+                Rigidbody.velocity = velocity;
+
+
             }
 
             Debug.DrawLine(transform.position, transform.position + velocity * 5, Color.yellow);

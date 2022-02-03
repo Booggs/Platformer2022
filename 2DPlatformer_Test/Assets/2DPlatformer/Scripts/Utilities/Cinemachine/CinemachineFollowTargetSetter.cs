@@ -14,7 +14,7 @@ namespace GSGD2.Utilities
 
 		private void Start()
 		{
-			if (LevelReferences.Instance.PlayerReferences.TryGetCameraAimController(out Player.CameraAimController cameraAimController) == true)
+			if (LevelReferences.Instance.PlayerReferences.TryGetSlingshotCameraAimController(out Player.CameraAimController cameraAimController) == true)
 			{
 				_vCam.Follow = cameraAimController.CameraAim.transform;
 			}
