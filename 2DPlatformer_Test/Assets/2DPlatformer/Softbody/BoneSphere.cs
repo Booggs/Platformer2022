@@ -57,6 +57,7 @@ namespace GSGD2.Player
 
         public List<GameObject> Bones => _bones;
         public List<SpringJoint> SpringJoints => _springJoints;
+        public Timer SnapTimer => _snapTimer;
 
         private void Awake()
         {

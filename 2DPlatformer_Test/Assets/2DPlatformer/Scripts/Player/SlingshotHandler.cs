@@ -64,6 +64,8 @@ namespace GSGD2.Gameplay
 
         public bool Slingshotting => _slingshotting;
 
+        public bool ChargingSlingshot => _slingshotCharging;
+
         private void Awake()
         {
             _playerRefs.TryGetCubeController(out _cubeController);
@@ -135,14 +137,20 @@ namespace GSGD2.Gameplay
                     _currentLaunchForce = _minLaunchForce;
             }
             if (_slingshotDurationTimer.IsRunning)
+            {
                 _slingshotDurationTimer.Update();
+            }
+            else if(_slingshotting && (_playerController.HorizontalMove != 0 || _playerController.IsJumpButtonPressed))
+            {
+                ResetSlingshot();
+            }
         }
 
         private void ChargeSlingshot(PlayerController sender, InputAction.CallbackContext obj)
         {
             if (_cubeController.CurrentState == CubeController.State.Grounded)
             {
-                _cubeController.enabled = false;
+                //_cubeController.enabled = false;
                 _slingshotCameraAimController.enabled = true;
                 _shootingCameraAimController.enabled = false;
                 _projectileLauncherController.enabled = false;
@@ -156,7 +164,7 @@ namespace GSGD2.Gameplay
         {
             if (_slingshotCharging == true)
             {
-                _boneSphere.SpringJoints[4].spring *= 5f;
+                //_boneSphere.SpringJoints[4].spring *= 5f;
                 _slingshotCharging = false;
                 _slingshotting = true;
                 _slingshotCameraAimController.enabled = false;
@@ -169,6 +177,7 @@ namespace GSGD2.Gameplay
                     rigidbody.AddForce(_playerController.LookDirection * _currentLaunchForce, ForceMode.Impulse);
                 }
                 print((_playerController.LookDirection * _currentLaunchForce).ToString("F4"));
+                _playerController.enabled = false;
             }
         }
 
@@ -179,14 +188,13 @@ namespace GSGD2.Gameplay
                 case Timer.State.Stopped:
                     break;
                 case Timer.State.Running:
-                    {
-                        print("slingshot timer started");
-                    }
                     break;
                 case Timer.State.Finished:
                     {
-                        print("slingshot timer finished");
-                        ResetSlingshot();
+                        if (_slingshotting)
+                        {
+                            _playerController.enabled = true;
+                        }
                     }
                     break;
                 default:
@@ -194,15 +202,18 @@ namespace GSGD2.Gameplay
             }
         }
 
-        private void ResetSlingshot()
+        public void ResetSlingshot()
         {
-            print("resetting slingshot");
+            if (_slingshotDurationTimer.IsRunning)
+                _slingshotDurationTimer.ForceFinishState();
+
             _shootingCameraAimController.enabled = true;
             _projectileLauncherController.enabled = true;
             _slingshotting = false;
-            _cubeController.enabled = true;
+            _boneSphere.SnapTimer.Start(0.03f);
+            //_cubeController.enabled = true;
 
-            _boneSphere.SpringJoints[4].spring /= 5f;
+            //_boneSphere.SpringJoints[4].spring /= 5f;
         }
 
         private void UpdateLineRenderer()

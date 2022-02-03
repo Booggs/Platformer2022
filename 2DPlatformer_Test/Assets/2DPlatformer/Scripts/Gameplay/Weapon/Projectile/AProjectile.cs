@@ -16,7 +16,7 @@ namespace GSGD2.Gameplay
 	{
 		[Header("References")]
 		[SerializeField]
-		private GameObjectDestroyer _gameObjectDestroyer = null;
+		protected GameObjectDestroyer _gameObjectDestroyer = null;
 
 		[SerializeField]
 		private PhysicsTriggerEvent _redirectProjectileTriggerEvent = null;
@@ -26,7 +26,7 @@ namespace GSGD2.Gameplay
 
 		[Header("Settings")]
 		[SerializeField]
-		private bool _destroyOnCollision = true;
+		protected bool _destroyOnCollision = true;
 
 		[SerializeField]
 		protected float lifeSpan = 10f;
@@ -50,32 +50,32 @@ namespace GSGD2.Gameplay
 
 		protected virtual void OnEnable()
 		{
-			_redirectProjectileTriggerEvent._onTriggerEnter.RemoveListener(OnRedirectProjectileEnter);
-			_redirectProjectileTriggerEvent._onTriggerEnter.AddListener(OnRedirectProjectileEnter);
+			//_redirectProjectileTriggerEvent._onTriggerEnter.RemoveListener(OnRedirectProjectileEnter);
+			//_redirectProjectileTriggerEvent._onTriggerEnter.AddListener(OnRedirectProjectileEnter);
 			_destroyOnCollisionTriggerEvent._onTriggerEnter.RemoveListener(OnDestroyOnCollisionEnter);
 			_destroyOnCollisionTriggerEvent._onTriggerEnter.AddListener(OnDestroyOnCollisionEnter);
 		}
 
 		protected virtual void OnDisable()
 		{
-			_redirectProjectileTriggerEvent._onTriggerEnter.RemoveListener(OnRedirectProjectileEnter);
+			//_redirectProjectileTriggerEvent._onTriggerEnter.RemoveListener(OnRedirectProjectileEnter);
 			_destroyOnCollisionTriggerEvent._onTriggerEnter.RemoveListener(OnDestroyOnCollisionEnter);
 		}
 
-		protected virtual void OnRedirectProjectileEnter(PhysicsTriggerEvent triggerEvent, Collider other)
-		{
-			if (_gameObjectDestroyer.WillDestroy == true) return;
+		//protected virtual void OnRedirectProjectileEnter(PhysicsTriggerEvent triggerEvent, Collider other)
+		//{
+		//	if (_gameObjectDestroyer.WillDestroy == true) return;
 
-			if (redirectProjectile == true)
-			{
-				TryRedirectProjectile(other);
-			}
-		}
+		//	if (redirectProjectile == true)
+		//	{
+		//		TryRedirectProjectile(other);
+		//	}
+		//}
 
 		protected virtual void OnDestroyOnCollisionEnter(PhysicsTriggerEvent triggerEvent, Collider other)
 		{
 			if (_gameObjectDestroyer.WillDestroy == true) return;
-		
+			
 			// ignore instigator
 			if (_damageDealer != null)
 			{
