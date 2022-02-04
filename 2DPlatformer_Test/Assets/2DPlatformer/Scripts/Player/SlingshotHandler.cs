@@ -44,6 +44,9 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private GameObject _rotator = null;
 
+        [SerializeField]
+        private DamageHandler _damageHandler = null;
+
         private List<Rigidbody> _rigidbodies = new List<Rigidbody>();
         private CubeController _cubeController = null;
         private PlayerController _playerController = null;
@@ -148,13 +151,14 @@ namespace GSGD2.Gameplay
 
         private void ChargeSlingshot(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_cubeController.CurrentState == CubeController.State.Grounded)
+            if (_cubeController.CurrentState == CubeController.State.Grounded && _cubeController.CurrentStamina >= 0.5f)
             {
                 //_cubeController.enabled = false;
                 _slingshotCameraAimController.enabled = true;
                 _shootingCameraAimController.enabled = false;
                 _projectileLauncherController.enabled = false;
                 _slingshotCharging = true;
+                _cubeController.StopStaminaRegen();
                 _chargingDurationTimer.ResetTimeElapsed();
                 _chargingDurationTimer.Start();
             }
@@ -162,7 +166,7 @@ namespace GSGD2.Gameplay
 
         private void ReleaseSlingshot(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_slingshotCharging == true)
+            if (_slingshotCharging == true && _cubeController.UseStamina(0.5f) == true)
             {
                 //_boneSphere.SpringJoints[4].spring *= 5f;
                 _slingshotCharging = false;
@@ -171,11 +175,15 @@ namespace GSGD2.Gameplay
                 _slingshotCameraAimController.ResetCameraAimPosition();
                 _lineRenderer.enabled = false;
                 _slingshotDurationTimer.Start();
+                if (_chargingDurationTimer.IsRunning == true)
+                    _slingshotDurationTimer.TimeElapsed = 1 - _chargingDurationTimer.TimeElapsed;
                 _chargingDurationTimer.ForceFinishState();
+                _cubeController.StartStaminaRegen();
                 foreach (Rigidbody rigidbody in _rigidbodies)
                 {
                     rigidbody.AddForce(_playerController.LookDirection * _currentLaunchForce, ForceMode.Impulse);
                 }
+                _damageHandler.UpdateState(DamageHandler.DamageStates.Slingshotting);
                 print((_playerController.LookDirection * _currentLaunchForce).ToString("F4"));
                 _playerController.enabled = false;
             }
@@ -211,6 +219,7 @@ namespace GSGD2.Gameplay
             _projectileLauncherController.enabled = true;
             _slingshotting = false;
             _boneSphere.SnapTimer.Start(0.03f);
+            _damageHandler.UpdateState(DamageHandler.DamageStates.None);
             //_cubeController.enabled = true;
 
             //_boneSphere.SpringJoints[4].spring /= 5f;

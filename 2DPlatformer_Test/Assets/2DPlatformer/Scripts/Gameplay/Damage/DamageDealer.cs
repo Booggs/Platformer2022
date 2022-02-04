@@ -39,6 +39,18 @@ namespace GSGD2.Gameplay
 		private List<Damageable> _damageablesInRange = new List<Damageable>();
 		public PhysicsTriggerEvent PhysicsTriggerEvent => _physicsTriggerEvent;
 
+		public Damage Damage
+        {
+			get
+            {
+				return _damage;
+            }
+			set
+            {
+				_damage = value;
+            }
+        }
+
 		public bool IsInstigator(IDamageInstigator instigator)
 		{
 			return (ReferenceEquals(instigator, _damage.Instigator)) == true;
@@ -87,6 +99,8 @@ namespace GSGD2.Gameplay
 
 		private bool CanGiveDamage(Damageable damageable)
 		{
+			if (damageable == null)
+				return false;
 			bool canGiveDamage = _hasGivenDamageThisFrame == false;
 			if (_ignorePlayer == true)
 			{

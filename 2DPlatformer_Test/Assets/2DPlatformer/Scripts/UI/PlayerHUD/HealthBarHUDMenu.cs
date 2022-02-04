@@ -21,13 +21,19 @@ namespace GSGD2.UI
 		[SerializeField]
 		private CanvasGroup _canvasGroup = null;
 
+		[SerializeField]
+		private Image _currentOutline = null;
+
+		[SerializeField]
+		private Sprite[] _outlines = new Sprite[3];
+
 		private Damageable _damageable = null;
 		private bool _fadingOut = false;
 
 		private void Awake()
 		{
 			_damageable = LevelReferences.Instance.Player.GetComponent<Damageable>();
-			_canvasGroup.alpha = 0;
+			//_canvasGroup.alpha = 0;
 		}
 
 		private void OnEnable()
@@ -59,7 +65,7 @@ namespace GSGD2.UI
 			}
 		}
 
-        private void Update()
+        /*private void Update()
         {
 			if (_fadingTimer.IsRunning)
 				_fadingTimer.Update();
@@ -69,7 +75,7 @@ namespace GSGD2.UI
 				_canvasGroup.alpha = 1 - _fadingTimer.Progress;
             }
 			else _canvasGroup.alpha = _fadingTimer.Progress;
-		}
+		}*/
 
         private void Damageable_OnHealthChanged(Damageable sender, Damageable.DamageableArgs args)
 		{
@@ -79,8 +85,18 @@ namespace GSGD2.UI
 		private void UpdateHealth(float health, float maxHealth)
 		{
 			float perc = Mathf.Clamp01(health / maxHealth);
+			if (perc >= 0.66f)
+            {
+				_currentOutline.sprite = _outlines[0];
+            }
+			else if (perc >= 0.33f && perc < 0.66f)
+            {
+				_currentOutline.sprite = _outlines[1];
+			}
+			else _currentOutline.sprite = _outlines[2];
+
 			_healthbarForeground.fillAmount = perc;
-			if (perc >= 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 1)
+			/*if (perc >= 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 1)
 			{
 				_fadingTimer.Start();
 				_fadingOut = true;
@@ -88,9 +104,9 @@ namespace GSGD2.UI
 			if (perc < 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 0)
             {
 				_fadingTimer.Start();
-				_fadingOut = true;
-            }
-			transform.localScale = new Vector3((maxHealth - 10f) * 0.05f + 0.5f, transform.localScale.y, transform.localScale.z);
+				_fadingOut = false;
+            }*/
+			transform.localScale = new Vector3((maxHealth - 10f) * 0.05f + 1f, transform.localScale.y, transform.localScale.z);
 		}
 	}
 }

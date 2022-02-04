@@ -1,6 +1,7 @@
 namespace GSGD2.Player
 {
     using GSGD2.Utilities;
+    using GSGD2.Gameplay;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -32,8 +33,13 @@ namespace GSGD2.Player
         [SerializeField]
         private CubeController.State _usableInState = CubeController.State.None;
 
+        [SerializeField]
+        private DamageHandler _damageHandler = null;
+
         private bool _isDashing = false;
         private PlayerReferences playerRefs = null;
+
+        public bool Dashing => _isDashing;
 
         private void Awake()
         {
@@ -77,6 +83,7 @@ namespace GSGD2.Player
                         }
                     }
                 }
+                _damageHandler.UpdateState(DamageHandler.DamageStates.Dashing);
                 _cubeController.enabled = false;
                 _dashTimeLimit.Start();
             }
@@ -99,6 +106,7 @@ namespace GSGD2.Player
                         _cubeController.enabled = true;
                         _cubeController.StartStaminaRegen();
                         _isDashing = false;
+                        _damageHandler.UpdateState(DamageHandler.DamageStates.None);
                     }
                 }
             }

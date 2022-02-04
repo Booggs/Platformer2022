@@ -156,6 +156,17 @@ namespace GSGD2.Player
                 }
             }
         }
+
+        public void ForceSnapBones()
+        {
+            for (int i = 1; i < _bones.Count; i++)
+            {
+                if (Vector3.Distance(_bones[i].transform.localPosition, _bonesCenter.transform.localPosition) * 100 > _jointsDistance[i] * _snapFactor)
+                {
+                    _bones[i].transform.localPosition = new Vector3(_jointsAnchorsPositions[i].x / 100, _jointsAnchorsPositions[i].y / 100, _jointsAnchorsPositions[i].z / 100);
+                }
+            }
+        }
          
         private void ResetPlayer(PlayerController sender, InputAction.CallbackContext obj)
         {

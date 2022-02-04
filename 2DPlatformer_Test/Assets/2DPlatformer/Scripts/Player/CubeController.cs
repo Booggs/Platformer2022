@@ -222,7 +222,7 @@ namespace GSGD2.Player
         private bool _hasBeganToFallFromGroundedState = false;
         private float _currentAirSpeed = 0f;
         private float _currentDescendingGravityScale = 0f;
-        private float _currentGrabbingStamina = 0f;
+        private float _currentStamina = 0f;
         private Collider[] _colliders = null; // TODO AL : move this to PlayerReferences
         private bool _stickingLeft = false;
 
@@ -278,7 +278,7 @@ namespace GSGD2.Player
 
         public int MaxJumpCount => _jump.MaximumAllowedForcesWhileInAir;
 
-        public float CurrentStamina => _currentGrabbingStamina;
+        public float CurrentStamina => _currentStamina;
 
         public bool StickyModeOn => _stickyModeOn;
 
@@ -376,11 +376,6 @@ namespace GSGD2.Player
         public void EnableGrab(bool isEnabled)
         {
             _enableWallGrab = isEnabled;
-            if (_staminaRegenTimer.IsRunning == false)
-            {
-                _staminaRegenTimer.Start(_completeStaminaRegenDuration);
-                _staminaRegenTimer.TimeElapsed = (_currentGrabbingStamina * _completeStaminaRegenDuration);
-            }
         }
 
         public void AddMaximumAllowedForceToJump(int toAdd)
@@ -452,6 +447,8 @@ namespace GSGD2.Player
 
             _rootRigidbody = GetComponentInChildren<Rigidbody>();
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
+
+            StartStaminaRegen();
             ResetCurrentValues();
         }
 
@@ -462,10 +459,6 @@ namespace GSGD2.Player
             // TODO AL retake, PlayerDamageable should listen to CubeController and change its state
             _colliders = GetComponentsInChildren<Collider>();
             BindInput(true);
-            if (_enableWallGrab == true)
-            {
-                _staminaRegenTimer.Start(7.5f);
-            }
         }
 
         private void OnDisable()
@@ -624,6 +617,34 @@ namespace GSGD2.Player
             _hasBeganToFallFromGroundedState = false;
             _hasBeganToFallFromGroundedStateAndDidJump = false;
             _hasBeganToFallFromGroundedStateAndDidDash = false;
+        }
+
+        public void StopStaminaRegen()
+        {
+            if (_staminaRegenTimer.IsRunning == true)
+            {
+                _staminaRegenTimer.ForceFinishState();
+            }
+        }
+
+        public void StartStaminaRegen()
+        {
+            if (_staminaRegenTimer.IsRunning == false)
+            {
+                _staminaRegenTimer.Start(_completeStaminaRegenDuration);
+                _staminaRegenTimer.TimeElapsed = (_currentStamina * _completeStaminaRegenDuration);
+            }
+        }
+
+        public bool UseStamina(float stamina)
+        {
+            if (_currentStamina >= stamina)
+            {
+                _currentStamina -= stamina;
+                StopStaminaRegen();
+                return true;
+            }
+            else return false;
         }
 
         private void ResetInputs()
@@ -1126,6 +1147,7 @@ namespace GSGD2.Player
                     if (canJump == true)
                     {
                         ResetRigidbodiesVelocity();
+                        _boneSphere.ForceSnapBones();
                         foreach (var rigidbody in _rigidbodies)
                         {
                             _jump.TryApplyForce(rigidbody);
@@ -1191,8 +1213,8 @@ namespace GSGD2.Player
             if (_stickyModeDuration.IsRunning == true)
             {
                 _stickyModeDuration.Update();
-                _currentGrabbingStamina = 1 - _stickyModeDuration.Progress;
-                if (_currentGrabbingStamina <= 0)
+                _currentStamina = 1 - _stickyModeDuration.Progress;
+                if (_currentStamina <= 0)
                 {
                     _willPerformWallJump = true;
                     SetStickyMode(false);
@@ -1202,7 +1224,7 @@ namespace GSGD2.Player
             if (_staminaRegenTimer.IsRunning == true)
             {
                 _staminaRegenTimer.Update();
-                _currentGrabbingStamina = _staminaRegenTimer.Progress;
+                _currentStamina = _staminaRegenTimer.Progress;
             }
         }
 
@@ -1411,8 +1433,6 @@ namespace GSGD2.Player
                     _rigidbodies[i].velocity = _rigidbodies[i].velocity * 0.975f;
                 }
                 Rigidbody.velocity = velocity;
-
-
             }
 
             Debug.DrawLine(transform.position, transform.position + velocity * 5, Color.yellow);
@@ -1425,7 +1445,7 @@ namespace GSGD2.Player
                 return;
             }
 
-            if (_stickyModeOn == false && _stickyModeDuration.IsRunning == false && _currentGrabbingStamina > 0.1)
+            if (_stickyModeOn == false && _stickyModeDuration.IsRunning == false && _currentStamina > 0.1)
             {
                 SetStickyMode(true);
             }
@@ -1440,10 +1460,10 @@ namespace GSGD2.Player
             if (status == true && _stickyModeOn == false)
             {
                 _stickyModeDuration.Start();
-                _stickyModeDuration.TimeElapsed = (1 - _currentGrabbingStamina) * _stickyModeDuration.Duration;
+                _stickyModeDuration.TimeElapsed = (1 - _currentStamina) * _stickyModeDuration.Duration;
                 _characterCollision.SlopeNormalThreshold = 0;
                 _stickyModeOn = true;
-                _staminaRegenTimer.ForceFinishState();
+                StopStaminaRegen();
             }
             else if (status == false && _stickyModeOn == true)
             {
@@ -1451,8 +1471,7 @@ namespace GSGD2.Player
                 _stickyModeOn = false;
                 _stickingToWall = false;
                 _stickyModeDuration.ForceFinishState();
-                _staminaRegenTimer.Start(_completeStaminaRegenDuration);
-                _staminaRegenTimer.TimeElapsed = (_currentGrabbingStamina * _completeStaminaRegenDuration);
+                StartStaminaRegen();
             }
         }
 
