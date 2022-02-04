@@ -135,7 +135,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8020309834056049571}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -237,7 +237,6 @@ MonoBehaviour:
       _jumpHeight: 1
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
-    _triggerInvincibility: 1
   _ignorePlayer: 0
   _giveDOT: 0
   _DOTDamage:
@@ -251,7 +250,6 @@ MonoBehaviour:
       _jumpHeight: 3
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
-    _triggerInvincibility: 0
   _DOTRate: 1
 --- !u!114 &135787008
 MonoBehaviour:

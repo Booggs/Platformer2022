@@ -18,12 +18,6 @@
 		[SerializeField]
 		private Timer _projectileFireRate = null;
 
-		[SerializeField]
-		private Damageable _parentDamageable = null;
-
-		[SerializeField]
-		private Damage _shootingDamage = null;
-
 		/// <summary>
 		/// Will set whether or not projectile should be destroyed by a given collider type
 		/// </summary>
@@ -52,7 +46,7 @@
 
 		public void LaunchProjectile()
 		{
-			if (CanUse() == true && _parentDamageable.CurrentHealth > _shootingDamage.DamageValue)
+			if (CanUse() == true)
 			{
 				AProjectile instance = Instantiate(_projectilePrefab, _projectileInstanceOffset.transform.position, _projectileInstanceOffset.transform.rotation);
 				_projectileFireRate.Start();
@@ -63,10 +57,6 @@
 					damageDealer.SetInstigator(this);
 					damageDealer.SetInteractWith(_damageDealerInteractWith);
 				}
-				if (_shootingDamage.DamageValue > 0)
-                {
-					_parentDamageable.TakeDamage(_shootingDamage);
-                }
 			}
 		}
 
