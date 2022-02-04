@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: fca42a731bfae814a8e5d89e20a82bc1
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Decal_Crane: {fileID: 2800000, guid: 8debc3219b0b83b4b9361905885329c9, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
