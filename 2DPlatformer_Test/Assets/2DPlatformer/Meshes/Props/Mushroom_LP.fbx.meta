@@ -3,7 +3,12 @@ guid: 077db004ea7bc6443ad47075c90a4786
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: champignon
+    second: {fileID: 2100000, guid: 863c427021be3eb47a0e83e555141001, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
