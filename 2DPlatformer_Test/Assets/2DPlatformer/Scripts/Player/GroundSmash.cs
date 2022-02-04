@@ -21,6 +21,9 @@ namespace GSGD2.Player
 		private float _force = 50f;
 
 		[SerializeField]
+		private float _staminaCost = 30f;
+
+		[SerializeField]
 		private Timer _enableControlsAfterTimer = null;
 
 		[SerializeField]
@@ -47,7 +50,7 @@ namespace GSGD2.Player
 
 		private void PlayerControllerOnGroundSmashPerformed(PlayerController sender, UnityEngine.InputSystem.InputAction.CallbackContext obj)
 		{
-			if (_usableInState.HasFlag(_cubeController.CurrentState) && _isOnGroundSmash == false)
+			if (_usableInState.HasFlag(_cubeController.CurrentState) && _isOnGroundSmash == false && _cubeController.UseStamina(_staminaCost / 100f))
 			{
 				_isOnGroundSmash = true;
 				_cubeController.ResetRigidbodiesVelocity();
@@ -72,6 +75,7 @@ namespace GSGD2.Player
 				if (_cubeController.CurrentState != CubeController.State.Jumping && _enableControlsAfterTimer.Update() == true)
 				{
 					_cubeController.enabled = true;
+					_cubeController.StartStaminaRegen();
 					_isOnGroundSmash = false;
 				}
 			}

@@ -16,6 +16,7 @@ namespace GSGD2.Player
 		private const string JUMP_ACTION_NAME = "Jump";
 		private const string DASH_ACTION_NAME = "Dash";
 		private const string WALL_GRAB_ACTION_NAME = "WallGrab";
+		private const string RELEASE_WALL_GRAB_ACTION_NAME = "ReleaseWallGrab";
 		private const string WALL_JUMP_ACTION_NAME = "WallJump";
 		private const string TAKE_ITEM_ACTION_NAME = "TakeItem";
 		private const string RELEASE_ITEM_ACTION_NAME = "ReleaseItem";
@@ -46,6 +47,7 @@ namespace GSGD2.Player
 		private InputAction _jumpInputAction = null;
 		private InputAction _dashInputAction = null;
 		private InputAction _wallGrabInputAction = null;
+		private InputAction _releaseWallGrabInputAction = null;
 		private InputAction _wallJumpInputAction = null;
 		private InputAction _takeItemInputAction = null;
 		private InputAction _releaseItemInputAction = null;
@@ -75,6 +77,7 @@ namespace GSGD2.Player
 		public event InputEvent JumpPerformed = null;
 		public event InputEvent DashPerformed = null;
 		public event InputEvent WallGrabPerformed = null;
+		public event InputEvent ReleaseWallGrabPerformed = null;
 		public event InputEvent WallJumpPerformed = null;
 		public event InputEvent TakeItemPerformed = null;
 		public event InputEvent ReleaseItemPerformed = null;
@@ -116,6 +119,12 @@ namespace GSGD2.Player
 			{
 				_wallGrabInputAction.performed -= WallGrabMoveInputAction_performed;
 				_wallGrabInputAction.performed += WallGrabMoveInputAction_performed;
+			}
+
+			if (_inputActionMapWrapper.TryFindAction(RELEASE_WALL_GRAB_ACTION_NAME, out _releaseWallGrabInputAction, true) == true)
+			{
+				_releaseWallGrabInputAction.performed -= ReleaseWallGrabMoveInputAction_performed;
+				_releaseWallGrabInputAction.performed += ReleaseWallGrabMoveInputAction_performed;
 			}
 
 			if (_inputActionMapWrapper.TryFindAction(WALL_JUMP_ACTION_NAME, out _wallJumpInputAction, true) == true)
@@ -227,6 +236,7 @@ namespace GSGD2.Player
 			_jumpInputAction.Disable();
 			_dashInputAction.Disable();
 			_wallGrabInputAction.Disable();
+			_releaseWallGrabInputAction.Disable();
 			_wallJumpInputAction.Disable();
 			_takeItemInputAction.Disable();
 			_releaseItemInputAction.Disable();
@@ -251,6 +261,7 @@ namespace GSGD2.Player
 			_jumpInputAction.performed -= JumpInputAction_performed;
 			_dashInputAction.performed -= DashInputAction_performed;
 			_wallGrabInputAction.performed -= WallGrabMoveInputAction_performed;
+			_releaseWallGrabInputAction.performed -= ReleaseWallGrabMoveInputAction_performed;
 			_wallJumpInputAction.performed -= WallJumpMoveInputAction_performed;
 			_takeItemInputAction.performed -= TakeItemInputAction_performed;
 			_releaseItemInputAction.performed -= ReleaseItemInputAction_performed;
@@ -283,6 +294,11 @@ namespace GSGD2.Player
 		private void WallGrabMoveInputAction_performed(InputAction.CallbackContext obj)
 		{
 			WallGrabPerformed?.Invoke(this, obj);
+		}
+
+		private void ReleaseWallGrabMoveInputAction_performed(InputAction.CallbackContext obj)
+		{
+			ReleaseWallGrabPerformed?.Invoke(this, obj);
 		}
 
 		private void WallJumpMoveInputAction_performed(InputAction.CallbackContext obj)

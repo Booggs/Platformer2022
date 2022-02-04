@@ -493,12 +493,14 @@ namespace GSGD2.Player
             _playerController.JumpPerformed -= PlayerController_JumpPerformed;
             _playerController.DashPerformed -= PlayerController_DashPerformed;
             _playerController.WallGrabPerformed -= PlayerController_WallGrabPerformed;
+            _playerController.ReleaseWallGrabPerformed -= PlayerController_ReleaseWallGrabPerformed;
             _playerController.WallJumpPerformed -= PlayerController_WallJumpPerformed;
             if (isActive == true)
             {
                 _playerController.JumpPerformed += PlayerController_JumpPerformed;
                 _playerController.DashPerformed += PlayerController_DashPerformed;
                 _playerController.WallGrabPerformed += PlayerController_WallGrabPerformed;
+                _playerController.ReleaseWallGrabPerformed += PlayerController_ReleaseWallGrabPerformed;
                 _playerController.WallJumpPerformed += PlayerController_WallJumpPerformed;
             }
         }
@@ -563,6 +565,26 @@ namespace GSGD2.Player
                     break;
             }
             TryWallGrab();
+        }
+
+        private void PlayerController_ReleaseWallGrabPerformed(PlayerController sender, InputAction.CallbackContext obj)
+        {
+            switch (_currentState)
+            {
+                case State.Grounded:
+                case State.Falling:
+                case State.Bumping:
+                case State.Jumping:
+                case State.WallJump:
+                case State.Dashing:
+                case State.StartJump:
+                case State.EndJump:
+                case State.WallGrab:
+                case State.DamageTaken:
+                default:
+                    break;
+            }
+            SetStickyMode(false);
         }
 
         private void PlayerController_WallJumpPerformed(PlayerController sender, InputAction.CallbackContext obj)
@@ -1407,10 +1429,10 @@ namespace GSGD2.Player
             {
                 SetStickyMode(true);
             }
-            else if (_stickyModeOn == true && _stickyModeDuration.IsRunning == true)
+            /*else if (_stickyModeOn == true && _stickyModeDuration.IsRunning == true)
             {
                 SetStickyMode(false);
-            }
+            }*/
         }
 
         private void SetStickyMode(bool status)

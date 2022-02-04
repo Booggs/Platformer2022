@@ -1,6 +1,7 @@
 namespace GSGD2.UI
 {
 	using GSGD2.Gameplay;
+	using GSGD2.Utilities;
 	using System.Collections;
 	using System.Collections.Generic;
 	using UnityEngine;
@@ -14,11 +15,19 @@ namespace GSGD2.UI
 		[SerializeField]
 		private Image _healthbarForeground = null;
 
+		[SerializeField]
+		private Timer _fadingTimer;
+
+		[SerializeField]
+		private CanvasGroup _canvasGroup = null;
+
 		private Damageable _damageable = null;
+		private bool _fadingOut = false;
 
 		private void Awake()
 		{
 			_damageable = LevelReferences.Instance.Player.GetComponent<Damageable>();
+			_canvasGroup.alpha = 0;
 		}
 
 		private void OnEnable()
@@ -50,7 +59,19 @@ namespace GSGD2.UI
 			}
 		}
 
-		private void Damageable_OnHealthChanged(Damageable sender, Damageable.DamageableArgs args)
+        private void Update()
+        {
+			if (_fadingTimer.IsRunning)
+				_fadingTimer.Update();
+
+			if (_fadingOut)
+            {
+				_canvasGroup.alpha = 1 - _fadingTimer.Progress;
+            }
+			else _canvasGroup.alpha = _fadingTimer.Progress;
+		}
+
+        private void Damageable_OnHealthChanged(Damageable sender, Damageable.DamageableArgs args)
 		{
 			UpdateHealth(args.currentHealth, args.maxHealth);
 		}
@@ -59,6 +80,16 @@ namespace GSGD2.UI
 		{
 			float perc = Mathf.Clamp01(health / maxHealth);
 			_healthbarForeground.fillAmount = perc;
+			if (perc >= 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 1)
+			{
+				_fadingTimer.Start();
+				_fadingOut = true;
+            }
+			if (perc < 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 0)
+            {
+				_fadingTimer.Start();
+				_fadingOut = true;
+            }
 			transform.localScale = new Vector3((maxHealth - 10f) * 0.05f + 0.5f, transform.localScale.y, transform.localScale.z);
 		}
 	}

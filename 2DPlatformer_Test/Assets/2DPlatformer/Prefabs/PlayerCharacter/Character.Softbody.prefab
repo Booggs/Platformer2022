@@ -436,7 +436,6 @@ MonoBehaviour:
   _space: 0
   _resetWorldRotationAtOnEnable: 0
   _resetWorldRotationAtOnDisable: 0
-  _slingshotHandler: {fileID: 868043966410835398}
 --- !u!1 &1063020546327857756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,8 +1035,8 @@ MonoBehaviour:
   _groundFriction: 5
   _airMoveSpeed: 11
   _ascendingGravityScale: 1
-  _descendingGravityScale: 5
-  _glidingSpeedDivider: 1.05
+  _descendingGravityScale: 10
+  _glidingSpeedDivider: 1.2
   _jump:
     enabled: 1
     _maximumAllowedForces: 1
@@ -1171,6 +1170,7 @@ MonoBehaviour:
       _jumpHeight: 3
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
+    _triggerInvincibility: 0
 --- !u!114 &1275202730724197374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1189,7 @@ MonoBehaviour:
     _maxDistance: 20
     _layerMask:
       serializedVersion: 2
-      m_Bits: 1281
+      m_Bits: 1025
     _drawGizmos: 1
   _lineRenderer: {fileID: 6075231610071905281}
   _rotator: {fileID: 1917130852}
@@ -1229,10 +1229,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c1e6948e7964f4d8692dd53ffce1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 5977267829128941261, guid: d0af26ae3b3bae14d8698cee0a3fdb63, type: 3}
+  _projectilePrefab: {fileID: 3141901799035707220, guid: d0af26ae3b3bae14d8698cee0a3fdb63, type: 3}
   _projectileInstanceOffset: {fileID: 2659276037661566532}
   _projectileFireRate:
     _duration: 0.3
+  _parentDamageable: {fileID: 2332251551028677084}
+  _shootingDamage:
+    _damageValue: 1
+    _bump:
+      enabled: 0
+      _maximumAllowedForces: 1
+      cubeController: {fileID: 0}
+      displacementEstimationUpdater: {fileID: 0}
+      _gravityScale: 5
+      _jumpHeight: 3
+      _jumpHeightBonusWhenFalling: 1
+      _jumpHeightBonusSpeedThreshold: 10
+    _triggerInvincibility: 0
   _projectileInteractWith: 6
   _damageDealerInteractWith: 6
 --- !u!114 &868043966410835398
@@ -1259,7 +1272,7 @@ MonoBehaviour:
   _lineRenderer: {fileID: 6075231610071905281}
   _raycaster:
     fromTransform: {fileID: 257308016}
-    _maxDistance: 10
+    _maxDistance: 20
     _layerMask:
       serializedVersion: 2
       m_Bits: 1041
