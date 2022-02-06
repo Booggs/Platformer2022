@@ -43,7 +43,6 @@ namespace GSGD2.UI
 				_fadingOut = true;
 				_fadingTimer.Start();
 			}
-			print(_fadingTimer.IsRunning);
 			if (_fadingTimer.IsRunning)
 				_fadingTimer.Update();
 			if (_fadingOut)

@@ -1,0 +1,239 @@
+namespace GSGD2.Gameplay
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.AI;
+    using GSGD2.Utilities;
+
+    public class Skeleton : MonoBehaviour
+    {
+        [SerializeField]
+        private Timer _playerLossTimer;
+
+        [SerializeField]
+        private NavMeshAgent _navMeshAgent = null;
+
+        [SerializeField]
+        private Raycaster _raycaster = null;
+
+        [SerializeField]
+        private Timer _attackCooldown;
+
+        [SerializeField]
+        private Animator _skeletonAnimator = null;
+
+
+        [Header("ReadOnly")]
+        [SerializeField]
+        private EnemyState currentState = 0;
+
+        [SerializeField]
+        private PlayerDamageable _player = null;
+
+        [SerializeField]
+        private bool _seeingPlayer = false;
+
+        [SerializeField]
+        private Vector3 destination;
+
+        [SerializeField]
+        private float distanceToTarget;
+
+        [SerializeField]
+        private bool withinAttackDistance;
+
+
+        private PlayerDamageable tmpPlayer = null;
+        private float _attackingDistance = 2;
+        private float _cachedMovementSpeed;
+        private EnemyState _currentState = 0;
+        private bool _attacking = false;
+
+        public EnemyState CurrentState => _currentState;
+
+        public enum EnemyState
+        {
+            Idle = 0,
+            Pursuing = 1,
+            Attacking = 2,
+            AttackingCooldown = 3
+        }
+
+        public delegate void SkeletonEvent(Skeleton skeleton, EnemyState newState);
+
+        public event SkeletonEvent StateChanged = null;
+
+        private void OnEnable()
+        {
+            _playerLossTimer.StateChanged -= PlayerLoss_Updated;
+            _attackCooldown.StateChanged -= AttackCooldownTimer_Updated;
+
+            _playerLossTimer.StateChanged += PlayerLoss_Updated;
+            _attackCooldown.StateChanged += AttackCooldownTimer_Updated;
+
+            _cachedMovementSpeed = _navMeshAgent.speed;
+            _attackingDistance = _navMeshAgent.stoppingDistance;
+        }
+
+        private void OnDisable()
+        {
+            _playerLossTimer.StateChanged -= PlayerLoss_Updated;
+            _attackCooldown.StateChanged -= AttackCooldownTimer_Updated;
+        }
+
+        private void Update()
+        {
+            CheckForPlayer();
+            destination = _navMeshAgent.destination;
+            distanceToTarget = _navMeshAgent.remainingDistance;
+            withinAttackDistance = _navMeshAgent.remainingDistance <= _attackingDistance;
+            currentState = _currentState;
+
+            switch (_currentState)
+            {
+                case EnemyState.Idle:
+                    break;
+                case EnemyState.Pursuing:
+                    {
+                        if (_player != null)
+                        {
+                            _navMeshAgent.destination = _player.transform.position;
+                        }
+                        else ChangeState(EnemyState.Idle);
+                        if (_navMeshAgent.remainingDistance <= _attackingDistance)
+                        {
+                            Attack();
+                        }
+                    }
+                    break;
+                case EnemyState.Attacking:
+                    break;
+                case EnemyState.AttackingCooldown:
+                    break;
+                default:
+                    break;
+            }
+            _playerLossTimer.Update();
+            _attackCooldown.Update();
+        }
+
+        private void CheckForPlayer()
+        {
+            if (_raycaster.BoxcastAll(out RaycastHit[] BoxcastHits, QueryTriggerInteraction.Ignore, false))
+            {
+                foreach (RaycastHit raycastHit in BoxcastHits)
+                {
+                    if (raycastHit.collider.GetComponentInParent<PlayerDamageable>() != null)
+                    {
+                        tmpPlayer = raycastHit.collider.GetComponentInParent<PlayerDamageable>();
+                        break;
+                    }
+                }
+                if (tmpPlayer != null)
+                {
+                    RaycastHit raycastHit;
+                    if (Physics.Linecast(_raycaster.WorldPosition, tmpPlayer.transform.position, out raycastHit, _raycaster.LayerMask) && raycastHit.collider.GetComponentInParent<PlayerDamageable>())
+                    {
+                        _player = tmpPlayer;
+                        _playerLossTimer.ResetTimeElapsed();
+                        _seeingPlayer = true;
+                        if (_currentState == EnemyState.Idle)
+                            ChangeState(EnemyState.Pursuing);
+                    }
+                    else if (_player != null && _playerLossTimer.IsRunning == false)
+                    {
+                        _playerLossTimer.Start();
+                        _seeingPlayer = false;
+                    }
+                }
+            }
+        }
+
+        #region Timers
+        private void PlayerLoss_Updated(Timer timer, Timer.State state)
+        {
+            switch (state)
+            {
+                case Timer.State.Stopped:
+                    break;
+                case Timer.State.Running:
+                    break;
+                case Timer.State.Finished:
+                    {
+                        ChangeState(EnemyState.Idle);
+                        _player = null;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void AttackCooldownTimer_Updated(Timer timer, Timer.State state)
+        {
+            switch (state)
+            {
+                case Timer.State.Stopped:
+                    break;
+                case Timer.State.Running:
+                    break;
+                case Timer.State.Finished:
+                    {
+                        if (_navMeshAgent.remainingDistance <= _attackingDistance)
+                            Attack();
+                        else ChangeState(EnemyState.Pursuing);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion;
+
+        private void ChangeState(EnemyState newState)
+        {
+            _currentState = newState;
+            switch (_currentState)
+            {
+                case EnemyState.Idle:
+                    {
+                        _attacking = false;
+                    }
+                    break;
+                case EnemyState.Pursuing:
+                    {
+                        _navMeshAgent.speed = _cachedMovementSpeed;
+                        _navMeshAgent.isStopped = false;
+                        _attacking = false;
+                    }
+                    break;
+                case EnemyState.Attacking:
+                    {
+                        _navMeshAgent.isStopped = true;
+                        _attacking = true;
+                    }
+                    break;
+                case EnemyState.AttackingCooldown:
+                    {
+                        _attacking = false;
+                        _attackCooldown.Start();
+                    }
+                    break;
+                default:
+                    break;
+            }
+            StateChanged?.Invoke(this, newState);
+        }
+
+        private void Attack()
+        {
+            ChangeState(EnemyState.Attacking);
+        }
+
+        public void AttackEnd()
+        {
+            ChangeState(EnemyState.AttackingCooldown);
+        }
+    }
+}

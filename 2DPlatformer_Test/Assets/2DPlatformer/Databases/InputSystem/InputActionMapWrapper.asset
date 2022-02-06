@@ -65,6 +65,14 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: ReleaseWallGrab
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 37c8e6f4-139f-4f16-b0c8-afc67a9f6817
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     - m_Name: WallJump
       m_Type: 1
       m_ExpectedControlType: Button
@@ -201,6 +209,14 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: PauseMenu
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 015896a8-8fa4-4b59-83cb-5545f08f10a9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
     - m_Name: 
       m_Id: b82491d4-813d-4be0-bea8-2217def02fb7
@@ -301,7 +317,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: f6685742-0816-4912-9c48-d429bb37a1b0
       m_Path: <Gamepad>/leftTrigger
-      m_Interactions: 
+      m_Interactions: Hold(duration=0.1)
       m_Processors: 
       m_Groups: 
       m_Action: WallGrab
@@ -513,4 +529,20 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: ReleaseSlingshot
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 46794fa6-3d80-456d-a12b-4a036d85a3c1
+      m_Path: <Gamepad>/leftTrigger
+      m_Interactions: Press(behavior=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: ReleaseWallGrab
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 91d4b2f7-5c0a-491e-9f85-fbe31619eb67
+      m_Path: <Gamepad>/start
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: PauseMenu
       m_Flags: 0

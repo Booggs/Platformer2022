@@ -157,7 +157,10 @@ namespace GSGD2.Gameplay
 		protected virtual bool CanTakeDamage(Damage damage)
 		{
 			bool result = enabled;
-			result &= _currentRecoveryDuration >= recoveryDuration;
+			if (damage.TriggerInvincibility)
+            {
+				result &= _currentRecoveryDuration >= recoveryDuration;
+            }
 			result &= CheckIfWillDestroy() == false;
 			result &= damage.DamageValue > 0;
 			return result;
