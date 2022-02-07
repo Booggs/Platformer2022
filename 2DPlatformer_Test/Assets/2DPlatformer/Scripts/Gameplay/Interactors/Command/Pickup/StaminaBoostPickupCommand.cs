@@ -14,7 +14,7 @@
 		{
 			if (LevelReferences.Instance.PlayerReferences.TryGetCubeController(out CubeController cubeController) == true)
 			{
-				cubeController
+				cubeController.UpgradeStamina();
 				return true;
 			}
 			return false;

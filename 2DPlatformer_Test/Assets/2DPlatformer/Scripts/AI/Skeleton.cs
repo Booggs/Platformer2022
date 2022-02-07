@@ -177,7 +177,7 @@ namespace GSGD2.Gameplay
                 if (tmpPlayer != null)
                 {
                     RaycastHit raycastHit;
-                    if (Physics.Linecast(_raycaster.WorldPosition, tmpPlayer.transform.position, out raycastHit, _raycaster.LayerMask) && raycastHit.collider.GetComponentInParent<PlayerDamageable>())
+                    if (Physics.Linecast(_raycaster.WorldPosition, tmpPlayer.transform.position, out raycastHit, _raycaster.LayerMask, QueryTriggerInteraction.Ignore) && raycastHit.collider.GetComponentInParent<PlayerDamageable>())
                     {
                         _player = tmpPlayer;
                         _playerLossTimer.ResetTimeElapsed();

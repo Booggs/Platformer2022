@@ -23,7 +23,17 @@
 		private float _timeElapsed = 0f;
 		private State _currentState = 0;
 
-		public float Duration => _duration;
+		public float Duration
+        {
+			get
+            {
+				return _duration;
+            }
+			set
+            {
+				_duration = value;
+            }
+        }
 		public float Progress => _timeElapsed / _duration;
 
 		public State CurrentState => _currentState;
@@ -53,7 +63,7 @@
 		{
 			_timeElapsed = 0;
 		}
-
+		
 		public void Start()
 		{
 			Start(_duration);

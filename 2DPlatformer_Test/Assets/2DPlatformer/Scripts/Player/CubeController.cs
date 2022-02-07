@@ -644,9 +644,10 @@ namespace GSGD2.Player
 
         public bool UseStamina(float stamina)
         {
-            if (_currentStamina >= stamina * (1 + _maxStaminaUpgrades / 10))
+            float modifiedStamina = stamina * (1 - _maxStaminaUpgrades / 20);
+            if (_currentStamina >= modifiedStamina)
             {
-                _currentStamina -= stamina;
+                _currentStamina -= modifiedStamina;
                 StopStaminaRegen();
                 return true;
             }
@@ -1222,9 +1223,12 @@ namespace GSGD2.Player
                 _currentStamina = 1 - _stickyModeDuration.Progress;
                 if (_currentStamina <= 0)
                 {
-                    _willPerformWallJump = true;
                     SetStickyMode(false);
-                    TryWallJump();
+                    if (_stickingToWall)
+                    {
+                        _willPerformWallJump = true;
+                        TryWallJump();
+                    }
                 }
             }
             if (_staminaRegenTimer.IsRunning == true)
@@ -1559,31 +1563,12 @@ namespace GSGD2.Player
             }
         }
 
-        private void LookToDirection()
+        public void UpgradeStamina()
         {
-            //float currentMovementDirection;
-            //if (Mathf.Abs(_inputMovement) > Mathf.Epsilon) // lazy deadzone
-            //{
-            //    currentMovementDirection = _inputMovement;
-            //}
-            //else
-            //{
-            //    currentMovementDirection = _lastMovementDirection;
-            //}
-            //int movementDirection = (currentMovementDirection > 0 ? 1 : -1);
-
-            //if (_lastMovementDirection != movementDirection)
-            //{
-            //    _currentTurnTime = 0;
-            //    _lastMovementDirection = movementDirection;
-            //}
-
-            //_currentTurnTime = Mathf.Clamp(_currentTurnTime + _turnSpeed * Time.deltaTime, 0, 1f);
-
-            //// ideas to improve perfs : do not set the rotation if the _currentTurnTime is at 1f since last frame
-            //Quaternion rotation = Quaternion.LookRotation(Vector3.forward * movementDirection);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _uturnCurve.Evaluate(_currentTurnTime));
+            _maxStaminaUpgrades++;
+            _stickyModeDuration.Duration *= (1 + _maxStaminaUpgrades / 20);
         }
+
 
         #region Editor
         private void OnValidate()
