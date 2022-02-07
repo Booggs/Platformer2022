@@ -23,6 +23,10 @@
 		[SerializeField]
 		private bool _drawGizmos = false;
 
+		[Header("Boxcast")]
+		[SerializeField]
+		private Vector3 boxExtent;
+
 		private bool _lastResult = false;
 
 		private float defaultDistance = 1f;
@@ -30,8 +34,8 @@
 
 		public float MaxDistance => _maxDistance;
 		public bool LastResult => _lastResult;
-
 		public Vector3 WorldPosition => fromTransform.position;
+		public LayerMask LayerMask => _layerMask;
 
 		private float _cachedMaxDistance = -1f;
 
@@ -69,6 +73,27 @@
 				Debug.LogFormat("Debug Raycast {0}", hit.transform != null ? hit.transform.name : "found nothing.");
 			}
 			return result;
+		}
+
+		public bool Boxcast(out RaycastHit hit, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore, bool debug = false)
+		{
+			Quaternion rotation = Quaternion.identity;
+			bool result = Physics.BoxCast(fromTransform.position, boxExtent, fromTransform.forward, out hit, fromTransform.rotation, _maxDistance, _layerMask, queryTriggerInteraction);
+			if (debug)
+			{
+				Debug.LogFormat("Debug Raycast {0}", hit.transform != null ? hit.transform.name : "found nothing.");
+			}
+			return result;
+		}
+
+		public bool BoxcastAll(out RaycastHit[] hits, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore, bool debug = false)
+		{
+			hits = Physics.BoxCastAll(fromTransform.position, boxExtent, fromTransform.forward, fromTransform.rotation, _maxDistance, _layerMask, queryTriggerInteraction);
+			if (debug)
+			{
+				DebugRaycast(ref hits);
+			}
+			return _lastResult = hits.Length > 0;
 		}
 
 		public bool RaycastAll(out RaycastHit[] hits, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore, bool debug = false)
