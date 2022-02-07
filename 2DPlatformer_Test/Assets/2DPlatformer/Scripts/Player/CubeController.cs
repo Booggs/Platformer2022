@@ -223,6 +223,7 @@ namespace GSGD2.Player
         private float _currentAirSpeed = 0f;
         private float _currentDescendingGravityScale = 0f;
         private float _currentStamina = 0f;
+        private float _maxStaminaUpgrades = 0f;
         private Collider[] _colliders = null; // TODO AL : move this to PlayerReferences
         private bool _stickingLeft = false;
 
@@ -643,7 +644,7 @@ namespace GSGD2.Player
 
         public bool UseStamina(float stamina)
         {
-            if (_currentStamina >= stamina)
+            if (_currentStamina >= stamina * (1 + _maxStaminaUpgrades / 10))
             {
                 _currentStamina -= stamina;
                 StopStaminaRegen();

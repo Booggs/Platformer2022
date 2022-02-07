@@ -30,7 +30,18 @@
 
 		private IDamageInstigator _instigator = null;
 
-		public int DamageValue => _damageValue;
+		public int DamageValue
+        {
+			get
+            {
+				return _damageValue;
+            }
+			set
+            {
+				_damageValue = value;
+            }
+        }
+
 		public IDamageInstigator Instigator => _instigator;
 		public Jump Bump => _bump;
 		public bool TriggerInvincibility => _triggerInvincibility;

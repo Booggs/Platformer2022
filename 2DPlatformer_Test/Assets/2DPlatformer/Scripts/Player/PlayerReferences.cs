@@ -30,6 +30,7 @@ namespace GSGD2.Player
 		[SerializeField] private BoneSphere _boneSphere = null;
 		[SerializeField] private ProjectileLauncherController _projectileLauncherController = null;
 		[SerializeField] private SlingshotHandler _slingshotHandler = null;
+		[SerializeField] private DamageHandler _damageHandler = null;
 
 		private Rigidbody _rigidbody = null;
 		private float _currentScale = 1f;
@@ -182,5 +183,11 @@ namespace GSGD2.Player
 			slingshotHandler = _slingshotHandler;
 			return slingshotHandler != null;
 		}
+
+		public bool TryGetDamageHandler(out DamageHandler damageHandler)
+        {
+			damageHandler = _damageHandler;
+			return damageHandler != null;
+        }
 	}
 }

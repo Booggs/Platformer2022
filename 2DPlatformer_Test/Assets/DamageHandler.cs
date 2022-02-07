@@ -19,10 +19,13 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private Damage _slingshotDamage = null;
 
+        private int _damageUpgradeLevel = 0;
+
 
         private DamageStates _currentState = 0;
 
         public DamageStates CurrentState => _currentState;
+        public int DamageUpgrades => _damageUpgradeLevel;
 
         public enum DamageStates
         {
@@ -63,6 +66,14 @@ namespace GSGD2.Gameplay
                         break;
                 }
             }
+        }
+
+        public void UpgradeDamage()
+        {
+            _dashDamage.DamageValue++;
+            _groundSmashDamage.DamageValue++;
+            _slingshotDamage.DamageValue++;
+            _damageUpgradeLevel++;
         }
     }
 }

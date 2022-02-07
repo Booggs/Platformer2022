@@ -20,11 +20,13 @@ namespace GSGD2.Gameplay
         private Rotator _rotator = null;
         [SerializeField]
         private SlingshotHandler _slingshotHandler = null;
+        [SerializeField]
+        private DamageHandler _damageHandler = null;
 
         void Update()
         {
-            //_debugText.text = _slingshotHandler.SlingshotTimer.TimeElapsed.ToString("F3");
-            _debugText.text = _cubeController.CurrentState.ToString();
+            _debugText.text = _damageHandler.CurrentState.ToString();
+            //_debugText.text = _cubeController.CurrentState.ToString();
         }
     }
 }

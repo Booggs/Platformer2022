@@ -15,6 +15,19 @@ namespace GSGD2.Gameplay
         private Timer _attackCooldown;
 
 
+        [Header("Patrolling")]
+        [SerializeField]
+        private bool _patrol = false;
+
+        [SerializeField]
+        private Transform[] _patrolPoints = new Transform[2];
+
+        [SerializeField]
+        private Timer _patrolWait;
+
+        private int _currentPatrolIndex = 0;
+
+
         [Header("References")]
         [SerializeField]
         private NavMeshAgent _navMeshAgent = null;
@@ -73,9 +86,11 @@ namespace GSGD2.Gameplay
         {
             _playerLossTimer.StateChanged -= PlayerLoss_Updated;
             _attackCooldown.StateChanged -= AttackCooldownTimer_Updated;
+            _patrolWait.StateChanged -= PatrolTimer_Updated;
 
             _playerLossTimer.StateChanged += PlayerLoss_Updated;
             _attackCooldown.StateChanged += AttackCooldownTimer_Updated;
+            _patrolWait.StateChanged += PatrolTimer_Updated;
 
             _cachedMovementSpeed = _navMeshAgent.speed;
             _attackingDistance = _navMeshAgent.stoppingDistance;
@@ -86,6 +101,7 @@ namespace GSGD2.Gameplay
         {
             _playerLossTimer.StateChanged -= PlayerLoss_Updated;
             _attackCooldown.StateChanged -= AttackCooldownTimer_Updated;
+            _patrolWait.StateChanged -= PatrolTimer_Updated;
         }
 
         private void Update()
@@ -107,6 +123,19 @@ namespace GSGD2.Gameplay
             switch (_currentState)
             {
                 case EnemyState.Idle:
+                    {
+                        if (_patrol == true && _patrolPoints.Length >= 2)
+                        {
+                            _navMeshAgent.destination = _patrolPoints[_currentPatrolIndex].transform.position;
+                            if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+                            {
+                                if ((!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f) && _patrolWait.IsRunning == false)
+                                {
+                                    _patrolWait.Start();
+                                }
+                            }
+                        }
+                    }
                     break;
                 case EnemyState.Pursuing:
                     {
@@ -130,6 +159,7 @@ namespace GSGD2.Gameplay
             }
             _playerLossTimer.Update();
             _attackCooldown.Update();
+            _patrolWait.Update();
         }
 
         private void CheckForPlayer()
@@ -199,6 +229,26 @@ namespace GSGD2.Gameplay
                             Attack();
                         }
                         else ChangeState(EnemyState.Pursuing);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PatrolTimer_Updated(Timer timer, Timer.State state)
+        {
+            switch (state)
+            {
+                case Timer.State.Stopped:
+                    break;
+                case Timer.State.Running:
+                    break;
+                case Timer.State.Finished:
+                    {
+                        if (_currentPatrolIndex == _patrolPoints.Length - 1)
+                            _currentPatrolIndex = 0;
+                        else _currentPatrolIndex++;
                     }
                     break;
                 default:

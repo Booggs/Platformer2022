@@ -285,7 +285,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: c12c7b0a-6041-49b8-9066-8f62102d9f0a
       m_Path: <Gamepad>/buttonSouth
-      m_Interactions: Tap
+      m_Interactions: Tap(duration=0.4)
       m_Processors: 
       m_Groups: 
       m_Action: Jump
@@ -541,6 +541,14 @@ MonoBehaviour:
     - m_Name: 
       m_Id: 91d4b2f7-5c0a-491e-9f85-fbe31619eb67
       m_Path: <Gamepad>/start
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: PauseMenu
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 77a07f52-a99b-48df-aeaf-a56f7f4a92db
+      m_Path: <Keyboard>/escape
       m_Interactions: 
       m_Processors: 
       m_Groups: 

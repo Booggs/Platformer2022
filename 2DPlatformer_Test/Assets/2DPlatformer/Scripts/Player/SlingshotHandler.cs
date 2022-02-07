@@ -125,11 +125,6 @@ namespace GSGD2.Gameplay
                         _lineRenderer.enabled = true;
                     }
                     _rotator.transform.rotation = Quaternion.LookRotation(direction, _rotator.transform.up);
-                    /*_rotator.transform.rotation = Quaternion.LookRotation(_playerController.transform.forward);
-                    if (_preventUseIfNoDirection == true && _lineRenderer.enabled == true)
-                    {
-                        _lineRenderer.enabled = false;
-                    }*/
                 }
                 UpdateLineRenderer();
 
@@ -146,6 +141,17 @@ namespace GSGD2.Gameplay
             else if(_slingshotting && (_playerController.HorizontalMove != 0 || _playerController.IsJumpButtonPressed))
             {
                 ResetSlingshot();
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (_slingshotDurationTimer.IsRunning)
+            {
+                foreach (var rigidbody in _cubeController.Rigidbodies)
+                {
+                    rigidbody.velocity = rigidbody.velocity * 0.975f;
+                }
             }
         }
 
@@ -171,20 +177,28 @@ namespace GSGD2.Gameplay
                 //_boneSphere.SpringJoints[4].spring *= 5f;
                 _slingshotCharging = false;
                 _slingshotting = true;
+                _slingshotDurationTimer.Start();
+
+                if (_chargingDurationTimer.IsRunning == true)
+                    _slingshotDurationTimer.TimeElapsed = 1 - _chargingDurationTimer.TimeElapsed;
+
+                _chargingDurationTimer.ForceFinishState();
+                _cubeController.StartStaminaRegen();
+
+                foreach (Rigidbody rigidbody in _rigidbodies)
+                {
+                    //rigidbody.AddForce(new Vector3(0f, _currentLaunchForce, _currentLaunchForce), ForceMode.Impulse);
+                    rigidbody.AddForce((_lineRenderer.GetPosition(1) - _lineRenderer.GetPosition(0)).normalized * _currentLaunchForce, ForceMode.Impulse);
+                }
+                
+                print("Current direction : " + (_lineRenderer.GetPosition(1) - _lineRenderer.GetPosition(0)).normalized);
+
+                _damageHandler.UpdateState(DamageHandler.DamageStates.Slingshotting);
+
                 _slingshotCameraAimController.enabled = false;
                 _slingshotCameraAimController.ResetCameraAimPosition();
                 _lineRenderer.enabled = false;
-                _slingshotDurationTimer.Start();
-                if (_chargingDurationTimer.IsRunning == true)
-                    _slingshotDurationTimer.TimeElapsed = 1 - _chargingDurationTimer.TimeElapsed;
-                _chargingDurationTimer.ForceFinishState();
-                _cubeController.StartStaminaRegen();
-                foreach (Rigidbody rigidbody in _rigidbodies)
-                {
-                    rigidbody.AddForce(_playerController.LookDirection * _currentLaunchForce, ForceMode.Impulse);
-                }
-                _damageHandler.UpdateState(DamageHandler.DamageStates.Slingshotting);
-                print((_playerController.LookDirection * _currentLaunchForce).ToString("F4"));
+
                 _playerController.enabled = false;
             }
         }
@@ -202,6 +216,7 @@ namespace GSGD2.Gameplay
                         if (_slingshotting)
                         {
                             _playerController.enabled = true;
+                            _damageHandler.UpdateState(DamageHandler.DamageStates.None);
                         }
                     }
                     break;
@@ -219,7 +234,6 @@ namespace GSGD2.Gameplay
             _projectileLauncherController.enabled = true;
             _slingshotting = false;
             _boneSphere.SnapTimer.Start(0.03f);
-            _damageHandler.UpdateState(DamageHandler.DamageStates.None);
             //_cubeController.enabled = true;
 
             //_boneSphere.SpringJoints[4].spring /= 5f;
