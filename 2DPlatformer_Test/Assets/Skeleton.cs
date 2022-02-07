@@ -12,19 +12,24 @@ namespace GSGD2.Gameplay
         private Timer _playerLossTimer;
 
         [SerializeField]
+        private Timer _attackCooldown;
+
+
+        [Header("References")]
+        [SerializeField]
         private NavMeshAgent _navMeshAgent = null;
 
         [SerializeField]
         private Raycaster _raycaster = null;
 
         [SerializeField]
-        private Timer _attackCooldown;
-
-        [SerializeField]
         private Animator _skeletonAnimator = null;
 
+        [SerializeField]
+        private Collider _damageTrigger = null;
 
-        [Header("ReadOnly")]
+
+        [Header("READ ONLY")]
         [SerializeField]
         private EnemyState currentState = 0;
 
@@ -74,6 +79,7 @@ namespace GSGD2.Gameplay
 
             _cachedMovementSpeed = _navMeshAgent.speed;
             _attackingDistance = _navMeshAgent.stoppingDistance;
+            _damageTrigger.enabled = false;
         }
 
         private void OnDisable()
@@ -86,8 +92,16 @@ namespace GSGD2.Gameplay
         {
             CheckForPlayer();
             destination = _navMeshAgent.destination;
-            distanceToTarget = _navMeshAgent.remainingDistance;
-            withinAttackDistance = _navMeshAgent.remainingDistance <= _attackingDistance;
+            if (_player != null)
+            {
+                distanceToTarget = Vector3.Distance(_player.transform.position, transform.position);
+                withinAttackDistance = Vector3.Distance(_player.transform.position, transform.position) <= _attackingDistance;
+            }
+            else
+            {
+                distanceToTarget = 0;
+                withinAttackDistance = false;
+            }
             currentState = _currentState;
 
             switch (_currentState)
@@ -99,12 +113,12 @@ namespace GSGD2.Gameplay
                         if (_player != null)
                         {
                             _navMeshAgent.destination = _player.transform.position;
+                            if (Vector3.Distance(_player.transform.position, transform.position) <= _attackingDistance)
+                            {
+                                Attack();
+                            }
                         }
                         else ChangeState(EnemyState.Idle);
-                        if (_navMeshAgent.remainingDistance <= _attackingDistance)
-                        {
-                            Attack();
-                        }
                     }
                     break;
                 case EnemyState.Attacking:
@@ -180,8 +194,10 @@ namespace GSGD2.Gameplay
                     break;
                 case Timer.State.Finished:
                     {
-                        if (_navMeshAgent.remainingDistance <= _attackingDistance)
+                        if (_player != null && Vector3.Distance(_player.transform.position, transform.position) <= _attackingDistance)
+                        {
                             Attack();
+                        }
                         else ChangeState(EnemyState.Pursuing);
                     }
                     break;
@@ -204,13 +220,12 @@ namespace GSGD2.Gameplay
                 case EnemyState.Pursuing:
                     {
                         _navMeshAgent.speed = _cachedMovementSpeed;
-                        _navMeshAgent.isStopped = false;
                         _attacking = false;
                     }
                     break;
                 case EnemyState.Attacking:
                     {
-                        _navMeshAgent.isStopped = true;
+                        _navMeshAgent.speed = 0;
                         _attacking = true;
                     }
                     break;
@@ -234,6 +249,12 @@ namespace GSGD2.Gameplay
         public void AttackEnd()
         {
             ChangeState(EnemyState.AttackingCooldown);
+            _damageTrigger.enabled = false;
+        }
+
+        public void EnableDamage()
+        {
+            _damageTrigger.enabled = true;
         }
     }
 }

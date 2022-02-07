@@ -25,6 +25,9 @@ namespace GSGD2.Player
         private float _groundDashMultiplier = 1.2f;
 
         [SerializeField]
+        private float _staminaCost = 25f;
+
+        [SerializeField]
         private Timer _dashTimeLimit = null;
 
         [SerializeField]
@@ -53,10 +56,10 @@ namespace GSGD2.Player
         {
             _playerController.DashPerformed -= PlayerControllerOnDashPerformed;
         }
-
+        
         private void PlayerControllerOnDashPerformed(PlayerController sender, UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
-            if (_usableInState.HasFlag(_cubeController.CurrentState) && _isDashing == false && (_cubeController.Rigidbody.velocity.z >= 3f || _cubeController.Rigidbody.velocity.z <= -3f))
+            if (_usableInState.HasFlag(_cubeController.CurrentState) && _isDashing == false && (_cubeController.Rigidbody.velocity.z >= 3f || _cubeController.Rigidbody.velocity.z <= -3f) && _cubeController.UseStamina(_staminaCost / 100))
             {
                 float dashDirection = Mathf.Sign(_playerController.HorizontalMove);
                 _isDashing = true;
@@ -101,6 +104,7 @@ namespace GSGD2.Player
                     if ((_cubeController.CurrentState != CubeController.State.Jumping == true) || _dashTimeLimit.IsRunning == false)
                     {
                         _cubeController.enabled = true;
+                        _cubeController.StartStaminaRegen();
                         _isDashing = false;
                         _damageHandler.UpdateState(DamageHandler.DamageStates.None);
                     }

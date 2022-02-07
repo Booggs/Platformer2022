@@ -55,7 +55,7 @@ namespace GSGD2.Gameplay
                     break;
                 case Skeleton.EnemyState.AttackingCooldown:
                     {
-                        _animator.SetBool("Cooldown", true);
+                        _animator.SetTrigger("Cooldown");
                     }
                     break;
                 default:

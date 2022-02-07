@@ -405,10 +405,16 @@ namespace GSGD2.Player
 
         public void ResetRigidbodiesVelocity()
         {
-            foreach (var rigidbody in _rigidbodies)
+            for (int i = 1; i < _rigidbodies.Length; i++)
+            {
+                _rigidbodies[i].velocity = Vector3.zero;
+                _rigidbodies[i].angularVelocity = Vector3.zero;
+            }
+            /*foreach (var rigidbody in _rigidbodies)
             {
                 rigidbody.velocity = Vector3.zero;
-            }
+                rigidbody.angularVelocity = Vector3.zero;
+            }*/
         }
 
         #region Interfaces
