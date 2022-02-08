@@ -5,6 +5,7 @@ namespace GSGD2.UI
 	using UnityEngine;
 	using UnityEngine.InputSystem;
 	using GSGD2.Player;
+	using GSGD2.Utilities;
 
 	/// <summary>
 	/// Manager class that handle global functionnality around UI. It is a proxy to UI subsystem and can enable or disable them.
@@ -18,7 +19,7 @@ namespace GSGD2.UI
 		private PlayerHUDMenu _playerHUD = null;
 
 		[SerializeField]
-		private PauseMenu _pauseMenu = null;
+		private PauseMenuManager _pauseMenu = null;
 
 		private bool _paused = false;
 		private PlayerController _playerController = null;
@@ -47,22 +48,27 @@ namespace GSGD2.UI
 			_playerHUD.SetActive(isActive);
 		}
 
-		private void PauseMenuToggle(PlayerController sender, InputAction.CallbackContext obj)
+		public void PauseMenuToggle(PlayerController sender, InputAction.CallbackContext obj)
         {
 			if (_paused == false)
             {
 				_paused = true;
 				ShowPlayerHUD(false);
 				_pauseMenu.gameObject.SetActive(true);
-				Time.timeScale = 0;
             }
 			else
             {
 				_paused = false;
 				ShowPlayerHUD(true);
 				_pauseMenu.gameObject.SetActive(false);
-				Time.timeScale = 1;
 			}
         }
+
+		public void Unpause()
+        {
+			_paused = false;
+			ShowPlayerHUD(true);
+			_pauseMenu.gameObject.SetActive(false);
+		}
 	}
 }

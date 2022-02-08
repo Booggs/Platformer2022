@@ -306,5 +306,10 @@ namespace GSGD2.Gameplay
         {
             _damageTrigger.enabled = true;
         }
+
+        public void DisableDamage()
+        {
+            _damageTrigger.enabled = false;
+        }
     }
 }

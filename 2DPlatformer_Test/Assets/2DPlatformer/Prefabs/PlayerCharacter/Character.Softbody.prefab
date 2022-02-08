@@ -1274,7 +1274,7 @@ MonoBehaviour:
   _snapTimer:
     _duration: 0.1
   _playerController: {fileID: 8963912016909959918}
-  Spring: 300
+  Spring: 500
   Damper: 50
   Shape: 1
   ColliderSize: 0.002
@@ -1644,7 +1644,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 3141901799035707220, guid: d0af26ae3b3bae14d8698cee0a3fdb63, type: 3}
   _projectileInstanceOffset: {fileID: 2659276037661566532}
   _projectileFireRate:
-    _duration: 0.3
+    _duration: 1
   _parentDamageable: {fileID: 2332251551028677084}
   _shootingDamage:
     _damageValue: 1

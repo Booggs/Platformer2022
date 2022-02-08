@@ -8,7 +8,6 @@ namespace GSGD2.Gameplay
 	/// <summary>
 	/// Damageable specialized for player. It's used by <see cref="DamageDealer"/> to filter player damageable from other. It react to the death of player, restore its health and reset it.
 	/// </summary>
-	[RequireComponent(typeof(CubeController))]
 	public class PlayerDamageable : Damageable
 	{
 		[SerializeField]
@@ -33,7 +32,7 @@ namespace GSGD2.Gameplay
 		protected override bool CanTakeDamage(Damage damage)
 		{
 			bool result = base.CanTakeDamage(damage);
-			result &= (_cubeController.CurrentState == CubeController.State.DamageTaken) == false; // do not take damage if we are in take damage state
+			//result &= (_cubeController.CurrentState == CubeController.State.DamageTaken) == false; // do not take damage if we are in take damage state
 			result &= (_disableTakeDamageDuringDash == true && _cubeController.CurrentState == CubeController.State.Dashing) == false;
 			// TODO AL : redo condition before, not good for dash because of the unsynced physics and event.
 			// When the rigidbody is reset by the end of the dash, it can take an update frame or two to be applied, so we can be hit by spikes and see our character collider not touching the spikes at the end of a dash.

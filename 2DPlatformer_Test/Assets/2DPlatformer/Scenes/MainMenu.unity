@@ -291,7 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadAtOnEnable: 0
-  _sceneName: GameplayZoo
+  _sceneName: GameplayTest_LD01
+  _mode: 0
 --- !u!1 &410869680
 GameObject:
   m_ObjectHideFlags: 0

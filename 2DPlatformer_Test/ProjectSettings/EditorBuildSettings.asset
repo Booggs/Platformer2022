@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/2DPlatformer/Scenes/GameplayTest_LD01.unity
-    guid: 8e8df4e59f6933d4088be32a7706ed6d
-  - enabled: 0
     path: Assets/2DPlatformer/Scenes/EntryPoint.unity
     guid: 8b802caaa0932e54aa1f97cef450b534
-  - enabled: 0
+  - enabled: 1
     path: Assets/2DPlatformer/Scenes/MainMenu.unity
     guid: 357a21f5e581f2b4cb5caaeb254a94b2
-  - enabled: 0
-    path: Assets/2DPlatformer/Scenes/GameplayZoo.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/2DPlatformer/Scenes/GameplayTest_LD01.unity
+    guid: 8e8df4e59f6933d4088be32a7706ed6d
+  - enabled: 1
+    path: Assets/2DPlatformer/Scenes/Test TechArt.unity
+    guid: 8201e889e58caa84b8f1cf34736b845b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 079574cea476da149abcb28640cb83c8, type: 2}

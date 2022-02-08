@@ -40,7 +40,7 @@ namespace GSGD2.Gameplay
         {
             _pickupCommand.DestroyPickupOnApply = false;
             _itemNameDisplay.text = _itemName;
-            _itemCostDisplay.text = "Cost : " + _itemCost;
+            _itemCostDisplay.text = _itemCost + " Dubloons";
         }
 
         public void BuyItem()

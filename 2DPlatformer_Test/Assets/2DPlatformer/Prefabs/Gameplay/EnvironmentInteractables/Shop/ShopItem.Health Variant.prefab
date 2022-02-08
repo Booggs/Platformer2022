@@ -7,21 +7,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4048543550289980187, guid: 92a28e55912be32458500e34113ea940, type: 3}
-      propertyPath: _itemCost
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4048543550289980187, guid: 92a28e55912be32458500e34113ea940, type: 3}
-      propertyPath: _itemName
-      value: Health
-      objectReference: {fileID: 0}
-    - target: {fileID: 4048543550289980187, guid: 92a28e55912be32458500e34113ea940, type: 3}
-      propertyPath: _pickupCommand
-      value: 
-      objectReference: {fileID: 11400000, guid: a7d827b2d04b31543abac3fc54ca81e0, type: 2}
     - target: {fileID: 4048543550289980188, guid: 92a28e55912be32458500e34113ea940, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4048543550289980190, guid: 92a28e55912be32458500e34113ea940, type: 3}
       propertyPath: m_Pivot.x

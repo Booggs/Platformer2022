@@ -32,6 +32,7 @@ namespace GSGD2.UI
 
         private void Update()
         {
+			transform.rotation = Quaternion.Euler(0f, 270f, 0f);
 			float currentHealthPerc = _damageable.CurrentHealth / _damageable.MaxHealth;
 			if (currentHealthPerc < 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 0f)
             {

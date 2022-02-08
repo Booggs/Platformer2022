@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 1144327585221088212}
   - component: {fileID: 4040496993252397337}
   - component: {fileID: 1682687927463601515}
+  - component: {fileID: 1635153655488006042}
   m_Layer: 6
   m_Name: DecoyBlob
   m_TagString: Untagged
@@ -189,6 +190,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 0
     _drawGizmos: 0
+    boxExtent: {x: 0, y: 0, z: 0}
   _gravityScale: 1
   _momentumTimer:
     _duration: 0.4
@@ -278,6 +280,7 @@ MonoBehaviour:
   Damper: 10
   _specialUndersideBone: 1
   Shape: 1
+  CenterSphereSize: 0.6
   ColliderSize: 0.002
   RigidbodyMass: 5
   PrefabLine: {fileID: 0}
@@ -295,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blobLifespanTimer:
-    _duration: 10
+    _duration: 180
   _blobExplosionTimer:
     _duration: 0.5
   _blobJumpForce: 6
@@ -315,6 +318,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _item: {fileID: 1579085293578825867}
   _shouldDestroyItem: 1
+--- !u!114 &1635153655488006042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144327585221088214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00ed4126fbe4ad49a9bbf4bf4aabcfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _capacity: 20
+  _averageSpeed: 0
+  _velocity: {x: 0, y: 0, z: 0}
+  _showDebug: 0
+  _movementDirection:
+    _up: 0
+    _right: 0
+    _down: 0
+    _left: 0
+    _upRight: 0
+    _downRight: 0
+    _downLeft: 0
+    _upLeft: 0
 --- !u!1 &1144327585242210704
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +483,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a78beb6da5154aa45a19dda7cf2e93a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
