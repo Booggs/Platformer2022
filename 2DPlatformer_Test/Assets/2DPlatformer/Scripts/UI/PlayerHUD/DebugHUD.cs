@@ -25,8 +25,8 @@ namespace GSGD2.Gameplay
 
         void Update()
         {
-            //_debugText.text = _cubeController.CurrentStamina.ToString("F5");
-            _debugText.text = _cubeController.CurrentState.ToString();
+            _debugText.text = _damageHandler.CurrentState.ToString();
+            //_debugText.text = _cubeController.CurrentState.ToString();
         }
     }
 }

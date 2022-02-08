@@ -35,6 +35,11 @@ namespace GSGD2.Gameplay
             Slingshotting = 3
         }
 
+        private void Awake()
+        {
+            UpdateState(DamageStates.None);
+        }
+
         public void UpdateState(DamageStates newState)
         {
             if (_currentState != newState)
@@ -44,7 +49,7 @@ namespace GSGD2.Gameplay
                 {
                     case DamageStates.None:
                         {
-                            _damageDealer.Damage = null;
+                            _damageDealer.Damage = new Damage(0, _damageDealer);
                         }
                         break;
                     case DamageStates.Dashing:
