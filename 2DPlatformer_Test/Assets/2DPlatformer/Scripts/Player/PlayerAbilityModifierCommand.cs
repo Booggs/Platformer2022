@@ -15,7 +15,9 @@
 		{
 			Jump,
 			Dash,
-			Grab
+			Grab,
+			Slingshot,
+			Division
 		}
 
 		// TODO AL : add modifiers : SetAllowedForce, 
@@ -70,6 +72,22 @@
                         }
 						break;
                     }
+				case Ability.Slingshot:
+                    {
+						if (_modifier == Modifier.Enable || _modifier == Modifier.Disable)
+						{
+							player.SlingshotHandler.EnableSlingshot(_modifier == Modifier.Enable ? true : false);
+						}
+						break;
+                    }
+				case Ability.Division:
+                    {
+						if (_modifier == Modifier.Enable || _modifier == Modifier.Disable)
+						{
+							player.BlobSeparation.EnableSeparation(_modifier == Modifier.Enable ? true : false);
+						}
+						break;
+					}
 				default:
 					break;
 			}

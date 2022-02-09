@@ -21,11 +21,14 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private Damage _spawningDamage;
 
+        [SerializeField]
+        private bool _enableOnStart = false;
+
         private PlayerController _playerController = null;
         private PlayerDamageable _playerDamageable = null;
         private CubeController _cubeController = null;
         private SpawnedBlob _spawnedBlob = null;
-
+        private bool _enabled = false;
 
 
         public SpawnedBlob SpawnedBlob
@@ -45,6 +48,7 @@ namespace GSGD2.Gameplay
             _playerRefs.TryGetPlayerController(out _playerController);
             _playerRefs.TryGetPlayerDamageable(out _playerDamageable);
             _playerRefs.TryGetCubeController(out _cubeController);
+            _enabled = _enableOnStart;
         }
 
         private void OnEnable()
@@ -65,7 +69,7 @@ namespace GSGD2.Gameplay
 
         private void SeparationPerformed(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_spawnedBlob == null && _blobCooldown.IsRunning == false && _playerDamageable.CurrentHealth > _spawningDamage.DamageValue)
+            if (_spawnedBlob == null && _blobCooldown.IsRunning == false && _playerDamageable.CurrentHealth > _spawningDamage.DamageValue && _enabled)
             {
                 _blobCooldown.Start();
                 _cubeController.LaunchBlob(new Vector3(0f, 7.5f, 0f));
@@ -83,6 +87,11 @@ namespace GSGD2.Gameplay
                 _spawnedBlob._blobLifespanTimer.TimeElapsed = _spawnedBlob._blobLifespanTimer.Duration;
                 //_spawnedBlob._blobLifespanTimer.ForceFinishState();
             }
+        }
+
+        public void EnableSeparation(bool isEnabled)
+        {
+            _enabled = isEnabled;
         }
 
     }

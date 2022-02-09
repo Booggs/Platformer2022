@@ -21,6 +21,7 @@ namespace GSGD2.UI
 		[SerializeField]
 		private PauseMenuManager _pauseMenu = null;
 
+
 		private bool _paused = false;
 		private PlayerController _playerController = null;
 

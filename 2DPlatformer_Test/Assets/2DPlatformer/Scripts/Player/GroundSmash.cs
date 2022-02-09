@@ -76,7 +76,7 @@ namespace GSGD2.Player
             if (_isOnGroundSmash == true)
             {
                 _cubeController.ForceCheckGround();
-                if (_cubeController.CurrentState != CubeController.State.Jumping && _enableControlsAfterTimer.Update() == true)
+                if (_cubeController.CurrentState != CubeController.State.Jumping && _enableControlsAfterTimer.Update() == false)
                 {
                     _cubeController.enabled = true;
                     _cubeController.StartStaminaRegen();

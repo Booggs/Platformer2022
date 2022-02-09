@@ -206,6 +206,7 @@ namespace GSGD2.Player
         private CharacterCollision _characterCollision = null;
         private BoneSphere _boneSphere = null;
         private SlingshotHandler _slingshotHandler = null;
+        private BlobSeparation _blobSeparation = null;
         private float _maxVelocitySqr = -1f;
         private float _inputMovement;
         private float _rawInputMovement;
@@ -284,6 +285,9 @@ namespace GSGD2.Player
         public bool StickyModeOn => _stickyModeOn;
 
         public Jump Jump => _jump;
+
+        public SlingshotHandler SlingshotHandler => _slingshotHandler;
+        public BlobSeparation BlobSeparation => _blobSeparation;
 
 
         public bool Gliding
@@ -440,6 +444,7 @@ namespace GSGD2.Player
             _playerReferences.TryGetCharacterCollision(out _characterCollision);
             _playerReferences.TryGetBoneSphere(out _boneSphere);
             _playerReferences.TryGetSlingshotHandler(out _slingshotHandler);
+            _playerReferences.TryGetBlobSeparation(out _blobSeparation);
 
             _maxVelocitySqr = _maxVelocity * _maxVelocity;
 

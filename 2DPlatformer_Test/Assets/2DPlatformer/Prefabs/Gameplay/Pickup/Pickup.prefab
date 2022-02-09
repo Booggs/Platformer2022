@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a542fae2c4c831418f1fd87d8d3be25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationForces: {x: 0, y: 180, z: 0}
   _space: 0
   _resetWorldRotationAtOnEnable: 1
   _resetWorldRotationAtOnDisable: 1
@@ -58,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9119622453447099773}
   - component: {fileID: 9119622453447099772}
+  - component: {fileID: 2075165965046800719}
   m_Layer: 0
   m_Name: Pickup
   m_TagString: Untagged
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86aa907d4940faa4e96bdac78a4fdbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _memento: 
   _restrictionList: []
   _drawLinkUtilityToRestricted:
     _drawGizmos: 0
@@ -103,6 +104,21 @@ MonoBehaviour:
     _width: 2
   _autoAddPlayerToRestrictionList: 1
   _pickupCommand: {fileID: 0}
+  _destroyOnPickup: 1
+--- !u!114 &2075165965046800719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9119622453447099650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ce132c7019f9f4fa6b40423ae0e9e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotator: {fileID: 9119622453051854798}
+  _rotationSpeed: 5
 --- !u!1 &9119622453634020738
 GameObject:
   m_ObjectHideFlags: 0

@@ -59,6 +59,11 @@
 			_currentState = State.Finished;
 		}
 
+		public void StopTimer()
+        {
+			_currentState = State.Stopped;
+        }
+
 		public void ResetTimeElapsed()
 		{
 			_timeElapsed = 0;

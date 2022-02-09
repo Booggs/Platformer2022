@@ -17,6 +17,16 @@ namespace GSGD2.Utilities
         [SerializeField]
         private GameObject _playButton = null;
 
+        [SerializeField]
+        private GameObject _keybindingsMenu = null;
+
+        [SerializeField]
+        private GameObject _pauseMenu = null;
+
+        [SerializeField]
+        private GameObject _returnButton = null;
+
+
         private void OnEnable()
         {
             EventSystem.current.SetSelectedGameObject(_playButton);
@@ -31,6 +41,20 @@ namespace GSGD2.Utilities
         public void Unpause()
         {
             _uiManager.Unpause();
+        }
+
+        public void OpenKeybindings()
+        {
+            _keybindingsMenu.SetActive(true);
+            _pauseMenu.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(_returnButton);
+        }
+
+        public void ReturnToPause()
+        {
+            _keybindingsMenu.SetActive(false);
+            _pauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(_playButton);
         }
     }
 }

@@ -47,6 +47,9 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private DamageHandler _damageHandler = null;
 
+        [SerializeField]
+        private bool _enableOnStart = false;
+
         private List<Rigidbody> _rigidbodies = new List<Rigidbody>();
         private CubeController _cubeController = null;
         private PlayerController _playerController = null;
@@ -60,6 +63,7 @@ namespace GSGD2.Gameplay
         private float _maxSlingshottingDuration = 2f;
         private bool _slingshotCharging = false;
         private bool _slingshotting = false;
+        private bool _enabled = false;
 
         public float AngleLimit => _angleLimit;
 
@@ -80,6 +84,7 @@ namespace GSGD2.Gameplay
             _maxRaycasterDistance = _raycaster.MaxDistance;
             _maxSlingshottingDuration = _slingshotDurationTimer.Duration;
             _currentLaunchForce = _minLaunchForce;
+            _enabled = _enableOnStart;
         }
 
         private void OnEnable()
@@ -157,7 +162,7 @@ namespace GSGD2.Gameplay
 
         private void ChargeSlingshot(PlayerController sender, InputAction.CallbackContext obj)
         {
-            if (_cubeController.CurrentState == CubeController.State.Grounded && _cubeController.CurrentStamina >= 0.5f)
+            if (_cubeController.CurrentState == CubeController.State.Grounded && _cubeController.CurrentStamina >= 0.5f && _enabled)
             {
                 //_cubeController.enabled = false;
                 _slingshotCameraAimController.enabled = true;
@@ -252,6 +257,11 @@ namespace GSGD2.Gameplay
             {
                 _lineRenderer.SetPositions(new Vector3[2] { startPosition, startPosition + projectileInstanceOffset.forward * _raycaster.MaxDistance });
             }
+        }
+
+        public void EnableSlingshot(bool isEnabled)
+        {
+            _enabled = isEnabled;
         }
     }
 }

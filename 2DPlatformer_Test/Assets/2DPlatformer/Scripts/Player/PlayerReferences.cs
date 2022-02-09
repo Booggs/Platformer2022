@@ -31,6 +31,7 @@ namespace GSGD2.Player
 		[SerializeField] private ProjectileLauncherController _projectileLauncherController = null;
 		[SerializeField] private SlingshotHandler _slingshotHandler = null;
 		[SerializeField] private DamageHandler _damageHandler = null;
+		[SerializeField] private BlobSeparation _blobSeparation = null;
 
 		private Rigidbody _rigidbody = null;
 		private float _currentScale = 1f;
@@ -189,5 +190,11 @@ namespace GSGD2.Player
 			damageHandler = _damageHandler;
 			return damageHandler != null;
         }
+
+		public bool TryGetBlobSeparation(out BlobSeparation blobSeparation)
+		{
+			blobSeparation = _blobSeparation;
+			return blobSeparation != null;
+		}
 	}
 }

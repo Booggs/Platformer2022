@@ -310,17 +310,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _explosionForce: 75
+  - {fileID: 7949606415794762482, guid: eb517c404993c9545b23b95686051fc2, type: 3}
+  - {fileID: 1986731886898067361, guid: 0db5e1392e8908642bcee09b982746df, type: 3}
+  - {fileID: 2623241405062917220, guid: 04d78303252230f4cb4c1aca8b540470, type: 3}
+  - {fileID: 5927488614260253152, guid: adc71c6992ddb88428ca1bdbd0960ef0, type: 3}
+  - {fileID: 1026386140555788221, guid: 92c34f9a3c5a4884f818f97e690d83d3, type: 3}
+  - {fileID: 1526102860389089763, guid: 852cfec7ccdd3964d9fcb3e61c1e290d, type: 3}
+  - {fileID: 967351209774197001, guid: e355b18ed38c28d4f8ffde31624dd0c2, type: 3}
+  - {fileID: 7811661057902502022, guid: 6f5630c7326108e4ba2371b1f8a4bf8e, type: 3}
+  - {fileID: 9100741673067600507, guid: d39378955ace9444fad9f83278255d8c, type: 3}
+  - {fileID: 1560868770631930518, guid: a9510e2c258120d43a0d6aa23ab5b5a8, type: 3}
+  _explosionForce: 20
 --- !u!114 &1545694462535583159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +355,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1545694462535583155}
         m_TargetAssemblyTypeName: GSGD2.Utilities.GameObjectDestroyer, Assembly-CSharp
         m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5307621843268654990}
+        m_TargetAssemblyTypeName: SkeletonBonesInstancer, Assembly-CSharp
+        m_MethodName: Explode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

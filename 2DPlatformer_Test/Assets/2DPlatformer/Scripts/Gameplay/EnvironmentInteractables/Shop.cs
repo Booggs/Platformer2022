@@ -70,7 +70,7 @@ namespace GSGD2.Gameplay
         }
         #endregion
 
-        private void OpenShop()
+        public void OpenShop()
         {
             if (_unlockedAtStart == true)
             {

@@ -126,7 +126,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a78beb6da5154aa45a19dda7cf2e93a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -275,6 +275,7 @@ MonoBehaviour:
       _jumpHeight: 3
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
+    _triggerInvincibility: 1
   _ignorePlayer: 1
   _giveDOT: 0
   _DOTDamage:
@@ -288,6 +289,7 @@ MonoBehaviour:
       _jumpHeight: 3
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
+    _triggerInvincibility: 1
   _DOTRate: 1
 --- !u!114 &6268743982065051993
 MonoBehaviour:
