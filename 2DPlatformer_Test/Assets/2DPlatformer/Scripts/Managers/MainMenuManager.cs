@@ -2,6 +2,7 @@
 {
 	using System.Collections;
 	using UnityEngine;
+	using UnityEngine.EventSystems;
 #if UNITY_EDITOR
 	using UnityEditor;
 #endif // UNITY_EDITOR
@@ -24,6 +25,21 @@
 		private GameObject _settings = null;
 
 
+
+		[SerializeField]
+		private GameObject _newGameButton = null;
+
+		[SerializeField]
+		private GameObject _settingsButton = null;
+
+		[SerializeField]
+		private GameObject _keybindingsRetturnButton = null;
+
+		[SerializeField]
+		private GameObject _graphicsReturnButton = null;
+
+
+
 		public void Quit()
 		{
 #if UNITY_EDITOR
@@ -39,6 +55,7 @@
 			_options.SetActive(false);
 			_keybindings.SetActive(false);
 			_settings.SetActive(false);
+			EventSystem.current.SetSelectedGameObject(_newGameButton);
 		}
 
 		public void ReturnToOptionsCanvas()
@@ -47,6 +64,7 @@
 			_options.SetActive(true);
 			_keybindings.SetActive(false);
 			_settings.SetActive(false);
+			EventSystem.current.SetSelectedGameObject(_settingsButton);
 		}
 
 		public void OpenKeybindings()
@@ -55,6 +73,7 @@
 			_options.SetActive(false);
 			_keybindings.SetActive(true);
 			_settings.SetActive(false);
+			EventSystem.current.SetSelectedGameObject(_keybindingsRetturnButton);
 		}
 
 		public void OpenSettings()
@@ -63,6 +82,7 @@
 			_options.SetActive(false);
 			_keybindings.SetActive(false);
 			_settings.SetActive(true);
+			EventSystem.current.SetSelectedGameObject(_graphicsReturnButton);
 		}
 
 		public void OpenOptions()
@@ -71,6 +91,7 @@
 			_options.SetActive(true);
 			_keybindings.SetActive(false);
 			_settings.SetActive(false);
+			EventSystem.current.SetSelectedGameObject(_settingsButton);
 		}
 	}
 }
