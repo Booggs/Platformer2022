@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4048543550289980187, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: _itemName
+      value: Healing
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550289980187, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: _pickupCommand
+      value: 
+      objectReference: {fileID: 11400000, guid: a7d827b2d04b31543abac3fc54ca81e0, type: 2}
     - target: {fileID: 4048543550289980188, guid: 92a28e55912be32458500e34113ea940, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -98,6 +106,38 @@ PrefabInstance:
     - target: {fileID: 4048543550289980193, guid: 92a28e55912be32458500e34113ea940, type: 3}
       propertyPath: m_Name
       value: ShopItem.Health Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550905381480, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550905381480, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550905381480, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.197
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550905381480, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.224
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550905381481, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b90595707daf632488dc9f865812c8e5, type: 3}
+    - target: {fileID: 4048543550905381481, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550905381481, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550905381481, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92a28e55912be32458500e34113ea940, type: 3}

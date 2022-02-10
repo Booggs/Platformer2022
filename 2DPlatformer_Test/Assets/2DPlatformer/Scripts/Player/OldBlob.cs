@@ -10,10 +10,8 @@ namespace GSGD2.Gameplay
         private PickupCommand _pickupCommand = null;
 
         [SerializeField]
-        private HealthBlob _healthBlobPrefab = null;
+        private int _maxHeal = 3;
 
-        [SerializeField]
-        private int _healthBlobs = 3;
 
         public GameObject GetGameObject()
         {
@@ -26,9 +24,9 @@ namespace GSGD2.Gameplay
             if (playerDamageable != null)
             {
                 _pickupCommand.Apply(this);
-                for (int i = 0; i < _healthBlobs; i++)
+                for (int i = 0; i < _maxHeal; i++)
                 {
-                    Instantiate<HealthBlob>(_healthBlobPrefab, transform.position, Quaternion.identity);
+                    playerDamageable.RestoreHealth(1);
                 }
                 Destroy(gameObject);
             }

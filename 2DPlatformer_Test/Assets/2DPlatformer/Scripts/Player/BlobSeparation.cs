@@ -30,6 +30,7 @@ namespace GSGD2.Gameplay
         private SpawnedBlob _spawnedBlob = null;
         private bool _enabled = false;
 
+        public bool Enabled => _enabled;
 
         public SpawnedBlob SpawnedBlob
         {
@@ -84,7 +85,7 @@ namespace GSGD2.Gameplay
             }
             if (_spawnedBlob != null)
             {
-                _spawnedBlob._blobLifespanTimer.TimeElapsed = _spawnedBlob._blobLifespanTimer.Duration;
+                _spawnedBlob.PrematureDeath();
                 //_spawnedBlob._blobLifespanTimer.ForceFinishState();
             }
         }

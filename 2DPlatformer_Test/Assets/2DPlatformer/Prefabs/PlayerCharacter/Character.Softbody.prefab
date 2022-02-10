@@ -991,7 +991,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979883796742175144}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.9, z: -0.00000047683716}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -1207,6 +1207,7 @@ GameObject:
   - component: {fileID: 649515385}
   - component: {fileID: 649515386}
   - component: {fileID: 649515387}
+  - component: {fileID: 8672265184573038527}
   m_Layer: 6
   m_Name: Character.Softbody
   m_TagString: Untagged
@@ -1316,6 +1317,7 @@ MonoBehaviour:
   _projectileLauncherController: {fileID: 1275202730724197374}
   _slingshotHandler: {fileID: 868043966410835398}
   _damageHandler: {fileID: 649515387}
+  _blobSeparation: {fileID: 1083523736}
 --- !u!114 &8963912016909959918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1582,6 +1584,7 @@ MonoBehaviour:
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
     _triggerInvincibility: 1
+  _enableOnStart: 1
 --- !u!114 &1275202730724197374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1693,6 +1696,7 @@ MonoBehaviour:
   _projectileLauncher: {fileID: 1083523738}
   _rotator: {fileID: 758342202677951435}
   _damageHandler: {fileID: 649515387}
+  _enableOnStart: 0
 --- !u!114 &1692861527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1710,8 +1714,8 @@ MonoBehaviour:
   _cameraAimTransformParent: {fileID: 8101763736310891629}
   _cameraAim: {fileID: 7038285111042879796}
   _axis: 2
-  _distance: 15
-  _speed: 30
+  _distance: 10
+  _speed: 15
   _isSlingshotController: 1
   _slingshotHandler: {fileID: 868043966410835398}
   _projectileLauncher: {fileID: 1083523738}
@@ -2261,6 +2265,19 @@ MonoBehaviour:
       _jumpHeightBonusWhenFalling: 1
       _jumpHeightBonusSpeedThreshold: 10
     _triggerInvincibility: 1
+--- !u!114 &8672265184573038527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177101262253061136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf39c55e55b4d2a42b8140ba43c38571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDecoy: 0
 --- !u!1 &2671628357469391244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3114,7 +3131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6732645064505343830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9, z: -0.00000047683716}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7280882848012791425}
@@ -3180,7 +3197,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0, z: -0.3}
-  m_TranslationOffset: {x: -0.0032114144, y: 0.005824566, z: 0.5967552}
+  m_TranslationOffset: {x: -0.003211415, y: 0.005824566, z: 0.5967552}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -3294,7 +3311,7 @@ SkinnedMeshRenderer:
   m_Quality: 4
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 3464268576955195577, guid: be7321ba37ba79e459781796b0b09544, type: 3}
+  m_Mesh: {fileID: 289301614986012343, guid: 78cbb997a59df92478956a63646d6ae8, type: 3}
   m_Bones:
   - {fileID: 1378240121804312390}
   - {fileID: 8021904361280626387}
@@ -3350,7 +3367,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: 0.003211415, y: -0.0031867027, z: 1.023}
-  m_TranslationOffset: {x: 0, y: 0, z: 0.107782125}
+  m_TranslationOffset: {x: 0, y: 0, z: 0.10778165}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -3531,7 +3548,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0, z: 0.3}
-  m_TranslationOffset: {x: -0.0032114144, y: 0.0031867027, z: -0.61521786}
+  m_TranslationOffset: {x: -0.003211415, y: 0.0031867027, z: -0.61521834}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1

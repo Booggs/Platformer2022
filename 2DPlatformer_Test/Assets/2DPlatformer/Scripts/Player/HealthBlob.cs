@@ -12,13 +12,17 @@ namespace GSGD2.Gameplay
         [SerializeField]
         private float _horizontalRange = 2f;
 
+        [SerializeField]
+        private bool _startJump = true;
+
         private int _healingAmount = 1;
         private Rigidbody[] _rigidbodies;
 
         private void Awake()
         {
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
-            LaunchHealthBlob();
+            if (_startJump)
+                LaunchHealthBlob();
         }
 
         public int HealingAmount

@@ -17,10 +17,22 @@ namespace GSGD2.Gameplay
         private float _blobJumpForce = 5f;
 
         [SerializeField]
+        private float _explosionRadius = 3f;
+
+        [SerializeField]
+        private Damage _explosionDamage;
+
+        [SerializeField]
+        private ParticleInstancier _takeDamageParticle = null;
+
+        [SerializeField]
         private GameObject _healthBlob;
 
         [SerializeField]
         private int _healthBlobsToSpawn = 3;
+
+        [SerializeField]
+        private GameObjectDestroyer _destroyer = null;
 
         private BlobSeparation _parentScript = null;
 
@@ -114,7 +126,25 @@ namespace GSGD2.Gameplay
             {
                 Instantiate(_healthBlob, transform.position, Quaternion.identity);
             }
-            Destroy(gameObject);
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, _explosionRadius, transform.forward, 0f);
+            foreach (RaycastHit hit in hits)
+            {
+                EnemyDamageable damageable = hit.collider.GetComponentInParent<EnemyDamageable>();
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(_explosionDamage);
+                }
+            }
+            if (_takeDamageParticle != null)
+            {
+                _takeDamageParticle.Instantiate();
+            }
+            _destroyer.Destroy();
+        }
+
+        public void PrematureDeath()
+        {
+            _blobLifespanTimer.TimeElapsed = _blobLifespanTimer.Duration;
         }
     }
 }

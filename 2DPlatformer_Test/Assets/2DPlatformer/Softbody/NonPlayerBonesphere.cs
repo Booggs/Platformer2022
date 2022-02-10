@@ -30,6 +30,7 @@ namespace GSGD2.Player
         [Tooltip("Higher the value the faster the spring oscillation stops")]
         public float Damper = 0.2f;
         [Header("Other Settings")]
+        public bool _lockPosition = true;
         public bool _specialUndersideBone = false;
         public Softbody.ColliderShape Shape = Softbody.ColliderShape.Box;
         public float CenterSphereSize = 0.6f;
@@ -80,7 +81,8 @@ namespace GSGD2.Player
 
         private void Update()
         {
-            root.transform.position = new Vector3(0, root.transform.position.y, root.transform.position.z);
+            if (_lockPosition)
+                root.transform.position = new Vector3(0, root.transform.position.y, root.transform.position.z);
         }
     }
 }

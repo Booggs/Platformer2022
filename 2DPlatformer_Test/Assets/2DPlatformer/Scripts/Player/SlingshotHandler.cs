@@ -73,6 +73,9 @@ namespace GSGD2.Gameplay
 
         public bool ChargingSlingshot => _slingshotCharging;
 
+        public bool Enabled => _enabled;
+
+
         private void Awake()
         {
             _playerRefs.TryGetCubeController(out _cubeController);

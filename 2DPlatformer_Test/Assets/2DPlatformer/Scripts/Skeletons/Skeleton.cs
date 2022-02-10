@@ -47,7 +47,7 @@ namespace GSGD2.Gameplay
         private EnemyState currentState = 0;
 
         [SerializeField]
-        private PlayerDamageable _player = null;
+        private TargetBlob _player = null;
 
         [SerializeField]
         private bool _seeingPlayer = false;
@@ -62,7 +62,7 @@ namespace GSGD2.Gameplay
         private bool withinAttackDistance;
 
 
-        private PlayerDamageable tmpPlayer = null;
+        private TargetBlob tmpPlayer = null;
         private float _attackingDistance = 2;
         private float _cachedMovementSpeed;
         private EnemyState _currentState = 0;
@@ -168,16 +168,17 @@ namespace GSGD2.Gameplay
             {
                 foreach (RaycastHit raycastHit in BoxcastHits)
                 {
-                    if (raycastHit.collider.GetComponentInParent<PlayerDamageable>() != null)
+                    if (raycastHit.collider.GetComponentInParent<TargetBlob>() != null)
                     {
-                        tmpPlayer = raycastHit.collider.GetComponentInParent<PlayerDamageable>();
-                        break;
+                        tmpPlayer = raycastHit.collider.GetComponentInParent<TargetBlob>();
+                        if (tmpPlayer.Decoy)
+                            break;
                     }
                 }
                 if (tmpPlayer != null)
                 {
                     RaycastHit raycastHit;
-                    if (Physics.Linecast(_raycaster.WorldPosition, tmpPlayer.transform.position, out raycastHit, _raycaster.LayerMask, QueryTriggerInteraction.Ignore) && raycastHit.collider.GetComponentInParent<PlayerDamageable>())
+                    if (Physics.Linecast(_raycaster.WorldPosition, tmpPlayer.transform.position, out raycastHit, _raycaster.LayerMask, QueryTriggerInteraction.Ignore) && raycastHit.collider.GetComponentInParent<TargetBlob>())
                     {
                         _player = tmpPlayer;
                         _playerLossTimer.ResetTimeElapsed();

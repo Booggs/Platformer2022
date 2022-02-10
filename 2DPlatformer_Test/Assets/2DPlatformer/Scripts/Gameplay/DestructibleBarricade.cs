@@ -38,7 +38,7 @@ namespace GSGD2.Gameplay
             for (int i = 0; i < _debrisNumber; i++)
             {
                 _debrisRigidbodies.Add(Instantiate(_debrisPrefab, new Vector3(transform.position.x, transform.position.y + Random.Range(-1, 1), transform.position.z), Random.rotation));
-                float scale = Random.Range(0.15f, 0.35f);
+                float scale = Random.Range(1.15f, 2.15f);
                 _debrisRigidbodies[i].transform.localScale = new Vector3(scale, scale, scale);
             }
             foreach (Rigidbody rigidbody in _debrisRigidbodies)

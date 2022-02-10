@@ -786,8 +786,8 @@ MonoBehaviour:
   _gameObjectDestroyer: {fileID: 3942962067989866687}
   rigidbody: {fileID: 0}
   displacementEstimationUpdater: {fileID: 3942962067989866688}
-  healthAtStart: 10
-  maxHealth: 10
+  healthAtStart: 5
+  maxHealth: 5
   destroyIfHealthBelowZero: 1
   recoveryDuration: 0.5
   showDebug: 0
@@ -805,6 +805,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3942962067989866687}
         m_TargetAssemblyTypeName: GSGD2.Utilities.GameObjectDestroyer, Assembly-CSharp
         m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1046957943}
+        m_TargetAssemblyTypeName: SkeletonBonesInstancer, Assembly-CSharp
+        m_MethodName: Explode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
