@@ -29,6 +29,7 @@ namespace GSGD2.Gameplay
 		public override void Interact()
 		{
 			_pickupCommand.Apply(this);
+
 			if (_destroyOnPickup == true)
             {
 				Destroy(this.gameObject);

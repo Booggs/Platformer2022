@@ -32,6 +32,7 @@ namespace GSGD2.Player
 		[SerializeField] private SlingshotHandler _slingshotHandler = null;
 		[SerializeField] private DamageHandler _damageHandler = null;
 		[SerializeField] private BlobSeparation _blobSeparation = null;
+		[SerializeField] private AudioSource _audioSource = null;
 
 		private Rigidbody _rigidbody = null;
 		private float _currentScale = 1f;
@@ -195,6 +196,12 @@ namespace GSGD2.Player
 		{
 			blobSeparation = _blobSeparation;
 			return blobSeparation != null;
+		}
+
+		public bool TryGetAudioSource(out AudioSource audioSource)
+		{
+			audioSource = _audioSource;
+			return audioSource != null;
 		}
 	}
 }

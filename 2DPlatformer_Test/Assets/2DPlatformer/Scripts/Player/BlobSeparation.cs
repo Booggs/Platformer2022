@@ -80,7 +80,6 @@ namespace GSGD2.Gameplay
                 _spawnedBlob = spawnedBlob.GetComponent<SpawnedBlob>();
                 _spawnedBlob.ParentScript = this;
                 _spawnedBlob.HealthBlobsToSpawn = _spawningDamage.DamageValue;
-
                 return;
             }
             if (_spawnedBlob != null)

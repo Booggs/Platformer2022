@@ -33,6 +33,9 @@ namespace GSGD2.Player
         [SerializeField]
         private DamageHandler _damageHandler = null;
 
+        [SerializeField]
+        private AudioClip _smashSound = null;
+
         private bool _isOnGroundSmash = false;
         private PlayerReferences playerRefs = null;
 

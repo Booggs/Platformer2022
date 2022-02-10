@@ -33,6 +33,9 @@ namespace GSGD2.Gameplay
         private PlayerReferences _playerRefs = null;
 
         [SerializeField]
+        private AudioClip _slingshotSound = null;
+
+        [SerializeField]
         private LineRenderer _lineRenderer = null;
 
         [SerializeField]
@@ -198,9 +201,8 @@ namespace GSGD2.Gameplay
                     //rigidbody.AddForce(new Vector3(0f, _currentLaunchForce, _currentLaunchForce), ForceMode.Impulse);
                     rigidbody.AddForce((_lineRenderer.GetPosition(1) - _lineRenderer.GetPosition(0)).normalized * _currentLaunchForce, ForceMode.Impulse);
                 }
+                //print("Current direction : " + (_lineRenderer.GetPosition(1) - _lineRenderer.GetPosition(0)).normalized);
                 
-                print("Current direction : " + (_lineRenderer.GetPosition(1) - _lineRenderer.GetPosition(0)).normalized);
-
                 _damageHandler.UpdateState(DamageHandler.DamageStates.Slingshotting);
 
                 _slingshotCameraAimController.enabled = false;

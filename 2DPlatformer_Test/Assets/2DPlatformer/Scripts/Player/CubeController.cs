@@ -87,6 +87,9 @@ namespace GSGD2.Player
         private Jump _jump = null;
 
         [SerializeField]
+        private AudioClip _jumpSound = null;
+
+        [SerializeField]
         private bool _changeToFallingStateWhenReleasingJump = false;
 
         [SerializeField]
@@ -287,6 +290,7 @@ namespace GSGD2.Player
         public Jump Jump => _jump;
 
         public SlingshotHandler SlingshotHandler => _slingshotHandler;
+
         public BlobSeparation BlobSeparation => _blobSeparation;
 
 
