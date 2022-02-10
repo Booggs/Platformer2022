@@ -15,6 +15,8 @@ namespace GSGD2.Gameplay
 			PlayerStart,
 			LastCheckpointOrPlayerStart
 		}
+		[SerializeField]
+		private GameObject _healthBlob;
 
 		[SerializeField]
 		private ResetMode _resetMode = 0;
@@ -131,6 +133,10 @@ namespace GSGD2.Gameplay
 					if (_lastCheckpointPassed != null)
 					{
 						resetPosition = _lastCheckpointPassed.transform.position + new Vector3(0, 1, 0);
+                        for (int i = 0; i < 5; i++)
+                        {
+							Instantiate<GameObject>(_healthBlob, _lastCheckpointPassed.transform.position, _lastCheckpointPassed.transform.rotation);
+                        }
 					}
 					else
 					{

@@ -54,8 +54,8 @@ namespace GSGD2.Gameplay
 			base.OnTakeDamageAndHealthBelowZero(damage);
 			if (_resetPositionWhenHealthBelowZero == true)
 			{
-				RestoreHealth(healthAtStart);
 				LevelReferences.Instance.PlayerStart.ResetPlayerPosition();
+				RestoreHealth(5);
 			}
 		}
 

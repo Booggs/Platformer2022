@@ -104,7 +104,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.45098042, b: 1, a: 1}
   m_Intensity: 5.7
-  m_Range: 10
+  m_Range: 7
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -3299,7 +3299,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0, z: -0.3}
-  m_TranslationOffset: {x: -0.003211415, y: 0.0058243275, z: 0.5967552}
+  m_TranslationOffset: {x: -0.003211415, y: 0.005824566, z: 0.5967552}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1

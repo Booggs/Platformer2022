@@ -230,6 +230,7 @@ namespace GSGD2.Player
         private float _maxStaminaUpgrades = 0f;
         private Collider[] _colliders = null; // TODO AL : move this to PlayerReferences
         private bool _stickingLeft = false;
+        private float _defaultWallJumpHeight = 0f;
 
         private bool _hasBeganToFallFromGroundedStateAndDidJump = false;
         private bool _hasBeganToFallFromGroundedStateAndDidDash = false;
@@ -460,6 +461,7 @@ namespace GSGD2.Player
 
             _currentAirSpeed = _airMoveSpeed;
             _currentDescendingGravityScale = _descendingGravityScale;
+            _defaultWallJumpHeight = _wallJumpHeight;
 
             _rootRigidbody = GetComponentInChildren<Rigidbody>();
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
@@ -1548,6 +1550,7 @@ namespace GSGD2.Player
 
         public void UpdateScale(float scale)
         {
+            _wallJumpHeight = _defaultWallJumpHeight * scale;
             _jump.JumpHeight = _defaultJumpHeight * scale;
             foreach (Rigidbody rigidbody in _rigidbodies)
             {

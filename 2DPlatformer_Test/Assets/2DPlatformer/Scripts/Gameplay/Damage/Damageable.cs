@@ -148,7 +148,10 @@ namespace GSGD2.Gameplay
 
 		public bool RestoreHealth(int healthPoint)
 		{
-			if (enabled == false || _currentHealth >= maxHealth) return false;
+			if (enabled == false || _currentHealth >= maxHealth)
+			{
+				return false;
+			}
 			_currentHealth = Mathf.RoundToInt(Mathf.Clamp(_currentHealth + healthPoint, 0f, maxHealth));
 			HealthRestored?.Invoke(this, GetArgs(null, healthPoint));
 			return true;

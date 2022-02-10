@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf72432bc2dd8b34ea3a704b824b7079, type: 3}
   m_Name: Pickup.Healing
   m_EditorClassIdentifier: 
-  _healthToChange: 1
+  _healthToChange: 5
