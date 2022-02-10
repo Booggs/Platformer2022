@@ -307,14 +307,6 @@ MonoBehaviour:
       m_Action: Dash
       m_Flags: 0
     - m_Name: 
-      m_Id: 4f5c77ca-fb78-490e-a132-86ee78cc870c
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: WallGrab
-      m_Flags: 0
-    - m_Name: 
       m_Id: f6685742-0816-4912-9c48-d429bb37a1b0
       m_Path: <Gamepad>/leftTrigger
       m_Interactions: Hold(duration=0.1)
