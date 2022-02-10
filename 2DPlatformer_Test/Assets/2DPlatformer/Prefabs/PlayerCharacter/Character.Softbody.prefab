@@ -103,7 +103,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.45098042, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 5.7
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1650,7 +1650,7 @@ MonoBehaviour:
     _duration: 1
   _parentDamageable: {fileID: 2332251551028677084}
   _shootingDamage:
-    _damageValue: 1
+    _damageValue: 3
     _bump:
       enabled: 0
       _maximumAllowedForces: 1
@@ -1678,7 +1678,7 @@ MonoBehaviour:
   _chargingDurationTimer:
     _duration: 2
   _slingshotDurationTimer:
-    _duration: 1
+    _duration: 0
   _minLaunchForce: 5
   _maxLaunchForce: 50
   _angleLimit: 40
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   _playerRefs: {fileID: 6559671171331571633}
   _sphereParent: {fileID: 4411907334222646362}
   _cameraAimParent: {fileID: 972144916}
-  _maxScale: 1.3
+  _maxScale: 1.24
   _minScale: 0.7
 --- !u!120 &6075231610071905281
 LineRenderer:
@@ -2230,7 +2230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageDealer: {fileID: 649515386}
   _dashDamage:
-    _damageValue: 2
+    _damageValue: 4
     _bump:
       enabled: 1
       _maximumAllowedForces: 1
@@ -2242,7 +2242,7 @@ MonoBehaviour:
       _jumpHeightBonusSpeedThreshold: 10
     _triggerInvincibility: 1
   _groundSmashDamage:
-    _damageValue: 3
+    _damageValue: 5
     _bump:
       enabled: 0
       _maximumAllowedForces: 1
@@ -2254,7 +2254,7 @@ MonoBehaviour:
       _jumpHeightBonusSpeedThreshold: 10
     _triggerInvincibility: 1
   _slingshotDamage:
-    _damageValue: 5
+    _damageValue: 8
     _bump:
       enabled: 1
       _maximumAllowedForces: 1
@@ -3197,7 +3197,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0, z: -0.3}
-  m_TranslationOffset: {x: -0.003211415, y: 0.005824566, z: 0.5967552}
+  m_TranslationOffset: {x: -0.003211415, y: 0.0058243275, z: 0.5967552}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1

@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4048543550289980187, guid: 92a28e55912be32458500e34113ea940, type: 3}
+      propertyPath: _itemCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048543550289980187, guid: 92a28e55912be32458500e34113ea940, type: 3}
       propertyPath: _itemName
       value: Healing
       objectReference: {fileID: 0}

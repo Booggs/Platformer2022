@@ -17,7 +17,7 @@ namespace GSGD2.Player
         private GameObject _cameraAimParent = null;
 
         [SerializeField]
-        private float _maxScale = 1.3f;
+        private float _maxScale = 1.15f;
 
         [SerializeField]
         private float _minScale = 0.7f;

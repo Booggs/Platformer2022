@@ -96,17 +96,6 @@ namespace GSGD2.UI
 			else _currentOutline.sprite = _outlines[2];
 
 			_healthbarForeground.fillAmount = perc;
-			/*if (perc >= 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 1)
-			{
-				_fadingTimer.Start();
-				_fadingOut = true;
-            }
-			if (perc < 1f && _fadingTimer.IsRunning == false && _canvasGroup.alpha == 0)
-            {
-				_fadingTimer.Start();
-				_fadingOut = false;
-            }*/
-			transform.localScale = new Vector3((maxHealth - 10f) * 0.05f + 1f, transform.localScale.y, transform.localScale.z);
 		}
 	}
 }

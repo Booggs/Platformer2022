@@ -189,7 +189,7 @@ namespace GSGD2.Player
                 if (scale < 1)
                     _springJoints[i].spring = Spring * (1 + (1 - scale));
                 else if (scale > 1)
-                    _springJoints[i].spring = Spring * (1 - scale);
+                    _springJoints[i].spring = Spring * (1 + (1 - scale));
                 else _springJoints[i].spring = Spring;
             }
 

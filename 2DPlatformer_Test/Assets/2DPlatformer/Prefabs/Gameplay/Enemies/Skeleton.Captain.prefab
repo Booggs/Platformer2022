@@ -786,8 +786,8 @@ MonoBehaviour:
   _gameObjectDestroyer: {fileID: 3942962067989866687}
   rigidbody: {fileID: 0}
   displacementEstimationUpdater: {fileID: 3942962067989866688}
-  healthAtStart: 5
-  maxHealth: 5
+  healthAtStart: 15
+  maxHealth: 15
   destroyIfHealthBelowZero: 1
   recoveryDuration: 0.5
   showDebug: 0
@@ -836,7 +836,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.8
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -906,7 +906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physicsTriggerEvent: {fileID: 5281332754604862517}
   _damage:
-    _damageValue: 1
+    _damageValue: 2
     _bump:
       enabled: 1
       _maximumAllowedForces: 1

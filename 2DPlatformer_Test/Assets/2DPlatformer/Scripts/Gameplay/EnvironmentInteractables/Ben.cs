@@ -15,6 +15,9 @@ namespace GSGD2.Gameplay
         private TextMeshPro _dialogueText = null;
 
         [SerializeField]
+        private GameObject _dialogueBackground = null;
+
+        [SerializeField]
         private Timer _timeBetweenLines;
 
         [SerializeField]
@@ -69,6 +72,7 @@ namespace GSGD2.Gameplay
             if (playerRefs != null)
             {
                 _dialogueText.enabled = true;
+                _dialogueBackground.SetActive(true);
                 if (_waveTimer.IsRunning == false)
                 {
                     _animator.SetTrigger("Wave");
@@ -100,6 +104,7 @@ namespace GSGD2.Gameplay
                 _danceWaitTimer.StopTimer();
                 _dialogueText.text = "";
                 _dialogueText.enabled = false;
+                _dialogueBackground.SetActive(false);
             }
         }
 
