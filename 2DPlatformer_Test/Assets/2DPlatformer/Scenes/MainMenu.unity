@@ -1822,7 +1822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadAtOnEnable: 0
-  _sceneName: Test TechArt
+  _sceneName: Level01
   _mode: 0
 --- !u!1 &317298549
 GameObject:
