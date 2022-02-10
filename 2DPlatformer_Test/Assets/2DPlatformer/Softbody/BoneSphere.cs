@@ -186,11 +186,11 @@ namespace GSGD2.Player
             {
                 _springJoints[i].autoConfigureConnectedAnchor = false;
                 _springJoints[i].connectedAnchor = new Vector3(_defaultAnchorsPositions[i].x * scale, _defaultAnchorsPositions[i].y * scale, _defaultAnchorsPositions[i].z * scale);
-                if (scale < 1)
-                    _springJoints[i].spring = Spring * (1 + (1 - scale));
+                _springJoints[i].spring = Spring * (1 + (1 - scale) * 2);
+                /*if (scale < 1)
                 else if (scale > 1)
-                    _springJoints[i].spring = Spring * (1 + (1 - scale));
-                else _springJoints[i].spring = Spring;
+                    _springJoints[i].spring = Spring * (1 + (1 - scale) * 2);
+                else _springJoints[i].spring = Spring;*/
             }
 
             _jointsAnchorsPositions.Clear();

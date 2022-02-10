@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/2DPlatformer/Scenes/MainMenu.unity
     guid: 357a21f5e581f2b4cb5caaeb254a94b2
   - enabled: 1
+    path: Assets/2DPlatformer/Scenes/Cutscene.unity
+    guid: edc7aa17a51f34c4f836688ae4095240
+  - enabled: 1
     path: Assets/2DPlatformer/Scenes/Zoo_GA.unity
     guid: cb871b2fc4f566d4596abef7b8fc43f2
   - enabled: 1
